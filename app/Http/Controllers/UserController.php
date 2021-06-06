@@ -60,6 +60,12 @@ class UserController extends Controller
         if (count($cekUser) > 0) {
             return Redirect::to('/user/create')->withErrors(['Duplicate user email!.'])->withInput();
         } else {
+            User::create([
+                "name" => $request->nama,
+                "email" => $request->email,
+                "password" => bcrypt($request->password),
+
+            ]);
             return Redirect::to('/user');
         }
     }

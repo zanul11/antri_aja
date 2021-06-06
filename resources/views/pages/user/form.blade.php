@@ -14,8 +14,18 @@
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                     <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/user':''}}">
+
                         @csrf
                         <div class=" info">
+                            @if ($errors->any())
+                            <div class="alert alert-pink alert-dismissable fade show has-icon">
+                                <i class="la la-info-circle alert-icon"></i>
+                                <button class="close" data-dismiss="alert" aria-label="Close"></button>
+                                @foreach ($errors->all() as $error)
+                                {{ $error }}
+                                @endforeach
+                            </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-11 mx-auto">
                                     <div class="row">
