@@ -104,7 +104,7 @@
                                 </div> -->
                                 <center>
                                     <div class="footer-section f-section-1" style="margin-top: 20px;">
-                                        <p class="">Copyright © 2020 Antrian Aja</p>
+                                        <p class="">Copyright © {{date('Y')}} Antrian Aja</p>
                                     </div>
                                 </center>
 

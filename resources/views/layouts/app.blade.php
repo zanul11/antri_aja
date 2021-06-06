@@ -10,7 +10,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{config('app.name')}} | @yield('title','Dashboard')</title>
+    <title>{{config('app.name')}} | {{$category_name}}</title>
     <link rel="icon" type="image/x-icon" href="{{asset('assets/img/favicon.ico')}}" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -56,6 +56,7 @@
     <!-- END MAIN CONTAINER -->
 
     @include('inc.scripts')
+    @yield('page_script')
 
 </body>
 

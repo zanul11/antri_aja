@@ -22,31 +22,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     // $this->middleware
 
-    Route::get('/analytics', function () {
-        // $category_name = '';
-        $data = [
-            'category_name' => 'dashboard',
-            'page_name' => 'analytics',
-            'has_scrollspy' => 0,
-            'scrollspy_offset' => '',
-        ];
-        // $pageName = 'analytics';
-        return view('dashboard2')->with($data);
-    });
-
-    // Route::get('/dashboard', function () {
-    //     // $category_name = '';
-    //     $data = [
-    //         'category_name' => 'dashboard',
-    //         'page_name' => 'dashboard',
-    //         'has_scrollspy' => 0,
-    //         'scrollspy_offset' => '',
-    //     ];
-    //     // $pageName = 'sales';
-    //     return view('dashboard')->with($data);
-    // });
-
     Route::get('/dashboard', 'HomeController@index');
+
+    Route::get('ss-user', 'UserController@getServerSide')->name('ss.user');
+    Route::resource('/user', 'UserController');
 
 
 
