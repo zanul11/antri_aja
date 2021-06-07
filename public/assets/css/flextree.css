@@ -1,0 +1,71 @@
+.flex-tree-container ul {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    text-align: center;
+}
+.flex-tree-container ul > li {
+    box-sizing: border-box;
+    flex: 1;
+    padding: 0 5px;
+}
+.flex-tree-container ul > li > *:not(ul):not(li) {
+    border: 1px solid black;
+    display: inline-block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    position: relative;
+}
+.flex-tree-container ul > li > *:not(ul):not(li):not(:last-child):after {
+    border-left: 1px solid green;
+    bottom: -30px;
+    content: "";
+    height: 30px;
+    left: 50%;
+    position: absolute;
+}
+.flex-tree-container ul > li ul {
+    margin-top: 59px;
+    position: relative;
+}
+.flex-tree-container ul > li ul li {
+    position: relative;
+}
+.flex-tree-container ul > li ul li:after,
+.flex-tree-container ul > li ul li:before {
+    border-top: 1px solid green;
+    content: "";
+    position: absolute;
+    top: -30px;
+    width: 50%;
+}
+.flex-tree-container ul > li ul li:before {
+    border-left: 1px solid green;
+    height: 30px;
+    left: 50%;
+}
+.flex-tree-container ul > li ul li:after {
+    right: 50%;
+}
+.flex-tree-container ul > li ul li:first-child:before,
+.flex-tree-container ul > li ul li:last-child:before {
+    border-top: 1px solid green;
+    border-top-left-radius: 10px;
+    top: -30px;
+}
+.flex-tree-container ul > li ul li:first-child:after,
+.flex-tree-container ul > li ul li:last-child:after {
+    border: none;
+}
+.flex-tree-container ul > li ul li:last-child:before {
+    border-left: 0;
+    border-right: 1px solid green;
+    border-top-left-radius: 0;
+    border-top-right-radius: 10px;
+    left: 0;
+    right: 50%;
+}
+.flex-tree-container ul > li ul li:only-child:before {
+    border-top: none;
+    border-top-right-radius: 0;
+}

@@ -8,6 +8,7 @@ use App\Models\Spesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\User;
 
 class DokterController extends Controller
 {
@@ -18,13 +19,15 @@ class DokterController extends Controller
      */
     public function index()
     {
+        $jaringan = User::with('childrenRekursif')->where('id', Auth::id())->firstOrFail();
         $dokter = Dokter::where('role', 3)->where('parent', Auth::user()->id)->get();
         $data = [
             'category_name' => 'Data Dokter',
             'page_name' => 'Data Dokter',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
-            'data_dokter' => $dokter
+            'data_dokter' => $dokter,
+            'jaringan' => $jaringan
         ];
         return view('pages.dokter.index')->with($data);
     }

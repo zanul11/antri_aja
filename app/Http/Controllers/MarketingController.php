@@ -16,6 +16,7 @@ class MarketingController extends Controller
      */
     public function index()
     {
+
         $marketing = Marketing::where('role', 2)->get();
         $data = [
             'category_name' => 'Data Marketing',

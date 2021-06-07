@@ -13,7 +13,7 @@
                     <a href="{{url('dokter/create')}}" class="mt-2 edit-profile"> <i data-feather="plus" class="text-defaulr"> </i></a>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
-                    <table id="zero-config" class="table table-hover" style="width:100%">
+                    <!-- <table id="zero-config" class="table table-hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -40,8 +40,44 @@
                             @endforeach
                         </tbody>
 
-                    </table>
+                    </table> -->
+                    <div class="flex-tree-container">
+                        <ul>
+                            <li>
+                                <p><img src="{{asset('assets/img/90x90.jpg')}}" alt="avatar"> <br>
+                                    {{$jaringan->name}} <br>
+                                    <button onclick="getData('{{$jaringan->id}}')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm">Detail</button>
+                                    <button class="btn btn-warning btn-sm">Lihat</button>
+                                </p>
+
+                                @if(count($jaringan->children)>0)
+                                <ul>
+                                    @foreach($jaringan->children as $child)
+                                    <li>
+                                        <p> <img src="{{asset('assets/img/90x90.jpg')}}" alt="avatar"> <br>{{$child->name}} <br>
+                                            <button onclick="getData('{{$child->id}}')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm">Detail</button>
+                                            <a href="/admin/jaringans/sub/{{$child->id}}" class="btn btn-warning btn-sm">Lihat</a></p>
+                                        @if(count($child->childrenRekursif)>0)
+                                        <ul>
+                                            @foreach($child->childrenRekursif as $childRekursif)
+                                            <li>
+                                                <p> <img src="{{asset('assets/img/90x90.jpg')}}" alt="avatar"> <br>{{$childRekursif->name}} <br>
+                                                    <button onclick="getData('{{$childRekursif->id}}')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm">Detail</button>
+                                                    <a href="/admin/jaringans/sub/{{$childRekursif->id}}" class="btn btn-warning btn-sm">Lihat</a></p>
+                                            </li>
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                @endif
+
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+
             </div>
         </div>
 
