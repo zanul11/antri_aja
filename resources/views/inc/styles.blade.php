@@ -134,7 +134,12 @@
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 <link href="{{asset('assets/css/users/user-profile.css')}}" rel="stylesheet" type="text/css" />
-
+<link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('plugins/animate/animate.css')}}" rel="stylesheet" type="text/css" />
+<script src="{{asset('plugins/sweetalerts/promise-polyfill.js')}}"></script>
+<link href="{{asset('plugins/sweetalerts/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('plugins/sweetalerts/sweetalert.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/css/components/custom-sweetalert.css')}}" rel="stylesheet" type="text/css" />
 
 
 @switch($page_name)
@@ -398,12 +403,7 @@
 
 @case('sweet_alerts')
 {{-- Component Sweetalert --}}
-<link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{asset('plugins/animate/animate.css')}}" rel="stylesheet" type="text/css" />
-<script src="{{asset('plugins/sweetalerts/promise-polyfill.js')}}"></script>
-<link href="{{asset('plugins/sweetalerts/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{asset('plugins/sweetalerts/sweetalert.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{asset('assets/css/components/custom-sweetalert.css')}}" rel="stylesheet" type="text/css" />
+
 @break
 
 @case('tabs')

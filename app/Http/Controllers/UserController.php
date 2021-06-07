@@ -58,7 +58,7 @@ class UserController extends Controller
 
         $cekUser = User::where('email', $request->email)->get();
         if (count($cekUser) > 0) {
-            return Redirect::to('/user/create')->withErrors(['Duplicate user email!.'])->withInput();
+            return Redirect::to('/user/create')->withErrors(['Duplicate user email!.'])->withInput()->with('message', 'Duplicate user email!.');
         } else {
             User::create([
                 "name" => $request->nama,
@@ -66,7 +66,7 @@ class UserController extends Controller
                 "password" => bcrypt($request->password),
 
             ]);
-            return Redirect::to('/user');
+            return Redirect::to('/user')->with('success', 'Data User added!');
         }
     }
 
@@ -87,9 +87,19 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        //
+        // return $user;
+        $data = [
+            'category_name' => 'User',
+            'page_name' => 'Tambah Data',
+            'has_scrollspy' => 0,
+            'scrollspy_offset' => '',
+            'action' => 'Edit',
+            'user' => $user
+        ];
+        // return config('sidemenu.administrator');
+        return view('pages.user.form')->with($data);
     }
 
     /**
@@ -99,9 +109,29 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        // return $user;
+        if ($request->email != $user->email) {
+            $cekUser = User::where('email', $request->email)->get();
+            if (count($cekUser) > 0) {
+                return Redirect::to('/user/' . $user->id . '/edit')->withErrors(['Duplicate user email!.'])->withInput()->with('message', 'Duplicate user email!.');
+            } else {
+                if (isset($request->password) || $request->password != '')
+                    $user->password = bcrypt($request->password);
+                $user->email = $request->email;
+                $user->name = $request->nama;
+                $user->save();
+                return Redirect::to('/user')->with('success', 'Data User updated!');
+            }
+        } else {
+            if (isset($request->password) || $request->password != '')
+                $user->password = bcrypt($request->password);
+            $user->email = $request->email;
+            $user->name = $request->nama;
+            $user->save();
+            return Redirect::to('/user')->with('success', 'Data User updated!');
+        }
     }
 
     /**

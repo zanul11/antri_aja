@@ -13,8 +13,10 @@
                     <a href="{{url('user/create')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                    <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/user':''}}">
-
+                    <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/user':'/user/'.$user->id}}">
+                        @if($action=='Edit')
+                        @method('PUT')
+                        @endif
                         @csrf
                         <div class=" info">
                             @if ($errors->any())
@@ -52,7 +54,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="Write your password" required>
+                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="Write your password" {{($action=='Tambah')?'required':''}}>
                                             </div>
                                         </div>
                                     </div>
@@ -60,7 +62,7 @@
 
                             </div>
                             <center>
-                                <button class="btn btn-primary mb-2 text-center"><i data-feather="plus"></i>SIMPAN</button>
+                                <button class="btn btn-primary mb-2 text-center"><i data-feather="{{($action=='Tambah')?'plus':'refresh-cw'}}"></i> {{($action=='Tambah')?'SIMPAN':'UPDATE'}}</button>
 
                             </center>
                         </div>
@@ -71,15 +73,6 @@
 
     </div>
 
-
-    <script>
-        swal({
-            title: 'Good job!',
-            text: "You clicked the!",
-            type: 'success',
-            padding: '2em'
-        })
-    </script>
 </div>
 
 

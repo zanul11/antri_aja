@@ -12,10 +12,7 @@
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
                     <h3 class=""> {{$page_name}} </h3>
-                    <a href="{{url('user/create')}}" class="mt-2 edit-profile"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-3">
-                            <path d="M12 20h9"></path>
-                            <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                        </svg></a>
+                    <a href="{{url('user/create')}}" class="mt-2 edit-profile"> <i data-feather="plus" class="text-defaulr"> </i></a>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
                     <table id="zero-config" class="table table-hover" style="width:100%">
@@ -36,7 +33,7 @@
                                 <td>{{$dt->email}}</td>
                                 <td>{{$dt->role}}</td>
                                 <td>
-                                    <a href=""><i data-feather="edit-2" class="text-warning"></i></a>
+                                    <a href="user/{{$dt->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>
                                     <a href=""><i data-feather="trash" class="text-danger"></i></a>
                                 </td>
                             </tr>

@@ -26,6 +26,30 @@
 <script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
 <script src="{{asset('plugins/bootstrap-select/bootstrap-select.min.js')}}"></script>
 
+<script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
+<script src="{{asset('plugins/sweetalerts/sweetalert2.min.js')}}"></script>
+<script src="{{asset('plugins/sweetalerts/custom-sweetalert.js')}}"></script>
+
+<script>
+  if ('{{session()->has("message")}}') {
+    swal({
+      title: 'Warning!',
+      text: '{{ session()->get("message") }}',
+      type: 'warning',
+      padding: '2em'
+    });
+  }
+
+  if ('{{session()->has("success")}}') {
+    swal({
+      title: 'Success!',
+      text: '{{ session()->get("success") }}',
+      type: 'success',
+      padding: '2em'
+    });
+  }
+</script>
+
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 @switch($page_name)
 @case('analytics')
