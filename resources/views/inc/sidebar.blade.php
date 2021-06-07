@@ -62,7 +62,7 @@
             @endif
 
 
-            <li class="menu {{ ($category_name === 'components') ? 'active' : '' }}">
+            <!-- <li class="menu {{ ($category_name === 'components') ? 'active' : '' }}">
                 <a href="#components" data-active="{{ ($category_name === 'components') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'components') ? 'true' : 'false' }}" class="dropdown-toggle">
                     <div class="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-box">
@@ -447,7 +447,7 @@
                         </ul>
                     </li>
                 </ul>
-            </li>
+            </li> -->
 
             <!-- <li class="menu {{ ($category_name === 'auth') ? 'active' : '' }}">
                 <a href="#authentication" data-active="{{ ($category_name === 'auth') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'auth') ? 'true' : 'false' }}" class="dropdown-toggle">
