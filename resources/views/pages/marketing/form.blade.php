@@ -13,7 +13,7 @@
                     <a href="{{url('user/create')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                    <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/user':'/user/'.$user->id}}">
+                    <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/marketing':'/marketing/'.$marketing->id}}">
                         @if($action=='Edit')
                         @method('PUT')
                         @endif
@@ -33,32 +33,38 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="country">Role</label>
-                                                @if($action=='Tambah')
-                                                <select class="form-control selectpicker" id="country" disabled>
-                                                    <option selected>Administrator</option>
-                                                </select>
-                                                @else
-                                                <input type="text" class="form-control mb-4" value="{{($user->role==1)?'Administrator':(($user->role==2)?'Marketing':(($user->role==3)?'Dokter':'Pasien'))}}" disabled>
-                                                @endif
+                                                <label for="country">NIK</label>
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" type="number" class="form-control mb-4" name="nik" id="nik" placeholder="Nik user" value="{{(isset($marketing))?$marketing->nik:(old('nik')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
-                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($user))?$user->name:(old('nama')??'')}}" required>
+                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($marketing))?$marketing->name:(old('nama')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="email">Email</label>
-                                                <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($user))?$user->email:(old('email')??'')}}" required>
+                                                <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($marketing))?$marketing->email:(old('email')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
                                                 <input type="password" class="form-control mb-4" name="password" id="password" placeholder="Write your password" {{($action=='Tambah')?'required':''}}>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="no_hp">No Hp</label>
+                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($marketing))?$marketing->no_hp:(old('no_hp')??'')}}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="alamat">Alamat</label>
+                                                <textarea class="form-control" placeholder="Description" name="alamat" rows="3">{{(isset($marketing))?$marketing->alamat:(old('alamat')??'')}}</textarea>
                                             </div>
                                         </div>
                                     </div>

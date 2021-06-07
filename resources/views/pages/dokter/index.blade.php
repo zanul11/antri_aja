@@ -10,34 +10,31 @@
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
                     <h3 class=""> {{$page_name}} </h3>
-                    <a href="{{url('user/create')}}" class="mt-2 edit-profile"> <i data-feather="plus" class="text-defaulr"> </i></a>
+                    <a href="{{url('dokter/create')}}" class="mt-2 edit-profile"> <i data-feather="plus" class="text-defaulr"> </i></a>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
                     <table id="zero-config" class="table table-hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>NIK</th>
                                 <th>Nama</th>
-                                <th>Email</th>
-                                <th>Role</th>
+                                <th>No Hp/email</th>
+                                <th>Alamat</th>
                                 <th class="no-content"></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data_user as $dt)
+                            @foreach($data_dokter as $dt)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
+                                <td>{{$dt->nik}}</td>
                                 <td>{{$dt->name}}</td>
-                                <td>{{$dt->email}}</td>
-                                <td>@if($dt->role==1)
-                                    <span class="badge badge-primary"> Administrator </span>
-                                    @elseif($dt->role==2)
-                                    <span class="badge badge-warning"> Marketing </span>
-                                    @endif
-                                </td>
+                                <td>{{$dt->no_hp}}/{{$dt->email}}</td>
+                                <td>{{$dt->alamat}}</td>
                                 <td>
-                                    <a href="user/{{$dt->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>
-                                    <a href="#" onclick="deleteData('/user','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
+                                    <a href="dokter/{{$dt->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>
+                                    <a href="#" onclick="deleteData('/dokter','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                 </td>
                             </tr>
                             @endforeach

@@ -12,7 +12,9 @@
             case 1 :
             $menu = config('sidemenu.administrator');
             break;
-
+            case 2 :
+            $menu = config('sidemenu.marketing');
+            break;
             }
             @endphp
             @if (is_array($menu) || is_object($menu))

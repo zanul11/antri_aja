@@ -17,6 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::all();
+        // $user = User::where('role', 1)->get();
         $data = [
             'category_name' => 'User',
             'page_name' => 'User',
@@ -140,8 +141,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+    }
+
+    public function delete(User $user)
+    {
+        $user->delete();
     }
 }

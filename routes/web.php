@@ -24,9 +24,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard', 'HomeController@index');
 
-    Route::get('ss-user', 'UserController@getServerSide')->name('ss.user');
     Route::resource('/user', 'UserController');
 
+    Route::resource('/spesialis', 'SpesialisController');
+
+    Route::resource('/marketing', 'MarketingController');
+    Route::resource('/dokter', 'DokterController');
 
 
     // APPS
