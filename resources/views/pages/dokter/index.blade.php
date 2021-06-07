@@ -46,8 +46,8 @@
                             <li>
                                 <p><img src="{{asset('assets/img/90x90.jpg')}}" alt="avatar"> <br>
                                     {{$jaringan->name}} <br>
-                                    <button onclick="getData('{{$jaringan->id}}')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm">Detail</button>
-                                    <button class="btn btn-warning btn-sm">Lihat</button>
+                                    <!-- <button onclick="getData('{{$jaringan->id}}')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm">Detail</button>
+                                    <button class="btn btn-warning btn-sm">Lihat</button> -->
                                 </p>
 
                                 @if(count($jaringan->children)>0)
@@ -55,9 +55,10 @@
                                     @foreach($jaringan->children as $child)
                                     <li>
                                         <p> <img src="{{asset('assets/img/90x90.jpg')}}" alt="avatar"> <br>{{$child->name}} <br>
-                                            <button onclick="getData('{{$child->id}}')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm">Detail</button>
-                                            <a href="/admin/jaringans/sub/{{$child->id}}" class="btn btn-warning btn-sm">Lihat</a></p>
-                                        @if(count($child->childrenRekursif)>0)
+                                            <a href="dokter/{{$child->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>
+                                            <a href="#" onclick="deleteData('/dokter','{{$child->id}}')"><i data-feather="trash" class="text-danger"></i></a>
+                                        </p>
+                                        <!-- @if(count($child->childrenRekursif)>0)
                                         <ul>
                                             @foreach($child->childrenRekursif as $childRekursif)
                                             <li>
@@ -67,7 +68,7 @@
                                             </li>
                                             @endforeach
                                         </ul>
-                                        @endif
+                                        @endif -->
                                     </li>
                                     @endforeach
                                 </ul>
