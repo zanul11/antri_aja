@@ -145,7 +145,7 @@ class DokterController extends Controller
                 $dokter->spesialis = $request->spesialis;
                 $dokter->pengalaman = $request->pengalaman;
                 $dokter->deskripsi = $request->deskripsi;
-                $dokter->latlong = $request->latlong;
+
                 if (isset($request->latlong)) {
                     $dokter->latlong = $request->latlong;
                     $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
@@ -167,7 +167,7 @@ class DokterController extends Controller
             $dokter->spesialis = $request->spesialis;
             $dokter->pengalaman = $request->pengalaman;
             $dokter->deskripsi = $request->deskripsi;
-            $dokter->latlong = $request->latlong;
+
             if (isset($request->latlong)) {
                 $dokter->latlong = $request->latlong;
                 $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));

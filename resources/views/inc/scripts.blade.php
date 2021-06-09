@@ -112,6 +112,11 @@
   });
 </script>
 
+<script src="{{asset('plugins/dropify/dropify.min.js')}}"></script>
+<script src="{{asset('plugins/blockui/jquery.blockUI.min.js')}}"></script>
+<script src="{{asset('assets/js/users/account-settings.js')}}"></script>
+
+
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 @switch($page_name)
 @case('analytics')
@@ -873,9 +878,7 @@
 
 @case('account_settings')
 {{-- User Account Setting  --}}
-<script src="{{asset('plugins/dropify/dropify.min.js')}}"></script>
-<script src="{{asset('plugins/blockui/jquery.blockUI.min.js')}}"></script>
-<script src="{{asset('assets/js/users/account-settings.js')}}"></script>
+
 @break
 
 

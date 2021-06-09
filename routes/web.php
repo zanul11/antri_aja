@@ -25,12 +25,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index');
 
     Route::resource('/user', 'UserController');
-
+    Route::resource('/profile', 'ProfileController');
+    Route::resource('/password', 'PasswordController');
     Route::resource('/spesialis', 'SpesialisController');
 
     Route::resource('/marketing', 'MarketingController');
     Route::resource('/dokter', 'DokterController');
-
+    Route::resource('/jadwal', 'JadwalController');
 
     // APPS
     Route::prefix('apps')->group(function () {
@@ -1292,6 +1293,7 @@ Route::group(['middleware' => 'auth'], function () {
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+Route::get('/sales', 'HomeController@index');
 
 Route::get('/register', function () {
     return redirect('/login');

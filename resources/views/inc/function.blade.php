@@ -244,8 +244,8 @@ $removeDash = str_replace('-', ' ', $removeUnderscore);
 
 $page = ucwords($removeDash);
 
-echo '<li class="breadcrumb-item"><a href="javascript:void(0);">'. $category .'</a></li>
-<li class="breadcrumb-item active" aria-current="page"><span>' . $page .'</span></li>';
+echo '<li class="breadcrumb-item active"><a href="javascript:void(0);">'. $category .'</a></li>
+';
 
 
 }

@@ -34,38 +34,38 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="country">NIK</label>
-                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" type="number" class="form-control mb-4" name="nik" id="nik" placeholder="Nik user" value="{{(isset($dokter))?$dokter->nik:(old('nik')??'')}}" required>
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" type="number" class="form-control mb-4" name="nik" id="nik" placeholder="Nik user" value="{{(isset($dokter))?$dokter->nik:(old('nik')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
-                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($dokter))?$dokter->name:(old('nama')??'')}}" required>
+                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($dokter))?$dokter->name:(old('nama')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="email">Email</label>
-                                                <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($dokter))?$dokter->email:(old('email')??'')}}" required>
+                                                <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($dokter))?$dokter->email:(old('email')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="Write your password" {{($action=='Tambah')?'required':''}}>
+                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}} {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">No Hp</label>
-                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($dokter))?$dokter->no_hp:(old('no_hp')??'')}}" required>
+                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($dokter))?$dokter->no_hp:(old('no_hp')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">Spesialis</label>
-                                                <select class="placeholder js-states form-control" name="spesialis" required>
+                                                <select class="placeholder js-states form-control" name="spesialis" required {{($action=='Edit')?'disabled':''}}>
                                                     @foreach($data_spesialis as $dt)
                                                     <option value="{{$dt->id}}" {{($action!='Tambah')?(($dokter->spesialis==$dt->id)?'selected':''):''}}>{{$dt->spesialis}}</option>
                                                     @endforeach
@@ -75,14 +75,14 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pengalaman">Pengalaman</label>
-                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Write your pengalaman" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}" required>
+                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Write your pengalaman" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
                                         <div class="col-lg-8">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="alamat">Deskripsi singkat</label>
-                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2">{{(isset($dokter))?$dokter->deskripsi:(old('deskripsi')??'')}}</textarea>
+                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2" {{($action=='Edit')?'readonly':''}}>{{(isset($dokter))?$dokter->deskripsi:(old('deskripsi')??'')}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -90,13 +90,17 @@
 
                                         <div class="col-lg-12 row">
                                             <div class="col-lg-8">
+
                                                 <div class="col-md-12">
+                                                    @if($action==='Tambah')
                                                     <div class="form-group">
                                                         <label for="no_hp">Tulis Nama Tempat</label>
-                                                        <input type="text" class="form-control mb-4" id="almt" onkeydown="clearTimer()" onkeyup="doneTyping()">
+                                                        <input type="text" class="form-control mb-4" id="almt" placeholder="Cari Tempat Disini!" onkeydown="clearTimer()" onkeyup="doneTyping()">
                                                     </div>
+                                                    @endif
                                                 </div>
-                                                <div class="col-md-12 form-group mb-3">
+
+                                                <div class="col-md-12 form-group mb-3v " style="{{($action!='Tambah')?'margin-top:50px':''}}">
                                                     <div id="map-container" style="width:100%;height:200px;z-index:1"></div>
                                                 </div>
                                             </div>
@@ -104,7 +108,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="alamat">Alamat Detail Praktek</label>
-                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10">{{(isset($dokter))?$dokter->alamat:(old('alamat')??'')}}</textarea>
+                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10" {{($action=='Edit')?'readonly':''}}>{{(isset($dokter))?$dokter->alamat:(old('alamat')??'')}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -117,12 +121,14 @@
                                         </div>
 
 
+
                                     </div>
                                 </div>
                             </div>
+                            @if($action==='Tambah')
                             <center>
                                 <button class=" btn btn-primary mb-2 text-center"><i data-feather="{{($action=='Tambah')?'plus':'refresh-cw'}}"></i> {{($action=='Tambah')?'SIMPAN':'UPDATE'}}</button>
-                            </center>
+                            </center> @endif
                         </div>
                     </form>
                 </div>

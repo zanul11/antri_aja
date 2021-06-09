@@ -54,8 +54,11 @@
                                 <ul>
                                     @foreach($jaringan->children as $child)
                                     <li>
-                                        <p> <img src="{{asset('assets/img/90x90.jpg')}}" alt="avatar"> <br>{{$child->name}} <br>
-                                            <a href="dokter/{{$child->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>
+                                        <p>
+                                            <!-- <i data-feather="users"></i> -->
+                                            <img src="{{asset('assets/img/90x90.jpg')}} " alt="avatar">
+                                            <br>{{$child->name}} <br>
+                                            <a href="dokter/{{$child->id}}/edit"><i data-feather="eye" class="text-warning"></i></a>
                                             <a href="#" onclick="deleteData('/dokter','{{$child->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                         </p>
                                         <!-- @if(count($child->childrenRekursif)>0)

@@ -33,6 +33,8 @@
                                     <span class="badge badge-primary"> Administrator </span>
                                     @elseif($dt->role==2)
                                     <span class="badge badge-warning"> Marketing </span>
+                                    @else
+                                    <span class="badge badge-success"> Dokter </span>
                                     @endif
                                 </td>
                                 <td>

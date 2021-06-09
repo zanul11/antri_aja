@@ -130,6 +130,8 @@
 <link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" type="text/css" href="{{asset('plugins/select2/select2.min.css')}}">
 <link href="{{asset('assets/css/flextree.css')}}" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="{{asset('plugins/dropify/dropify.min.css')}}">
+<link href="{{asset('assets/css/users/account-setting.css')}}" rel="stylesheet" type="text/css" />
 
 @if ($page_name != 'coming_soon' && $page_name != 'contact_us' && $page_name != 'error404' && $page_name != 'error500' && $page_name != 'error503' && $page_name != 'faq' && $page_name != 'helpdesk' && $page_name != 'maintenence' && $page_name != 'privacy' && $page_name != 'auth_boxed' && $page_name != 'auth_default')
 <link href="{{asset('assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
@@ -1091,8 +1093,7 @@
 
 @case('account_settings')
 {{-- User Account Settings --}}
-<link rel="stylesheet" type="text/css" href="{{asset('plugins/dropify/dropify.min.css')}}">
-<link href="{{asset('assets/css/users/account-setting.css')}}" rel="stylesheet" type="text/css" />
+
 @break
 
 @case('profile')
