@@ -17,12 +17,9 @@
 
                     <div class="row ">
                         <div class=" col-lg-4 ">
-
                             <label for="no_hp">Hari</label>
                             <select class="form-control" ng-model="selectedHari" ng-options="hari as hari.hari for hari in hari">
-
                             </select>
-
                         </div>
                         <div class="col-lg-3">
                             <label for="no_hp">Dari Jam</label>
