@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Jadwal;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JadwalController extends Controller
 {
@@ -24,7 +25,7 @@ class JadwalController extends Controller
             'scrollspy_offset' => '',
             'data_jadwal' => $jadwal
         ];
-        return view('pages.jadwal.index')->with($data);
+        return view('pages.jadwal.create')->with($data);
     }
 
     /**
@@ -52,8 +53,39 @@ class JadwalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return 'tes';
+        Jadwal::create([
+            "id_user" => Auth::user()->id,
+            "hari" => $request->value,
+            "dJam" => $request->dJam,
+            "sJam" => $request->sJam
+        ]);
+        return $request;
     }
+
+    public function delete(Request $request)
+    {
+        Jadwal::where('id_user', Auth::user()->id)->where('dJam', $request->dJam)->where('sJam', $request->sJam)->delete();
+        return $request;
+    }
+
+    public function getData()
+    {
+        return Jadwal::where('id_user', Auth::user()->id)->get();
+    }
+
+    public function getJadwal()
+    {
+        $jadwal = [];
+        for ($i = 0; $i < 7; $i++) {
+            array_push($jadwal, (object) [
+                'hari' => $i,
+                'jadwals' => Jadwal::where('id_user', Auth::user()->id)->where('hari', $i)->orderBy('dJam')->get(),
+            ]);
+        }
+        return $jadwal;
+    }
+
 
     /**
      * Display the specified resource.

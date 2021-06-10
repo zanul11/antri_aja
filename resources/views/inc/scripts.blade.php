@@ -78,7 +78,7 @@
     }).then(function(result) {
       if (result.value) {
         $.ajax({
-          url: url + "/delete/" + id,
+          url: url + "/" + id,
           type: "DELETE",
           data: {
             _token: "{{ csrf_token() }}"

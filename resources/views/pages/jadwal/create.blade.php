@@ -41,60 +41,34 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-4 layout-spacing">
 
+        <div class="col-lg-4 col-sm-4 layout-spacing user-profile ">
             <div class="statbox widget box box-shadow">
-                <div class="height-300" style="display: block; position: relative; overflow-y: auto;">
-
-                    <div class="widget-content widget-content-area">
+                <div class="widget-content widget-content-area br-6 ">
+                    <div class="d-flex ">
+                        <h5 class=""> Senin </h5>
+                    </div>
+                    <div class="table-responsive mb-4 ">
                         <table class="table table-hover table-sm" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>SENIN</th>
+                                    <th>NO</th>
+                                    <th>JAM</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
-                            </tbody>
-                            <!-- <tbody>
-                                <tr ng-repeat="dt in jadwals | orderBy:'value'">
+                            <tbody class="table-sm">
+                                <tr ng-repeat="dt in jadwals | orderBy:'dJam' | filter:{ value: 1 }">
                                     <td align="center">
                                         @{{$index+1}}
-                                    </td>
-                                    <td align="center">
-                                        @{{dt.hari}}
                                     </td>
                                     <td align="center">
                                         @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
                                     </td>
                                     <td align="center">
-                                        <a ng-click="removeItem($index)"><i data-feather="x"></i></a>
+                                        <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
                                     </td>
                                 </tr>
-                            </tbody> -->
-
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-sm-4 layout-spacing">
-
-            <div class="statbox widget box box-shadow">
-                <div class="height-300" style="display: block; position: relative; overflow-y: auto;">
-
-                    <div class="widget-content widget-content-area">
-                        <table class="table table-hover table-sm" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>SELASA</th>
-                                    <th class="no-content">#</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
                             </tbody>
                         </table>
                     </div>
@@ -102,21 +76,34 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-4 layout-spacing">
 
+        <div class="col-lg-4 col-sm-4 layout-spacing user-profile ">
             <div class="statbox widget box box-shadow">
-                <div class="height-300" style="display: block; position: relative; overflow-y: auto;">
-
-                    <div class="widget-content widget-content-area">
+                <div class="widget-content widget-content-area br-6 ">
+                    <div class="d-flex ">
+                        <h5 class=""> Selasa </h5>
+                    </div>
+                    <div class="table-responsive mb-4 ">
                         <table class="table table-hover table-sm" style="width:100%">
-                            <thead>
+                            <thead align="center">
                                 <tr>
-                                    <th>RABU</th>
+                                    <th>NO</th>
+                                    <th>JAM</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
+                            <tbody class="table-sm">
+                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 2 }">
+                                    <td align="center">
+                                        @{{$index+1}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -124,21 +111,33 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-4 layout-spacing">
-
+        <div class="col-lg-4 col-sm-4 layout-spacing user-profile ">
             <div class="statbox widget box box-shadow">
-                <div class="height-300" style="display: block; position: relative; overflow-y: auto;">
-
-                    <div class="widget-content widget-content-area">
+                <div class="widget-content widget-content-area br-6 ">
+                    <div class="d-flex ">
+                        <h5 class=""> Rabu </h5>
+                    </div>
+                    <div class="table-responsive mb-4 ">
                         <table class="table table-hover table-sm" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>KAMIS</th>
+                                    <th>NO</th>
+                                    <th>JAM</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
+                            <tbody class="table-sm">
+                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 3 }">
+                                    <td align="center">
+                                        @{{$index+1}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -146,21 +145,66 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-4 layout-spacing">
-
+        <div class="col-lg-4 col-sm-4 layout-spacing user-profile ">
             <div class="statbox widget box box-shadow">
-                <div class="height-300" style="display: block; position: relative; overflow-y: auto;">
-
-                    <div class="widget-content widget-content-area">
+                <div class="widget-content widget-content-area br-6 ">
+                    <div class="d-flex ">
+                        <h5 class=""> Kamis </h5>
+                    </div>
+                    <div class="table-responsive mb-4 ">
                         <table class="table table-hover table-sm" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>JUMAT</th>
+                                    <th>NO</th>
+                                    <th>JAM</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
+                            <tbody class="table-sm">
+                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 4 }">
+                                    <td align="center">
+                                        @{{$index+1}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-4 layout-spacing user-profile ">
+            <div class="statbox widget box box-shadow">
+                <div class="widget-content widget-content-area br-6 ">
+                    <div class="d-flex ">
+                        <h5 class=""> Jumat </h5>
+                    </div>
+                    <div class="table-responsive mb-4 ">
+                        <table class="table table-hover table-sm" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>JAM</th>
+                                    <th class="no-content">#</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-sm">
+                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 5 }">
+                                    <td align="center">
+                                        @{{$index+1}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -168,21 +212,33 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-4 layout-spacing">
-
+        <div class="col-lg-4 col-sm-4 layout-spacing user-profile ">
             <div class="statbox widget box box-shadow">
-                <div class="height-300" style="display: block; position: relative; overflow-y: auto;">
-
-                    <div class="widget-content widget-content-area">
+                <div class="widget-content widget-content-area br-6 ">
+                    <div class="d-flex ">
+                        <h5 class=""> Sabtu </h5>
+                    </div>
+                    <div class="table-responsive mb-4 ">
                         <table class="table table-hover table-sm" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>SABTU</th>
+                                    <th>NO</th>
+                                    <th>JAM</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
+                            <tbody class="table-sm">
+                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 6 }">
+                                    <td align="center">
+                                        @{{$index+1}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -190,21 +246,33 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-sm-4 layout-spacing">
-
+        <div class="col-lg-4 col-sm-4 layout-spacing user-profile ">
             <div class="statbox widget box box-shadow">
-                <div class="height-300" style="display: block; position: relative; overflow-y: auto;">
-
-                    <div class="widget-content widget-content-area">
+                <div class="widget-content widget-content-area br-6 ">
+                    <div class="d-flex ">
+                        <h5 class=""> Minggu </h5>
+                    </div>
+                    <div class="table-responsive mb-4 ">
                         <table class="table table-hover table-sm" style="width:100%">
                             <thead>
                                 <tr>
-                                    <th>MINGGU</th>
+                                    <th>NO</th>
+                                    <th>JAM</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
-                            <tbody>
-
+                            <tbody class="table-sm">
+                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 0 }">
+                                    <td align="center">
+                                        @{{$index+1}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

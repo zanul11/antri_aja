@@ -30,13 +30,15 @@
                                                 <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
                                                     <div class="form">
                                                         <div class="row">
+                                                            @if($profile->role!=4)
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
                                                                     <label for="nikDr">NIK</label>
                                                                     <input type="text" class="form-control mb-4" id="nikDr" name="nik" placeholder="Nik" value="{{$profile->nik}}" required>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-6">
+                                                            @endif
+                                                            <div class="{{($profile->role!=4)?'col-sm-6':'col-sm-12'}}">
                                                                 <div class="form-group">
                                                                     <label for="fullName">Nama</label>
                                                                     <input type="text" class="form-control mb-4" id="fullName" name="nama" placeholder="Nama Lengkap" value="{{$profile->name}}" required>
@@ -59,6 +61,7 @@
                                                             </div>
 
                                                         </div>
+                                                        @if($profile->role!=4)
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
@@ -78,6 +81,7 @@
                                                             </div>
 
                                                         </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
@@ -86,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @if($profile->role!=4)
                     <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                         <div class="section general-info">
                             <div class="info">
@@ -147,7 +151,7 @@
                             </div>
                         </div>
                     </div>
-
+                    @endif
                     <!-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
 
                         <div class="info">

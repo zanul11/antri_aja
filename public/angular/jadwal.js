@@ -3,7 +3,8 @@ app = angular.module("app", []);
 app.controller("JadwalController", [
     "$scope",
     "$http",
-    function JadwalController($scope, $http) {
+    "$filter",
+    function JadwalController($scope, $http, $filter) {
         $scope.jadwals = [];
         $scope.dJam = null;
         $scope.sJam = null;
@@ -17,6 +18,22 @@ app.controller("JadwalController", [
             { hari: "Sabtu", value : 6 },
             { hari: "Minggu", value : 0 }
           ];
+
+          $http({
+            method: "GET",
+            url: "/jadwal/getData"
+        }).then(res => {
+            angular.forEach(res.data, function(dt) {
+                $scope.jadwals.push({
+                    hari:'-',
+                    value: dt['hari'],
+                    dJam: $filter('date')(dt['dJam'], 'HH:mm') ,
+                    sJam: $filter('date')(dt['sJam'], 'HH:mm') ,
+                });
+            });
+            // $scope.kwitansi = res.data;
+          
+        });
           
           $scope.selectedHari = $scope.hari[0];
 
@@ -36,24 +53,55 @@ app.controller("JadwalController", [
                         "warning"
                     );
                 }else {
-                    console.log($scope.dJam);
-                    $scope.jadwals.push({
-                        hari: $scope.selectedHari.hari,
-                        value: $scope.selectedHari.value,
-                        dJam: $scope.dJam,
-                        sJam: $scope.sJam,
+                    $http({
+                        url: "/jadwal",
+                        method: "POST",
+                        data: {
+                            hari: $scope.selectedHari.hari,
+                            value: $scope.selectedHari.value,
+                            dJam: $filter('date')($scope.dJam, 'HH:mm:ss') ,
+                            sJam: $filter('date')($scope.sJam, 'HH:mm:ss'),
+                        }
+                    }).then(function(res){
+                        $scope.jadwals.push({
+                            hari: $scope.selectedHari.hari,
+                            value: $scope.selectedHari.value,
+                            dJam: $filter('date')($scope.dJam, 'HH:mm:ss') ,
+                            sJam: $filter('date')($scope.sJam, 'HH:mm:ss'),
+                        });
+                        $scope.dJam = null;
+                        $scope.sJam = null;
+                        $scope.selectedHari = $scope.hari[0];
                     });
-                    $scope.dJam = null;
-                    $scope.sJam = null;
-                    $scope.selectedHari = $scope.hari[0];
+                    
                 }
             }
             // }
         
         };
 
-        $scope.removeItem = function(index) {
-            $scope.jadwals.splice(index, 1);
+        $scope.removeItem = function(obj) {
+            for(var i = $scope.jadwals.length - 1; i >= 0; i--){
+                if($scope.jadwals[i].value == obj['value'] && $scope.jadwals[i].dJam == obj['dJam'] && $scope.jadwals[i].sJam == obj['sJam']){
+                    $scope.jadwals.splice(i,1);
+                    $http({
+                        url: "/jadwal/delete",
+                        method: "POST",
+                        data: {
+                            hari: obj['hari'],
+                            value: obj['value'],
+                            dJam: $filter('date')(obj['dJam'], 'HH:mm:ss') ,
+                            sJam: $filter('date')(obj['sJam'], 'HH:mm:ss'),
+                        }
+                    }).then(function(res){
+                        // console.log(obj);
+                    });
+                }
+            }
+            // console.log(obj);
+            // var index  =$scope.jadwals.;
+            // console.log(index);
+            // $scope.jadwals.splice(index, 1);
         };
 
         $scope.submitData = function() {

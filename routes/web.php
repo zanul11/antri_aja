@@ -24,14 +24,18 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/dashboard', 'HomeController@index');
 
-    Route::resource('/user', 'UserController');
-    Route::resource('/profile', 'ProfileController');
-    Route::resource('/password', 'PasswordController');
-    Route::resource('/spesialis', 'SpesialisController');
+    Route::resource('user', 'UserController');
+    Route::resource('profile', 'ProfileController');
+    Route::resource('password', 'PasswordController');
+    Route::resource('spesialis', 'SpesialisController');
 
-    Route::resource('/marketing', 'MarketingController');
-    Route::resource('/dokter', 'DokterController');
-    Route::resource('/jadwal', 'JadwalController');
+    Route::resource('marketing', 'MarketingController');
+    Route::resource('dokter', 'DokterController');
+
+    Route::get('/jadwal/getJadwal', 'JadwalController@getJadwal');
+    Route::get('/jadwal/getData', 'JadwalController@getData');
+    Route::post('/jadwal/delete', 'JadwalController@delete');
+    Route::resource('jadwal', 'JadwalController');
 
     // APPS
     Route::prefix('apps')->group(function () {
@@ -1295,9 +1299,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/sales', 'HomeController@index');
 
-Route::get('/register', function () {
-    return redirect('/login');
-});
+Route::resource('/daftar', 'RegisterController');
+
 Route::get('/password/reset', function () {
     return redirect('/login');
 });

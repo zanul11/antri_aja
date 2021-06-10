@@ -18,6 +18,9 @@
             case 3 :
             $menu = config('sidemenu.dokter');
             break;
+            case 4 :
+            $menu = config('sidemenu.pasien');
+            break;
             }
             @endphp
             @if (is_array($menu) || is_object($menu))

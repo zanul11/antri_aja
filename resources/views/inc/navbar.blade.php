@@ -39,7 +39,7 @@
                 </a>
                 <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                     <div class="">
-                        @if(Auth::user()->role==2||Auth::user()->role==3)
+                        @if(Auth::user()->role!=1)
                         <div class="dropdown-item">
                             <a href="{{url('/password')}}"><i data-feather="lock"></i>Ubah Password</a>
                         </div>
