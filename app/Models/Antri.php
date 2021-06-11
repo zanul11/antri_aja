@@ -5,14 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Spesialis extends Model
+class Antri extends Model
 {
     use HasFactory;
-    protected $table = 'spesialis';
+    protected $table = 'antri';
     protected $guarded = [];
-
-    public function dokter()
-    {
-        return $this->hasMany(Dokter::class, 'spesialis', 'id');
-    }
 }

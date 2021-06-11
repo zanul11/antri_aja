@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/jadwal/getData', 'JadwalController@getData');
     Route::post('/jadwal/delete', 'JadwalController@delete');
     Route::resource('jadwal', 'JadwalController');
+    Route::resource('antri', 'AntriController');
 
     // APPS
     Route::prefix('apps')->group(function () {

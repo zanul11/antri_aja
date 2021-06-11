@@ -11,4 +11,9 @@ class Dokter extends Model
     use HasFactory;
     protected $table = 'users';
     protected $guarded = [];
+
+    public function jadwal()
+    {
+        return $this->hasMany(Jadwal::class, 'id_user', 'id');
+    }
 }
