@@ -116,6 +116,16 @@
 <script src="{{asset('plugins/blockui/jquery.blockUI.min.js')}}"></script>
 <script src="{{asset('assets/js/users/account-settings.js')}}"></script>
 
+<script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
+<script src="{{asset('plugins/flatpickr/flatpickr.js')}}"></script>
+<script src="{{asset('plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js')}}"></script>
+<script>
+  var f1 = flatpickr(document.getElementById('basicFlatpickr'), {
+    dateFormat: "Y-m-d",
+    defaultDate: "{{date('Y-m-d')}}"
+  });
+</script>
+
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 @switch($page_name)
@@ -904,15 +914,7 @@
 <script src="{{asset('assets/js/forms/custom-clipboard.js')}}"></script>
 @break
 
-@case('date_range_picker')
-{{-- Forms Date Range Picker --}}
-<script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
-<script src="{{asset('plugins/flatpickr/flatpickr.js')}}"></script>
-<script src="{{asset('plugins/noUiSlider/nouislider.min.js')}}"></script>
-<script src="{{asset('plugins/flatpickr/custom-flatpickr.js')}}"></script>
-<script src="{{asset('plugins/noUiSlider/custom-nouiSlider.js')}}"></script>
-<script src="{{asset('plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js')}}"></script>
-@break
+
 
 @case('file_upload')
 {{-- Forms File Upload --}}

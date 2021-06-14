@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Antri;
 use App\Http\Controllers\Controller;
 use App\Models\Dokter;
+use App\Models\Jadwal;
 use App\Models\Spesialis;
 use Illuminate\Http\Request;
 
@@ -35,9 +36,7 @@ class AntriController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
+    { }
 
     /**
      * Store a newly created resource in storage.
@@ -86,6 +85,37 @@ class AntriController extends Controller
     public function edit(Antri $antri)
     {
         //
+    }
+
+    public function pilihJam($id)
+    {
+        $spesialis = Spesialis::all();
+        $dokter = Dokter::with(['jadwal' => function ($q) {
+            $q->orderBy('hari');
+            $q->orderBy('dJam');
+        }])->where('id', $id)->first();
+        $data = [
+            'category_name' => 'Daftar Antrian',
+            'page_name' => 'Pilih Waktu',
+            'has_scrollspy' => 0,
+            'scrollspy_offset' => '',
+            'dokter' => $dokter,
+            'data_spesialis' => $spesialis
+        ];
+        return view('pages.antri.list_jam')->with($data);
+
+        return $id;
+    }
+
+    public function getJam(Request $request)
+    {
+        // $dokter = Dokter::with(['jadwal' => function ($q) use ($request) {
+        //     $q->orderBy('hari');
+        //     $q->orderBy('dJam');
+        //     $q->where('hari', $request->hari);
+        // }])->where('id', $request->dokter)->first();
+        $jam = Jadwal::where('hari', $request->hari)->where('id_user', $request->dokter)->orderBy('hari')->orderBy('dJam')->get();
+        return $jam;
     }
 
     /**

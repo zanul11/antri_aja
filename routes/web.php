@@ -36,6 +36,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/jadwal/getData', 'JadwalController@getData');
     Route::post('/jadwal/delete', 'JadwalController@delete');
     Route::resource('jadwal', 'JadwalController');
+
+    Route::get('/antri/waktu/{antri}', 'AntriController@pilihJam');
+    Route::post('/antri/getJam', 'AntriController@getJam');
     Route::resource('antri', 'AntriController');
 
     // APPS

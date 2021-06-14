@@ -132,6 +132,12 @@
 <link href="{{asset('assets/css/flextree.css')}}" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="{{asset('plugins/dropify/dropify.min.css')}}">
 <link href="{{asset('assets/css/users/account-setting.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('plugins/noUiSlider/nouislider.min.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('plugins/flatpickr/custom-flatpickr.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('plugins/noUiSlider/custom-nouiSlider.css')}}" rel="stylesheet" type="text/css">
+<link href="{{asset('plugins/bootstrap-range-Slider/bootstrap-slider.css')}}" rel="stylesheet" type="text/css">
 
 @if ($page_name != 'coming_soon' && $page_name != 'contact_us' && $page_name != 'error404' && $page_name != 'error500' && $page_name != 'error503' && $page_name != 'faq' && $page_name != 'helpdesk' && $page_name != 'maintenence' && $page_name != 'privacy' && $page_name != 'auth_boxed' && $page_name != 'auth_default')
 <link href="{{asset('assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
@@ -1150,12 +1156,7 @@
 
 @case('date_range_picker')
 {{-- Forms Date Range Picker --}}
-<link href="{{asset('plugins/flatpickr/flatpickr.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('plugins/noUiSlider/nouislider.min.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css" />
-<link href="{{asset('plugins/flatpickr/custom-flatpickr.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('plugins/noUiSlider/custom-nouiSlider.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('plugins/bootstrap-range-Slider/bootstrap-slider.css')}}" rel="stylesheet" type="text/css">
+
 @break
 
 @case('file_upload')
