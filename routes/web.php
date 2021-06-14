@@ -39,7 +39,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/antri/waktu/{antri}', 'AntriController@pilihJam');
     Route::post('/antri/getJam', 'AntriController@getJam');
+    Route::post('/antri/getJum', 'AntriController@getJum');
     Route::resource('antri', 'AntriController');
+
+    Route::resource('antri_dokter', 'AntriDokterController');
 
     // APPS
     Route::prefix('apps')->group(function () {

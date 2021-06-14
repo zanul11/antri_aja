@@ -55,4 +55,9 @@ class User extends Authenticatable
     {
         return $this->children()->with('childrenRekursif');
     }
+
+    public function antri()
+    {
+        return $this->hasMany(Antri::class, 'pasien', 'id');
+    }
 }

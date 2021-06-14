@@ -104,7 +104,12 @@ return [
             'icon' => '<i data-feather="calendar" ></i>',
             'title' => 'Jadwal Pelayanan',
             'url' => '/jadwal'
-        ]
+        ],
+        [
+            'icon' => '<i data-feather="layers" ></i>',
+            'title' => 'Daftar Antrian',
+            'url' => '/antri_dokter'
+        ],
     ],
     'pasien' => [
         [

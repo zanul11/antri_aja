@@ -9,8 +9,8 @@
 
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
-                    <h3 class=""> {{$dokter->name}} </h3>
-                    <a href="{{url('/dashboard')}}" class="mt-2 edit-profile"> <i data-feather="home" class="text-default"> </i></a>
+                    <h3 class=""> {{$dokter->name}} - {{$dokter->spesialis_detail->spesialis}} </h3>
+                    <a href="{{url('/antri')}}" class="mt-2 edit-profile"> <i data-feather="home" class="text-default"> </i></a>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
                     <div class="col-lg-12 col-12 layout-spacing" ng-show="!info">
@@ -49,8 +49,12 @@
                             <div class="widget-content widget-content-area">
 
                                 <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
+
                                     <div class="form">
                                         <div class="row">
+                                            <div class="alert alert-warning mb-4 col-sm-12" role="alert">
+                                                <h5 class="text-center">Jumlah Antrian : @{{jumlahAntrian}}</h5>
+                                            </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="fullName">Nama Dokter</label>
@@ -101,7 +105,7 @@
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <label for="noHp">Catatun untuk Dokter</label>
+                                                    <label for="noHp">Catatan untuk Dokter</label>
                                                     <textarea class="form-control" rows="5" autofocus ng-model="note"></textarea>
                                                 </div>
                                             </div>

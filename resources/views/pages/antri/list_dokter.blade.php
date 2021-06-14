@@ -10,7 +10,7 @@
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
                     <h3 class=""> Daftar Dokter {{$spesialis->spesialis}}</h3>
-                    <a href="{{url('/dashboard')}}" class="mt-2 edit-profile"> <i data-feather="home" class="text-default"> </i></a>
+                    <a href="{{url('/antri')}}" class="mt-2 edit-profile"> <i data-feather="home" class="text-default"> </i></a>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
                     <table id="zero-config" class="table table-hover" style="width:100%">
@@ -18,7 +18,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>No Hp/email</th>
+                                <th>No Hp</th>
+                                <th>Alamat</th>
                                 <th>Pengalaman</th>
                                 <th>Jadwal</th>
                                 <th class="no-content"></th>
@@ -29,7 +30,8 @@
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$dt->name}}</td>
-                                <td>{{$dt->no_hp}}/{{$dt->email}}</td>
+                                <td>{{$dt->no_hp}}</td>
+                                <td>{{$dt->alamat}}</td>
                                 <td>{{$dt->pengalaman}} tahun</td>
                                 <td>
                                     @if(count($dt->jadwal)>0)

@@ -139,6 +139,7 @@
 {{-- Dashboard 2 --}}
 <script src="{{asset('plugins/apex/apexcharts.min.js')}}"></script>
 <script src="{{asset('assets/js/dashboard/dash_1.js')}}"></script>
+<script src="{{asset('assets/js/apps/invoice.js')}}"></script>
 @break
 
 @case('calendar')
@@ -162,7 +163,7 @@
 
 @case('invoice')
 {{-- App Invoice --}}
-<script src="{{asset('assets/js/apps/invoice.js')}}"></script>
+
 @break
 
 @case('mailbox')

@@ -16,4 +16,14 @@ class Dokter extends Model
     {
         return $this->hasMany(Jadwal::class, 'id_user', 'id');
     }
+
+    public function spesialis_detail()
+    {
+        return $this->hasOne(Spesialis::class, 'id', 'spesialis');
+    }
+
+    public function antri()
+    {
+        return $this->hasMany(Antri::class, 'dokter', 'id');
+    }
 }

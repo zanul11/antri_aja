@@ -9,6 +9,7 @@ app.controller("WaktuController", [
         $scope.jam = '';
         $scope.info = false;
         $scope.note = '';
+        $scope.jumlahAntrian = 0;
         $scope.init = function(dokter)
         {
             $scope.dokter = dokter;
@@ -48,17 +49,57 @@ app.controller("WaktuController", [
         };
 
         $scope.selectJam = function(data) {
-            $scope.info = true;
-            $scope.jam_ = data['dJam']+' - '+data['sJam'];
+            $http({
+                url: "/antri/getJum",
+                method: "POST",
+                data: {
+                    dokter: $scope.dokter,
+                    jam : data['id'],
+                    tgl : $scope.tgl 
+                }
+            }).then(function(res){
+                $scope.jumlahAntrian = res.data;
+                $scope.info = true;
+                $scope.jam_ = data['dJam']+' - '+data['sJam'];
+                $scope.selectedJam = data;
+              console.log(res);
+            });
+            
             console.log(data)
         };
+
         $scope.kembali = function() {
             $scope.info = false;
-           
         };
         $scope.submit = function() {
-            console.log($scope.note)
-           
+            if($scope.note==null||$scope.note==undefined||$scope.note==''){
+                Swal.fire(
+                    "Warning!",
+                    "Input catatan unutk dokter!",
+                    "warning"
+                );
+            }else {
+                $http({
+                    url: "/antri",
+                    method: "POST",
+                    data: {
+                        dokter: $scope.dokter,
+                        jam : $scope.selectedJam,
+                        catatan : $scope.note,
+                        tgl : $scope.tgl 
+                    }
+                }).then(function(res){
+                    console.log(res);
+                  Swal.fire(
+                    "Success",
+                    "Berhasil daftar antrian!",
+                    "success"
+                    ).then(result => {
+                        window.location='/antri';
+                    });
+                });
+                
+            }
         };
     }
     

@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Dokter;
 use App\Models\Jadwal;
 use App\Models\Spesialis;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AntriController extends Controller
 {
@@ -18,6 +20,31 @@ class AntriController extends Controller
      */
     public function index()
     {
+        $antri =  User::with('antri')->with('antri.dokter_detail')->with('antri.waktu_detail')->where('id', Auth::user()->id)->first();
+        // $spesialis = Spesialis::all();
+        $data = [
+            'category_name' => 'Daftar Antrian',
+            'page_name' => 'Daftar Antrian',
+            'has_scrollspy' => 0,
+            'scrollspy_offset' => '',
+            'data_antri' => $antri,
+
+        ];
+        return view('pages.antri.index')->with($data);
+    }
+
+    public function pilihSpesialis()
+    {
+        // return User::with('antri')->with('antri.dokter_detail')->where('id', Auth::user()->id)->first();
+
+    }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
         $spesialis = Spesialis::all();
         $data = [
             'category_name' => 'Daftar Antrian',
@@ -27,16 +54,8 @@ class AntriController extends Controller
             'spesialis' => $spesialis,
 
         ];
-        return view('pages.antri.index')->with($data);
+        return view('pages.antri.list_spesialis')->with($data);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    { }
 
     /**
      * Store a newly created resource in storage.
@@ -46,7 +65,17 @@ class AntriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $jum = Antri::where('dokter', $request->dokter)->whereDate('tgl', $request->tgl)->where('waktu', $request->jam['id'])->count();
+        Antri::create([
+            'no_antrian' => $jum + 1,
+            'pasien' => Auth::user()->id,
+            'tgl' => $request->tgl,
+            'dokter' => $request->dokter,
+            'waktu' => $request->jam['id'],
+            'catatan' => $request->catatan
+        ]);
+        // return $request;
     }
 
     /**
@@ -84,7 +113,19 @@ class AntriController extends Controller
      */
     public function edit(Antri $antri)
     {
-        //
+        $spesialis = Spesialis::all();
+
+        $data = [
+            'category_name' => 'Daftar Antrian',
+            'page_name' => 'Pilih Waktu',
+            'has_scrollspy' => 0,
+            'scrollspy_offset' => '',
+            'antri' => $antri,
+            'data_spesialis' => $spesialis,
+
+        ];
+        return view('pages.antri.detail')->with($data);
+        return $antri;
     }
 
     public function pilihJam($id)
@@ -93,7 +134,7 @@ class AntriController extends Controller
         $dokter = Dokter::with(['jadwal' => function ($q) {
             $q->orderBy('hari');
             $q->orderBy('dJam');
-        }])->where('id', $id)->first();
+        }])->with('spesialis_detail')->where('id', $id)->first();
         $data = [
             'category_name' => 'Daftar Antrian',
             'page_name' => 'Pilih Waktu',
@@ -118,6 +159,15 @@ class AntriController extends Controller
         return $jam;
     }
 
+    public function getJum(Request $request)
+    {
+        $jum = Antri::where('dokter', $request->dokter)->whereDate('tgl', $request->tgl)->where('waktu', $request->jam)->count();
+        return $jum;
+    }
+
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -138,6 +188,6 @@ class AntriController extends Controller
      */
     public function destroy(Antri $antri)
     {
-        //
+        $antri->delete();
     }
 }
