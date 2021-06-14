@@ -58,14 +58,15 @@ app.controller("WaktuController", [
                     tgl : $scope.tgl 
                 }
             }).then(function(res){
+                // console.log(res);
                 $scope.jumlahAntrian = res.data;
                 $scope.info = true;
                 $scope.jam_ = data['dJam']+' - '+data['sJam'];
                 $scope.selectedJam = data;
-              console.log(res);
+                
             });
             
-            console.log(data)
+            // console.log(data)
         };
 
         $scope.kembali = function() {

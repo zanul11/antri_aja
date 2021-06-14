@@ -58,7 +58,7 @@ class AntriDokterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $request;
     }
 
     /**

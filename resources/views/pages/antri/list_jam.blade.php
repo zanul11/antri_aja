@@ -48,7 +48,7 @@
                             </div>
                             <div class="widget-content widget-content-area">
 
-                                <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
+                                <div class="col-xl-12 col-lg-12 col-md-8 mt-md-0 mt-4">
 
                                     <div class="form">
                                         <div class="row">
