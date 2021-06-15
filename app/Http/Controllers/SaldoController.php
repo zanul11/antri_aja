@@ -21,30 +21,24 @@ class SaldoController extends Controller
     public function index()
     {
 
-
-        if (Session::has('user')) {
-            return $d = Config::get('session.lifetime');
-            return Session::get('user');
-        } else {
-            $profile = Auth::user();
-            $client = new \GuzzleHttp\Client();
-            $response = $client->post('https://my.ipaymu.com/api/saldo', [
-                'headers' => ['Content-Type' => 'application/json'],
-                'body' => json_encode([
-                    'key' => $profile['api_key'],
-                ])
-            ]);
-            // return json_decode($response->getBody(), true);
-            $data = [
-                'category_name' => 'Saldo',
-                'page_name' => 'Saldo',
-                'has_scrollspy' => 0,
-                'scrollspy_offset' => '',
-                'profile' => $profile,
-                'saldo' => json_decode($response->getBody(), true)
-            ];
-            return view('pages.saldo.index')->with($data);
-        }
+        $profile = Auth::user();
+        $client = new \GuzzleHttp\Client();
+        $response = $client->post('https://my.ipaymu.com/api/saldo', [
+            'headers' => ['Content-Type' => 'application/json'],
+            'body' => json_encode([
+                'key' => $profile['api_key'],
+            ])
+        ]);
+        // return json_decode($response->getBody(), true);
+        $data = [
+            'category_name' => 'Saldo',
+            'page_name' => 'Saldo',
+            'has_scrollspy' => 0,
+            'scrollspy_offset' => '',
+            'profile' => $profile,
+            'saldo' => json_decode($response->getBody(), true)
+        ];
+        return view('pages.saldo.index')->with($data);
     }
 
     /**
@@ -116,7 +110,7 @@ class SaldoController extends Controller
         $body['qty']        = array('1');
         $body['price']      = array($request->jumlah);
         // $body['amount']     = $request->jumlah;
-        $body['returnUrl']  = url('/') . '/ipaymu-success';
+        $body['returnUrl']  = url('/') . 'ipaymu-success/' . Auth::user()->email;
         $body['cancelUrl']  = 'http://antriaja.com/';
         $body['notifyUrl']  = 'https://mywebsite.com/notify';
         $body['name']  = Auth::user()->name;
@@ -171,7 +165,7 @@ class SaldoController extends Controller
             if ($res['Status'] == 200) {
                 TopUp::create([
                     "session_id" => $res['Data']['SessionID'],
-                    "dokter" => Auth::user()->id,
+                    "dokter" => Auth::user()->email,
                     "jumlah" => $request->jumlah
                 ]);
                 return Redirect::to($res['Data']['Url']);
