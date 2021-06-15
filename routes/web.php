@@ -1304,7 +1304,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/sales', 'HomeController@index');
 
-Route::get('ipaymu-success/{email}', 'IpaymuResponseController@success');
+Route::get('ipaymu-success/{email}/{uid}', 'IpaymuResponseController@success');
 
 Route::get('/antri/waktu/{antri}', 'AntriController@pilihJam');
 Route::post('/antri/getJam', 'AntriController@getJam');
