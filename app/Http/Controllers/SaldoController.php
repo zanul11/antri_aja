@@ -96,28 +96,41 @@ class SaldoController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        // return $request;
         //production
         // $va           = '1179001227977474'; 
         // $secret       = 'BE93365D-9A7A-469F-B34D-7B96EA454568'; 
         $va           = '1179002340758828'; //sandbox dev
         $secret       = '2BC8D477-98DC-414F-9DC1-8D9B7B9C9CDA'; //sandbox dev
 
-        $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; //url
+        // $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; //redirect
+        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; //direct
         $method       = 'POST'; //method
 
+        if ($request->metode == 'va') {
+            $fee = 3500;
+        } else if ($request->metode == 'banktransfer') {
+            $fee = 4000;
+        } else {
+            $fee = ceil(((0.7 / 100) * $request->jumlah) + ((1.43 / 100) * $request->jumlah));
+        }
+        // return $fee;
         //Request Body//
-        $body['product']    = array('Top Up Saldo');
-        $body['qty']        = array('1');
-        $body['price']      = array($request->jumlah);
-        // $body['amount']     = $request->jumlah;
+        $body['product']    = array('Top Up Saldo', 'Harga layanan');
+        $body['qty']        = array('1', '1');
+        $body['price']      = array($request->jumlah, $fee);
         $body['returnUrl']  = url('/') . 'ipaymu-success/' . Auth::user()->email;
         $body['cancelUrl']  = 'http://antriaja.com/';
         $body['notifyUrl']  = 'https://mywebsite.com/notify';
         $body['name']  = Auth::user()->name;
         $body['email']  = Auth::user()->email;
         $body['phone']  = Auth::user()->no_hp;
-        // $body['paymentMethod']  = 'va';
-        // $body['paymentChannel']  = 'mandiri';
+
+        //khusus direct
+        $body['paymentMethod']  = $request->metode;
+        $body['paymentChannel']  = $request->paymentChannel;
+        $body['amount']     = $request->jumlah + $fee;
+
         //End Request Body//
 
         //Generate Signature
@@ -163,11 +176,11 @@ class SaldoController extends Controller
             $res = json_decode($ret, true);
             return $res;
             if ($res['Status'] == 200) {
-                TopUp::create([
-                    "session_id" => $res['Data']['SessionID'],
-                    "dokter" => Auth::user()->email,
-                    "jumlah" => $request->jumlah
-                ]);
+                // TopUp::create([
+                //     "session_id" => $res['Data']['SessionID'],
+                //     "dokter" => Auth::user()->email,
+                //     "jumlah" => $request->jumlah
+                // ]);
                 return Redirect::to($res['Data']['Url']);
             } else {
                 return Redirect::to('/saldo')->with('message', $res['Message']);

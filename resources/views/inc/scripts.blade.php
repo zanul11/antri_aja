@@ -133,6 +133,11 @@
     placeholder: "Pilih Spesialis",
     allowClear: true
   });
+
+  $(".pembayaran").select2({
+    placeholder: "Pilih Methode Dulu",
+    allowClear: true
+  });
 </script>
 
 <script src="{{asset('plugins/dropify/dropify.min.js')}}"></script>
@@ -140,14 +145,8 @@
 <script src="{{asset('assets/js/users/account-settings.js')}}"></script>
 
 <script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
-<script src="{{asset('plugins/flatpickr/flatpickr.js')}}"></script>
-<script src="{{asset('plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js')}}"></script>
-<script>
-  var f1 = flatpickr(document.getElementById('basicFlatpickr'), {
-    dateFormat: "Y-m-d",
-    defaultDate: "{{date('Y-m-d')}}"
-  });
-</script>
+
+
 
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
@@ -184,9 +183,16 @@
 <script src="{{asset('assets/js/apps/contact.js')}}"></script>
 @break
 
-@case('invoice')
+@case('antri')
 {{-- App Invoice --}}
-
+<script src="{{asset('plugins/flatpickr/flatpickr.js')}}"></script>
+<script src="{{asset('plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js')}}"></script>
+<script>
+  var f1 = flatpickr(document.getElementById('basicFlatpickr'), {
+    dateFormat: "Y-m-d",
+    defaultDate: "{{date('Y-m-d')}}"
+  });
+</script>
 @break
 
 @case('mailbox')
