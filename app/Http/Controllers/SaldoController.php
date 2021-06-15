@@ -107,6 +107,9 @@ class SaldoController extends Controller
         $body['returnUrl']  = url('/') . '/ipaymu-success';
         $body['cancelUrl']  = 'http://antriaja.com/';
         $body['notifyUrl']  = 'https://mywebsite.com/notify';
+        $body['name']  = Auth::user()->name;
+        $body['email']  = Auth::user()->email;
+        $body['phone']  = Auth::user()->no_hp;
         //End Request Body//
 
         //Generate Signature
