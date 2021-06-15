@@ -110,7 +110,7 @@ class SaldoController extends Controller
         $body['qty']        = array('1');
         $body['price']      = array($request->jumlah);
         // $body['amount']     = $request->jumlah;
-        $body['returnUrl']  = url('/') . 'ipaymu-success/' . Auth::user()->email;
+        $body['returnUrl']  = url('/') . '/ipaymu-success/' . Auth::user()->email;
         $body['cancelUrl']  = 'http://antriaja.com/';
         $body['notifyUrl']  = 'https://mywebsite.com/notify';
         $body['name']  = Auth::user()->name;
