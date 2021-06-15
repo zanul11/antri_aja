@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('antri', 'AntriController');
 
     Route::resource('antri_dokter', 'AntriDokterController');
+    Route::resource('saldo', 'SaldoController');
 
     // APPS
     Route::prefix('apps')->group(function () {

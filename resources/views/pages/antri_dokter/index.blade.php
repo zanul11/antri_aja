@@ -12,7 +12,7 @@
                     <h3 class=""> {{$page_name}} </h3>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
-                    <table id="zero-config" class="table table-hover" style="width:100%">
+                    <table id="antrian" class="table table-hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
@@ -25,7 +25,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data_antri->antri as $dt)
+                            @foreach($data_antri as $dt)
                             <tr>
                                 <td>{{$dt->tgl}}</td>
                                 <td>{{$dt->no_antrian}}</td>
@@ -34,9 +34,8 @@
                                 <td>{{$dt->waktu_detail->dJam}}-{{$dt->waktu_detail->sJam}}</td>
                                 <td>@if($dt->status==0)
                                     <span class="badge badge-warning"> Menunggu </span>
-                                    @elseif($dt->status==2)
+                                    @elseif($dt->status==1)
                                     <span class="badge badge-success"> Selesai </span>
-
                                     @endif</td>
                                 <td>
                                     <a href="antri_dokter/{{$dt->id}}/edit"><i data-feather="eye" class="text-warning"></i></a>

@@ -96,6 +96,11 @@ return [
             'url' => '/profile'
         ],
         [
+            'icon' => '<i data-feather="dollar-sign" ></i>',
+            'title' => 'Saldo',
+            'url' => '/saldo'
+        ],
+        [
             'icon' => '<i data-feather="users" ></i>',
             'title' => 'Data Dokter',
             'url' => '/dokter'

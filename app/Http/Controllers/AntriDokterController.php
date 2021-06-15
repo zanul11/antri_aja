@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Dokter;
 use App\Models\Spesialis;
+use Illuminate\Support\Facades\Redirect;
 
 class AntriDokterController extends Controller
 {
@@ -24,10 +25,15 @@ class AntriDokterController extends Controller
         //     ->where('status', 0)
         //     ->groupBy('tgl')
         //     ->get();
-        $antri =  Dokter::with(['antri' => function ($q) {
-            $q->orderBy('tgl');
-            $q->orderBy('no_antrian');
-        }])->with('antri.waktu_detail')->with('antri.pasien_detail')->where('id', Auth::user()->id)->first();
+        $antri = Antri::where('dokter', Auth::user()->id)->with('waktu_detail')->with('pasien_detail')->orderBy('status')->orderBy('tgl')->orderBy('no_antrian')->get();
+
+
+
+        // return $antri =  Dokter::with(['antri' => function ($q) {
+        //     $q->orderBy('status', 'asc');
+        //     // $q->orderBy('tgl');
+        //     // $q->orderBy('no_antrian');
+        // }])->with('antri.waktu_detail')->with('antri.pasien_detail')->where('id', Auth::user()->id)->first();
         // $spesialis = Spesialis::all();
         $data = [
             'category_name' => 'Daftar Antrian',
@@ -58,6 +64,10 @@ class AntriDokterController extends Controller
      */
     public function store(Request $request)
     {
+
+        Antri::where('id', $request->id_antri)
+            ->update(["status" => 1, "catatan_dokter" => $request->catatan, "selesai_at" => date('Y-m-d H:i:s')]);
+        return Redirect::to('/antri_dokter')->with('success', 'Selesai ditangani!');
         return $request;
     }
 
@@ -87,7 +97,6 @@ class AntriDokterController extends Controller
         // }])->with('antri.waktu_detail')->with('antri.pasien_detail')->where('id', Auth::user()->id)->first();
 
         $antri = Antri::with('waktu_detail')->with('pasien_detail')->where('dokter', Auth::user()->id)->where('id', $id)->first();
-
         $data = [
             'category_name' => 'Daftar Antrian',
             'page_name' => 'Pilih Waktu',

@@ -13,7 +13,7 @@
                     <a href="{{url('antri/create')}}" class="mt-2 "> <button class="btn btn-primary mb-2">DAFTAR ANTRIAN</button></a>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
-                    <table id="zero-config" class="table table-hover" style="width:100%">
+                    <table id="antrian" class="table table-hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
@@ -35,7 +35,7 @@
                                 <td>{{$dt->waktu_detail->dJam}}-{{$dt->waktu_detail->sJam}}</td>
                                 <td>@if($dt->status==0)
                                     <span class="badge badge-warning"> Menunggu </span>
-                                    @elseif($dt->status==2)
+                                    @elseif($dt->status==1)
                                     <span class="badge badge-success"> Selesai </span>
 
                                     @endif</td>
