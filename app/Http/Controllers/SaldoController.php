@@ -94,6 +94,9 @@ class SaldoController extends Controller
      */
     public function update(Request $request,  $id)
     {
+        //production
+        // $va           = '1179001227977474'; 
+        // $secret       = 'BE93365D-9A7A-469F-B34D-7B96EA454568'; 
         $va           = '1179002340758828'; //get on iPaymu dashboard
         $secret       = '2BC8D477-98DC-414F-9DC1-8D9B7B9C9CDA'; //get on iPaymu dashboard
 
