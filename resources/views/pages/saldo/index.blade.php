@@ -11,22 +11,21 @@
                 <div class="row">
                     @if(isset($profile->api_key))
                     <div class="col-xl-5 layout-top-spacing">
-                        <div class="user-profile layout-spacing">
+                        <div class="bio layout-spacing">
                             <div class="widget-content widget-content-area">
-
+                                <h3 class="">Saldo</h3>
                                 <div class="text-center user-info">
                                     <img src="https://my.ipaymu.com/asset/images/logo-ipaymu.png" alt="avatar" height="50px">
-                                    <p class="">Saldo iPaymu</p>
+                                    <p class="">{{$saldo['Username']}}</p>
                                 </div>
-                                <div class="user-info-list">
-
+                                <div class="user-info-list layout-spacing">
                                     <div class="text-center">
                                         <h1>
-                                            Rp.20.000
+                                            Rp. {{$saldo['Saldo']}}
                                         </h1>
                                     </div>
                                 </div>
-                            </div>
+                            </div><br>
                         </div>
                     </div>
                     <div class="col-xl-7 layout-top-spacing">
@@ -41,7 +40,7 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="number" class="form-control mb-4" id="nikDr" name="jumlah" placeholder="Jumlah top up">
+                                                <input type="number" class="form-control mb-4" id="nikDr" name="jumlah" placeholder="Jumlah top up" required>
 
                                             </div>
                                         </div>

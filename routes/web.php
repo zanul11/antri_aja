@@ -1307,6 +1307,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/sales', 'HomeController@index');
 
+Route::get('ipaymu-success', 'IpaymuResponseController@success');
+
 Route::resource('/daftar', 'RegisterController');
 
 Route::get('/password/reset', function () {

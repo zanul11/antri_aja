@@ -33,7 +33,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        //
+        return 'tes';
     }
 
     /**
@@ -45,14 +45,14 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        $cek = Register::where('email', $request->email)->get();
+        $cek = Register::where('email', $request->no_hp)->get();
         if (count($cek) > 0) {
-            return Redirect::to('/register')->withErrors(['Duplicate marketing email/nik!.'])->withInput()->with('message', 'Duplicate email!.');
+            return Redirect::to('/register')->withErrors(['Duplicate no hp!.'])->withInput()->with('message', 'Duplicate no hp!.');
         } else {
             // return $request;
             Register::create([
                 "name" => $request->nama,
-                "email" => $request->email,
+                "email" => $request->no_hp,
                 "password" => bcrypt($request->password),
                 "no_hp" => $request->no_hp,
                 "role" => 4
