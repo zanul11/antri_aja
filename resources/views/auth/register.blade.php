@@ -38,8 +38,8 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">DAFTAR PASIEN</h1>
-                        <p class="">Register new account</p>
+                        <h1 class="">LOGIN USER</h1>
+                        <p class="">Masuk sebagai</p>
                         <form method="POST" action="{{ url('/daftar') }}" class="text-left">
                             @csrf
                             <div class="form">
@@ -91,7 +91,7 @@
 
                                 </div>
 
-                                <div id="password-field" class="field-wrapper input mb-2">
+                                <!-- <div id="password-field" class="field-wrapper input mb-2">
                                     <div class="d-flex justify-content-between">
                                         <label for="password">PASSWORD</label>
                                     </div>
@@ -110,10 +110,10 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                </div>
+                                </div> -->
                                 <div class="d-sm-flex justify-content-between">
                                     <div class="field-wrapper">
-                                        <button type="submit" class="btn btn-primary" value="">Daftar</button>
+                                        <button type="submit" class="btn btn-primary" value="">MASUK</button>
                                     </div>
                                 </div>
                                 <!-- 
@@ -135,11 +135,11 @@
                                         <span class="brand-name">Github</span>
                                     </a>
                                 </div> -->
-                                <center>
+                                <!-- <center>
                                     <div class="footer-section f-section-1" style="margin-top: 20px;">
                                         <a href="{{url('/')}}" style="color:blue">Login disini !</a>
                                     </div>
-                                </center>
+                                </center> -->
                                 <center>
                                     <div class="footer-section f-section-1" style="margin-top: 20px;">
                                         <p class="">Copyright © {{date('Y')}} Antrian Aja</p>

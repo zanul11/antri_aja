@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_user')
 
 @section('content')
 <div class="layout-px-spacing" ng-app="app" ng-controller="WaktuController" ng-init="init({{$dokter->id}})">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="widget-content widget-content-area">
 
-                                <div class="col-xl-12 col-lg-12 col-md-8 mt-md-0 mt-4">
+                                <div class="col-xl-12 col-lg-12 col-md-12 mt-md-0 mt-4">
 
                                     <div class="form">
                                         <div class="row">
@@ -98,6 +98,21 @@
                                                 <div class="form-group">
                                                     <label for="noHp">Jam</label>
                                                     <input type="text" class="form-control mb-4" ng-model="jam_" id="noHp" name="no_hp" placeholder="no Hp" readonly>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="noHp">Nama Pasien</label>
+                                                    <input type="text" class="form-control mb-4" ng-model="nama_pasien" placeholder="Nama Pasien">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="noHp">Umur</label>
+                                                    <input type="number" class="form-control mb-4" ng-model="umur_pasien" placeholder="Umur Pasien">
                                                 </div>
                                             </div>
 

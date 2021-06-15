@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_user')
 
 @section('content')
 <div class="layout-px-spacing">
@@ -17,7 +17,8 @@
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
-                                <th>No Antrian</th>
+                                <th>No Antri</th>
+                                <th>Pasien</th>
                                 <th>Dokter</th>
                                 <th>Alamat</th>
                                 <th>Waktu</th>
@@ -26,10 +27,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data_antri->antri as $dt)
+                            @foreach($data_antri as $dt)
                             <tr>
                                 <td>{{$dt->tgl}}</td>
                                 <td>{{$dt->no_antrian}}</td>
+                                <td>{{$dt->pasien}}</td>
                                 <td>{{$dt->dokter_detail->name}}</td>
                                 <td>{{$dt->dokter_detail->alamat}}</td>
                                 <td>{{$dt->waktu_detail->dJam}}-{{$dt->waktu_detail->sJam}}</td>

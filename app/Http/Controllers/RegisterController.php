@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Register;
 use App\Http\Controllers\Controller;
+use App\Models\Antri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
+use App\Models\User;
 
 class RegisterController extends Controller
 {
@@ -16,14 +19,28 @@ class RegisterController extends Controller
      */
     public function index()
     {
-
-        $data = [
-            'category_name' => 'Data Marketing',
-            'page_name' => 'Data Marketing',
-            'has_scrollspy' => 0,
-            'scrollspy_offset' => '',
-        ];
-        return view('auth.register');
+        if (Session::has('user')) {
+            // return Session::get('id');
+            // return $antri =  User::with('antri')->with('antri.dokter_detail')->with('antri.waktu_detail')->where('pasien', Session::get('id'))->first();
+            $antri = Antri::with('dokter_detail')->with('waktu_detail')->where('user_id')->get();
+            // $spesialis = Spesialis::all();
+            $data = [
+                'category_name' => 'Daftar Antrian',
+                'page_name' => 'Daftar Antrian',
+                'has_scrollspy' => 0,
+                'scrollspy_offset' => '',
+                'data_antri' => $antri,
+            ];
+            return view('pages.antri.index')->with($data);
+        } else {
+            $data = [
+                'category_name' => 'Data Marketing',
+                'page_name' => 'Data Marketing',
+                'has_scrollspy' => 0,
+                'scrollspy_offset' => '',
+            ];
+            return view('auth.register');
+        }
     }
 
     /**
@@ -45,20 +62,28 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        $cek = Register::where('email', $request->no_hp)->get();
-        if (count($cek) > 0) {
-            return Redirect::to('/register')->withErrors(['Duplicate no hp!.'])->withInput()->with('message', 'Duplicate no hp!.');
-        } else {
-            // return $request;
-            Register::create([
-                "name" => $request->nama,
-                "email" => $request->no_hp,
-                "password" => bcrypt($request->password),
-                "no_hp" => $request->no_hp,
-                "role" => 4
-            ]);
-            return Redirect::to('/login')->with('success', 'Daftar berhasil!');
-        }
+        Session::put(
+            [
+                'user' => $request->nama,
+                'no_hp' => $request->no_hp,
+                'id' => substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 9)
+            ]
+        );
+        return Redirect::to('/antri')->with('success', 'Daftar berhasil!');
+        // $cek = Register::where('email', $request->no_hp)->get();
+        // if (count($cek) > 0) {
+        //     return Redirect::to('/register')->withErrors(['Duplicate no hp!.'])->withInput()->with('message', 'Duplicate no hp!.');
+        // } else {
+        //     // return $request;
+        //     Register::create([
+        //         "name" => $request->nama,
+        //         "email" => $request->no_hp,
+        //         "password" => bcrypt($request->password),
+        //         "no_hp" => $request->no_hp,
+        //         "role" => 4
+        //     ]);
+        //     return Redirect::to('/login')->with('success', 'Daftar berhasil!');
+        // }
     }
 
     /**
@@ -78,9 +103,10 @@ class RegisterController extends Controller
      * @param  \App\Models\Register  $register
      * @return \Illuminate\Http\Response
      */
-    public function edit(Register $register)
+    public function edit($register)
     {
-        //
+        Session::flush();
+        return Redirect::to('/')->with('success', 'Cache Cleared');
     }
 
     /**

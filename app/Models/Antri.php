@@ -20,9 +20,4 @@ class Antri extends Model
     {
         return $this->hasOne(Jadwal::class, 'id', 'waktu');
     }
-
-    public function pasien_detail()
-    {
-        return $this->hasOne(Dokter::class, 'id', 'pasien');
-    }
 }

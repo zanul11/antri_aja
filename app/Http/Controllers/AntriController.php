@@ -10,6 +10,7 @@ use App\Models\Spesialis;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AntriController extends Controller
 {
@@ -20,7 +21,7 @@ class AntriController extends Controller
      */
     public function index()
     {
-        $antri =  User::with('antri')->with('antri.dokter_detail')->with('antri.waktu_detail')->where('id', Auth::user()->id)->first();
+        $antri = Antri::with('dokter_detail')->with('waktu_detail')->where('user_id', Session::get('id'))->get();
         // $spesialis = Spesialis::all();
         $data = [
             'category_name' => 'Daftar Antrian',
@@ -28,7 +29,6 @@ class AntriController extends Controller
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'data_antri' => $antri,
-
         ];
         return view('pages.antri.index')->with($data);
     }
@@ -69,11 +69,15 @@ class AntriController extends Controller
         $jum = Antri::where('dokter', $request->dokter)->whereDate('tgl', $request->tgl)->where('waktu', $request->jam['id'])->count();
         Antri::create([
             'no_antrian' => $jum + 1,
-            'pasien' => Auth::user()->id,
+            'user_id' => Session::get('id'),
+            'pasien' => $request->pasien,
+            'umur' => $request->umur,
             'tgl' => $request->tgl,
             'dokter' => $request->dokter,
             'waktu' => $request->jam['id'],
-            'catatan' => $request->catatan
+            'catatan' => $request->catatan,
+            'no_hp' => Session::get('no_hp'),
+            'user_name' => Session::get('user')
         ]);
         // return $request;
     }

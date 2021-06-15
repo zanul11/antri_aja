@@ -37,10 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/jadwal/delete', 'JadwalController@delete');
     Route::resource('jadwal', 'JadwalController');
 
-    Route::get('/antri/waktu/{antri}', 'AntriController@pilihJam');
-    Route::post('/antri/getJam', 'AntriController@getJam');
-    Route::post('/antri/getJum', 'AntriController@getJum');
-    Route::resource('antri', 'AntriController');
+
 
     Route::resource('antri_dokter', 'AntriDokterController');
     Route::resource('saldo', 'SaldoController');
@@ -1307,7 +1304,12 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/sales', 'HomeController@index');
 
-Route::get('ipaymu-success', 'IpaymuResponseController@success');
+// Route::get('ipaymu-success', 'IpaymuResponseController@success');
+
+Route::get('/antri/waktu/{antri}', 'AntriController@pilihJam');
+Route::post('/antri/getJam', 'AntriController@getJam');
+Route::post('/antri/getJum', 'AntriController@getJum');
+Route::resource('antri', 'AntriController');
 
 Route::resource('/daftar', 'RegisterController');
 

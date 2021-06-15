@@ -16,8 +16,10 @@
                         <thead>
                             <tr>
                                 <th>Tanggal</th>
-                                <th>No Antrian</th>
-                                <th>Nama Pasien</th>
+                                <th>No Antri</th>
+                                <th>Pasien</th>
+                                <th>User</th>
+                                <th>No Hp</th>
                                 <th>Catatan</th>
                                 <th>Waktu</th>
                                 <th>Status</th>
@@ -29,7 +31,9 @@
                             <tr>
                                 <td>{{$dt->tgl}}</td>
                                 <td>{{$dt->no_antrian}}</td>
-                                <td>{{$dt->pasien_detail->name}}</td>
+                                <td>{{$dt->pasien}}</td>
+                                <td>{{$dt->user_name}}</td>
+                                <td>{{$dt->no_hp}}</td>
                                 <td>{{$dt->catatan}}</td>
                                 <td>{{$dt->waktu_detail->dJam}}-{{$dt->waktu_detail->sJam}}</td>
                                 <td>@if($dt->status==0)

@@ -25,7 +25,7 @@ class AntriDokterController extends Controller
         //     ->where('status', 0)
         //     ->groupBy('tgl')
         //     ->get();
-        $antri = Antri::where('dokter', Auth::user()->id)->with('waktu_detail')->with('pasien_detail')->orderBy('status')->orderBy('tgl')->orderBy('no_antrian')->get();
+        $antri = Antri::where('dokter', Auth::user()->id)->with('waktu_detail')->orderBy('status')->orderBy('tgl')->orderBy('no_antrian')->get();
 
 
 
@@ -91,12 +91,9 @@ class AntriDokterController extends Controller
     public function edit($id)
     {
         $spesialis = Spesialis::all();
-        // return $antri =  Dokter::with(['antri' => function ($q) {
-        //     $q->orderBy('tgl');
-        //     $q->orderBy('no_antrian');
-        // }])->with('antri.waktu_detail')->with('antri.pasien_detail')->where('id', Auth::user()->id)->first();
 
-        $antri = Antri::with('waktu_detail')->with('pasien_detail')->where('dokter', Auth::user()->id)->where('id', $id)->first();
+
+        $antri = Antri::with('waktu_detail')->where('dokter', Auth::user()->id)->where('id', $id)->first();
         $data = [
             'category_name' => 'Daftar Antrian',
             'page_name' => 'Pilih Waktu',

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_user')
 
 @section('content')
 <div class="layout-px-spacing">

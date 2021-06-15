@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-
+        Session::put(['user' => 'KISE']);
         $data = [
             'category_name' => 'Dashboard',
             'page_name' => 'Dashboard',

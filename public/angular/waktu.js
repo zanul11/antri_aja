@@ -9,6 +9,8 @@ app.controller("WaktuController", [
         $scope.jam = '';
         $scope.info = false;
         $scope.note = '';
+        $scope.nama_pasien = null;
+        $scope.umur_pasien = null;
         $scope.jumlahAntrian = 0;
         $scope.init = function(dokter)
         {
@@ -73,10 +75,24 @@ app.controller("WaktuController", [
             $scope.info = false;
         };
         $scope.submit = function() {
-            if($scope.note==null||$scope.note==undefined||$scope.note==''){
+            if($scope.nama_pasien==null||$scope.nama_pasien==undefined||$scope.nama_pasien==''){
                 Swal.fire(
                     "Warning!",
-                    "Input catatan unutk dokter!",
+                    "Input nama pasien untuk dokter!",
+                    "warning"
+                );
+            }
+            else if($scope.umur_pasien==null||$scope.umur_pasien==undefined||$scope.umur_pasien==0){
+                Swal.fire(
+                    "Warning!",
+                    "Input umur pasien untuk dokter!",
+                    "warning"
+                );
+            }
+            else if($scope.note==null||$scope.note==undefined||$scope.note==''){
+                Swal.fire(
+                    "Warning!",
+                    "Input catatan untuk dokter!",
                     "warning"
                 );
             }else {
@@ -87,7 +103,9 @@ app.controller("WaktuController", [
                         dokter: $scope.dokter,
                         jam : $scope.selectedJam,
                         catatan : $scope.note,
-                        tgl : $scope.tgl 
+                        tgl : $scope.tgl,
+                        pasien : $scope.nama_pasien,
+                        umur : $scope.umur_pasien 
                     }
                 }).then(function(res){
                     console.log(res);

@@ -8,19 +8,7 @@
 
         <ul class="list-unstyled menu-categories" id="accordionExample">
             @php
-            switch(Auth::user()->role){
-            case 1 :
-            $menu = config('sidemenu.administrator');
-            break;
-            case 2 :
-            $menu = config('sidemenu.marketing');
-            break;
-            case 3 :
-            $menu = config('sidemenu.dokter');
-            break;
-            default :
             $menu = config('sidemenu.pasien');
-            }
             @endphp
             @if (is_array($menu) || is_object($menu))
             @foreach ($menu as $key => $menu)
