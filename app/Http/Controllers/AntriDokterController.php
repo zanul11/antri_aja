@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Dokter;
 use App\Models\Spesialis;
+use App\Models\TopUp;
 use Illuminate\Support\Facades\Redirect;
 
 class AntriDokterController extends Controller
@@ -43,6 +44,7 @@ class AntriDokterController extends Controller
             'data_antri' => $antri,
 
         ];
+
         return view('pages.antri_dokter.index')->with($data);
     }
 
@@ -90,20 +92,25 @@ class AntriDokterController extends Controller
      */
     public function edit($id)
     {
-        $spesialis = Spesialis::all();
+        $pasien = Antri::where('dokter', Auth::user()->id)->where('status', 1)->count();
+        $saldo = TopUp::where('dokter', Auth::user()->email)->where('status', 1)->sum('jumlah');
 
+        if (($saldo - ($pasien * 2000)) < 2000) {
+            return Redirect::to('/antri_dokter')->with('message', 'Saldo kurang, mohon segera Top Up!.');
+        } else {
+            $spesialis = Spesialis::all();
+            $antri = Antri::with('waktu_detail')->where('dokter', Auth::user()->id)->where('id', $id)->first();
+            $data = [
+                'category_name' => 'Daftar Antrian',
+                'page_name' => 'Pilih Waktu',
+                'has_scrollspy' => 0,
+                'scrollspy_offset' => '',
+                'antri' => $antri,
+                'data_spesialis' => $spesialis,
 
-        $antri = Antri::with('waktu_detail')->where('dokter', Auth::user()->id)->where('id', $id)->first();
-        $data = [
-            'category_name' => 'Daftar Antrian',
-            'page_name' => 'Pilih Waktu',
-            'has_scrollspy' => 0,
-            'scrollspy_offset' => '',
-            'antri' => $antri,
-            'data_spesialis' => $spesialis,
-
-        ];
-        return view('pages.antri_dokter.detail')->with($data);
+            ];
+            return view('pages.antri_dokter.detail')->with($data);
+        }
     }
 
     /**

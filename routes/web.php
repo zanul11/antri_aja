@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
     Route::resource('saldo', 'SaldoController');
 
+    Route::resource('pemasukan', 'PemasukanController');
+
     // APPS
     Route::prefix('apps')->group(function () {
         Route::get('/calendar', function () {

@@ -26,4 +26,9 @@ class Dokter extends Model
     {
         return $this->hasMany(Antri::class, 'dokter', 'id');
     }
+
+    public function saldo()
+    {
+        return $this->hasMany(TopUp::class, 'dokter', 'email');
+    }
 }

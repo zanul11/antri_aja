@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Antri;
 use App\Models\Dokter;
 use App\Models\TopUp;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use PharIo\Manifest\Author;
 
 class SaldoController extends Controller
 {
@@ -29,7 +31,7 @@ class SaldoController extends Controller
         //         'key' => $profile['api_key'],
         //     ])
         // ]);
-
+        $pasien = Antri::where('dokter', Auth::user()->id)->where('status', 1)->count();
         $saldo = TopUp::where('dokter', Auth::user()->email)->where('status', 1)->sum('jumlah');
         // return json_decode($response->getBody(), true);
         $data = [
@@ -38,7 +40,8 @@ class SaldoController extends Controller
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'profile' => $profile,
-            'saldo' => $saldo
+            'saldo' => $saldo,
+            'pasien' => $pasien
         ];
         return view('pages.saldo.index')->with($data);
     }
@@ -179,7 +182,7 @@ class SaldoController extends Controller
         } else {
 
             $res = json_decode($ret, true);
-            return $res;
+            // return $res;
             if ($res['Status'] == 200) {
                 TopUp::create([
                     // "session_id" => $res['Data']['SessionID'],
@@ -187,7 +190,9 @@ class SaldoController extends Controller
                     "dokter" => Auth::user()->email,
                     "jumlah" => $request->jumlah,
                     "uid" => $generateUid,
-                    "fee" => $res['Data']['Fee']
+                    "fee" => $res['Data']['Fee'],
+                    "metode" => $request->metode,
+                    "channel" => $request->paymentChannel
                 ]);
                 $data = [
                     'category_name' => 'Saldo',

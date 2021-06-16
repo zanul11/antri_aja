@@ -21,7 +21,7 @@
                                 <div class="user-info-list layout-spacing">
                                     <div class="text-center">
                                         <h1>
-                                            Rp. {{number_format($saldo)}}
+                                            Rp. {{number_format($saldo-($pasien*2000))}}
                                         </h1>
                                     </div>
                                 </div>

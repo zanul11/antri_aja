@@ -40,9 +40,13 @@
                                     <span class="badge badge-warning"> Menunggu </span>
                                     @elseif($dt->status==1)
                                     <span class="badge badge-success"> Selesai </span>
-                                    @endif</td>
+                                    @endif
+                                </td>
                                 <td>
-                                    <a href="antri_dokter/{{$dt->id}}/edit"><i data-feather="eye" class="text-warning"></i></a>
+                                    @if($dt->tgl==date('Y-m-d') && $dt->status==0)
+
+                                    <a href="antri_dokter/{{$dt->id}}/edit" class="btn btn-primary"><i data-feather="check"></i></a>
+                                    @endif
                                     <!-- <a href="#" onclick="deleteData('/antri','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a> -->
                                 </td>
                             </tr>
