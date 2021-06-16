@@ -98,15 +98,15 @@ class SaldoController extends Controller
      */
     public function update(Request $request,  $id)
     {
-        // return $request;
+
         //production
         // $va           = '1179001227977474'; 
         // $secret       = 'BE93365D-9A7A-469F-B34D-7B96EA454568'; 
         $va           = '1179002340758828'; //sandbox dev
         $secret       = '2BC8D477-98DC-414F-9DC1-8D9B7B9C9CDA'; //sandbox dev
 
-        $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; //redirect
-        // $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; //direct
+        // $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; //redirect
+        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; //direct
         $method       = 'POST'; //method
 
         $generateUid =  substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 9);
@@ -132,9 +132,9 @@ class SaldoController extends Controller
         $body['phone']  = Auth::user()->no_hp;
 
         //khusus direct
-        // $body['paymentMethod']  = $request->metode;
-        // $body['paymentChannel']  = $request->paymentChannel;
-        // $body['amount']     = $request->jumlah + $fee;
+        $body['paymentMethod']  = $request->metode;
+        $body['paymentChannel']  = $request->paymentChannel;
+        $body['amount']     = $request->jumlah;
 
         //End Request Body//
 
@@ -179,15 +179,25 @@ class SaldoController extends Controller
         } else {
 
             $res = json_decode($ret, true);
-            // return $res;
+            return $res;
             if ($res['Status'] == 200) {
                 TopUp::create([
-                    "session_id" => $res['Data']['SessionID'],
+                    // "session_id" => $res['Data']['SessionID'],
+                    "session_id" => $res['Data']['SessionId'],
                     "dokter" => Auth::user()->email,
                     "jumlah" => $request->jumlah,
-                    "uid" => $generateUid
+                    "uid" => $generateUid,
+                    "fee" => $res['Data']['Fee']
                 ]);
-                return Redirect::to($res['Data']['Url']);
+                $data = [
+                    'category_name' => 'Saldo',
+                    'page_name' => 'Saldo',
+                    'has_scrollspy' => 0,
+                    'scrollspy_offset' => '',
+                    'dt_pembayaran' => $res['Data']
+                ];
+                return view('pages.saldo.pembayaran')->with($data);
+                // return Redirect::to($res['Data']['Url']);
             } else {
                 return Redirect::to('/saldo')->with('message', $res['Message']);
             }

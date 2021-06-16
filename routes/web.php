@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::resource('antri_dokter', 'AntriDokterController');
+    Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
     Route::resource('saldo', 'SaldoController');
 
     // APPS
