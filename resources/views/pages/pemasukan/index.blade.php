@@ -20,7 +20,7 @@
                                 <div class="user-info-list layout-spacing">
                                     <div class="text-center">
                                         <h1>
-                                            Rp. {{number_format($pasien*2000)}}
+                                            Rp. {{number_format($pemasukan)}}
                                         </h1>
                                     </div>
                                 </div>
@@ -37,9 +37,9 @@
                                 </div>
                                 <div class="user-info-list layout-spacing">
                                     <div class="text-center">
-                                        <h1>
-                                            Rp. {{number_format($saldo-($pasien*2000))}}
-                                        </h1>
+                                        <h2>
+                                            Rp. {{number_format($saldo-$pemasukan)}}
+                                        </h2>
                                     </div>
                                 </div>
                             </div><br>
@@ -55,9 +55,9 @@
                                 </div>
                                 <div class="user-info-list layout-spacing">
                                     <div class="text-center">
-                                        <h1>
-                                            Rp. {{number_format(($saldo-($pasien*2000))-$fee)}}
-                                        </h1>
+                                        <h2>
+                                            Rp. {{number_format(($saldo-$pemasukan)-$fee)}}
+                                        </h2>
                                     </div>
                                 </div>
                             </div><br>
@@ -78,6 +78,7 @@
                                                 <th>Saldo</th>
                                                 <th>Saldo Real</th>
                                                 <th>Pasien </th>
+                                                <th class="no-content"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -112,6 +113,9 @@
                                                     {{number_format(($saldo_dokter-($pasien_dokter*2000))-$fee)}}
                                                 </td>
                                                 <td>{{$pasien_dokter}}</td>
+                                                <td>
+                                                    <a href="pemasukan/{{$dt->id}}/edit" class="btn btn-primary"><i data-feather="eye"></i></a>
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>

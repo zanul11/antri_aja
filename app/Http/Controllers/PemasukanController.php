@@ -18,20 +18,21 @@ class PemasukanController extends Controller
      */
     public function index()
     {
-        $pasien = Antri::where('status', 1)->count();
-        $saldo = TopUp::where('status', 1)->sum('jumlah');
-        $fee = TopUp::where('status', 1)->sum('fee');
+        $pemasukan = TopUp::where('status', 1)->where('jenis', 0)->sum('jumlah');;
+        $saldo = TopUp::where('status', 1)->where('jenis', 1)->sum('jumlah');
+        $fee = TopUp::where('status', 1)->where('jenis', 1)->sum('fee');
         $dokter = Dokter::where('role', 3)->with(['saldo' => function ($q) {
             $q->where('status', 1);
+            $q->where('jenis', 1);
         }])->with(['antri' => function ($q) {
             $q->where('status', 1);
         }])->get();
         $data = [
-            'category_name' => 'Saldo',
-            'page_name' => 'Saldo',
+            'category_name' => 'Pemasukan',
+            'page_name' => 'Pemasukan',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
-            'pasien' => $pasien,
+            'pemasukan' => $pemasukan,
             'saldo' => $saldo,
             'fee' => $fee,
             'data_dokter' => $dokter
@@ -80,7 +81,24 @@ class PemasukanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dokter = Dokter::where('id', $id)->with(['saldo' => function ($q) {
+            $q->where('status', 1);
+        }])->first();
+        $pemasukan = TopUp::where('status', 1)->where('jenis', 0)->where('dokter', $dokter['email'])->sum('jumlah');;
+        $saldo = TopUp::where('status', 1)->where('jenis', 1)->where('dokter', $dokter['email'])->sum('jumlah');
+        $fee = TopUp::where('status', 1)->where('jenis', 1)->where('dokter', $dokter['email'])->sum('fee');
+        $data = [
+            'category_name' => 'Pemasukan',
+            'page_name' => 'Pemasukan',
+            'has_scrollspy' => 0,
+            'scrollspy_offset' => '',
+            'pemasukan' => $pemasukan,
+            'saldo' => $saldo,
+            'fee' => $fee,
+            'data_dokter' => $dokter
+
+        ];
+        return view('pages.pemasukan.detail_dokter')->with($data);
     }
 
     /**

@@ -9,7 +9,7 @@
         <div class="account-content">
             <div class="scrollspy-example" data-spy="scroll" data-target="#account-settings-scroll" data-offset="-100">
                 <div class="row">
-                    @if(isset($profile->api_key))
+
                     <div class="col-xl-5 layout-top-spacing">
                         <div class="bio layout-spacing">
                             <div class="widget-content widget-content-area">
@@ -21,7 +21,7 @@
                                 <div class="user-info-list layout-spacing">
                                     <div class="text-center">
                                         <h1>
-                                            Rp. {{number_format($saldo-($pasien*2000))}}
+                                            Rp. {{number_format($saldo)}}
                                         </h1>
                                     </div>
                                 </div>
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                 </div>
-                @endif
+
                 <!-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing ">
                     <div class="section general-info">
                         <div class="info ">

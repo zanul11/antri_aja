@@ -69,6 +69,15 @@ class AntriDokterController extends Controller
 
         Antri::where('id', $request->id_antri)
             ->update(["status" => 1, "catatan_dokter" => $request->catatan, "selesai_at" => date('Y-m-d H:i:s')]);
+        TopUp::create([
+            // "session_id" => $res['Data']['SessionID'],
+            "session_id" => '-',
+            "dokter" => Auth::user()->email,
+            "jumlah" => 2000,
+            "status" => 1,
+            "jenis" => 0,
+            "pasien_id" => $request->id_antri
+        ]);
         return Redirect::to('/antri_dokter')->with('success', 'Selesai ditangani!');
         return $request;
     }

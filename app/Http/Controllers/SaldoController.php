@@ -31,8 +31,7 @@ class SaldoController extends Controller
         //         'key' => $profile['api_key'],
         //     ])
         // ]);
-        $pasien = Antri::where('dokter', Auth::user()->id)->where('status', 1)->count();
-        $saldo = TopUp::where('dokter', Auth::user()->email)->where('status', 1)->sum('jumlah');
+
         // return json_decode($response->getBody(), true);
         $data = [
             'category_name' => 'Saldo',
@@ -40,10 +39,17 @@ class SaldoController extends Controller
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'profile' => $profile,
-            'saldo' => $saldo,
-            'pasien' => $pasien
+            'saldo' => $this->getSaldo(),
+
         ];
         return view('pages.saldo.index')->with($data);
+    }
+
+    public function getSaldo()
+    {
+        $kredit = TopUp::where('dokter', Auth::user()->email)->where('status', 1)->where('jenis', 0)->sum('jumlah');
+        $saldo = TopUp::where('dokter', Auth::user()->email)->where('status', 1)->where('jenis', 1)->sum('jumlah');
+        return $saldo - $kredit;
     }
 
     /**
