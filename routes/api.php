@@ -27,3 +27,5 @@ Route::post('/getJumAntrian', 'ApiController@getJumAntrian');
 Route::post('/saveAntrian', 'ApiController@saveAntrian');
 Route::post('/deleteAntrian', 'ApiController@deleteAntrian');
 Route::post('/detailAntrian', 'ApiController@detailAntrian');
+Route::get('/getDokterTernama', 'ApiController@getDokterTernama');
+Route::get('/getSpesialisTernama', 'ApiController@getSpesialisTernama');
