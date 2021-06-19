@@ -97,7 +97,9 @@ class ApiController extends Controller
     {
         return $antri = Dokter::where('role', 3)->withCount(['antri' => function ($q) {
             $q->where('status', 1);
-        }])->orderBy('antri_count', 'desc')->take(5)->get();
+        }])->with(['jadwal' => function ($q) {
+            $q->groupBy('hari');
+        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->take(5)->get();
     }
 
     public function getSpesialisTernama()
