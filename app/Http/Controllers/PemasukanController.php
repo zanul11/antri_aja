@@ -84,9 +84,9 @@ class PemasukanController extends Controller
         $dokter = Dokter::where('id', $id)->with(['saldo' => function ($q) {
             $q->where('status', 1);
         }])->first();
-        $pemasukan = TopUp::where('status', 1)->where('jenis', 0)->where('dokter', $dokter['email'])->sum('jumlah');;
-        $saldo = TopUp::where('status', 1)->where('jenis', 1)->where('dokter', $dokter['email'])->sum('jumlah');
-        $fee = TopUp::where('status', 1)->where('jenis', 1)->where('dokter', $dokter['email'])->sum('fee');
+        $pemasukan = TopUp::where('status', 1)->where('jenis', 0)->where('dokter', $dokter['id'])->sum('jumlah');;
+        $saldo = TopUp::where('status', 1)->where('jenis', 1)->where('dokter', $dokter['id'])->sum('jumlah');
+        $fee = TopUp::where('status', 1)->where('jenis', 1)->where('dokter', $dokter['id'])->sum('fee');
         $data = [
             'category_name' => 'Pemasukan',
             'page_name' => 'Pemasukan',

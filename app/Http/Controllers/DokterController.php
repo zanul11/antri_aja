@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Dokter;
 use App\Http\Controllers\Controller;
+use App\Models\Marketing;
 use App\Models\Spesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,17 +62,18 @@ class DokterController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        $cek = Dokter::where('email', $request->email)->orWhere('nik', $request->nik)->get();
+        $cek = Dokter::where('email', $request->email)->get();
         if (count($cek) > 0) {
-            return Redirect::to('/dokter/create')->withErrors(['Duplicate Dokter email/nik!.'])->withInput()->with('message', 'Duplicate Dokter email/nik!.');
+            return Redirect::to('/dokter/create')->withErrors(['Duplicate Dokter email/username!.'])->withInput()->with('message', 'Duplicate Dokter email/username!.');
         } else {
             $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
             $tmpLokasi = explode(",", $tmp);
             Dokter::create([
                 "name" => $request->nama,
                 "email" => $request->email,
+                "username" => $request->email,
                 "password" => bcrypt($request->password),
-                "nik" => $request->nik,
+
                 "no_hp" => $request->no_hp,
                 "alamat" => $request->alamat,
                 "parent" => Auth::user()->id,
@@ -109,7 +111,7 @@ class DokterController extends Controller
         $spesialis = Spesialis::all();
         $data = [
             'category_name' => 'Data Dokter',
-            'page_name' => 'Tambah Data',
+            'page_name' => 'Lihat Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'action' => 'Edit',
@@ -130,16 +132,16 @@ class DokterController extends Controller
     public function update(Request $request, Dokter $dokter)
     {
         // return $request;
-        if ($request->email != $dokter->email && $request->nik != $dokter->nik) {
-            $cek = Marketing::where('email', $request->email)->orWhere('nik', $request->nik)->get();
+        if ($request->email != $dokter->email) {
+            $cek = Dokter::where('email', $request->email)->get();
             if (count($cek) > 0) {
-                return Redirect::to('/dokter/' . $dokter->id . '/edit')->withErrors(['Duplicate dokter email/nik!.'])->withInput()->with('message', 'Duplicate dokter email/nik!.');
+                return Redirect::to('/dokter/' . $dokter->id . '/edit')->withErrors(['Duplicate dokter email/username!.'])->withInput()->with('message', 'Duplicate dokter email/username!.');
             } else {
                 if (isset($request->password) || $request->password != '')
                     $dokter->password = bcrypt($request->password);
                 $dokter->email = $request->email;
                 $dokter->name = $request->nama;
-                $dokter->nik = $request->nik;
+                $dokter->username = $request->email;
                 $dokter->no_hp = $request->no_hp;
                 $dokter->alamat = $request->alamat;
                 $dokter->spesialis = $request->spesialis;
@@ -161,7 +163,7 @@ class DokterController extends Controller
                 $dokter->password = bcrypt($request->password);
             $dokter->email = $request->email;
             $dokter->name = $request->nama;
-            $dokter->nik = $request->nik;
+            $dokter->username = $request->email;
             $dokter->no_hp = $request->no_hp;
             $dokter->alamat = $request->alamat;
             $dokter->spesialis = $request->spesialis;

@@ -15,8 +15,9 @@
                             <div class="widget-content widget-content-area">
                                 <h3 class="">Saldo</h3>
                                 <div class="text-center user-info">
-                                    <img src="{{asset('assets/img/favicon.ico')}}" alt="avatar" height="50px">
-                                    <p class="">{{Auth::user()->email}}</p>
+                                    <img src="{{asset('assets/img/logo2.png')}}" alt="avatar">
+                                    <br><br>
+                                    <p class="">{{Auth::user()->username}}</p>
                                 </div>
                                 <div class="user-info-list layout-spacing">
                                     <div class="text-center">

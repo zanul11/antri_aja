@@ -71,11 +71,12 @@ class AntriDokterController extends Controller
             ->update(["status" => 1, "catatan_dokter" => $request->catatan, "selesai_at" => date('Y-m-d H:i:s')]);
         TopUp::create([
             // "session_id" => $res['Data']['SessionID'],
-            "session_id" => '-',
-            "dokter" => Auth::user()->email,
+            "trx_id" => '-',
+            "dokter" => Auth::user()->id,
             "jumlah" => 2000,
             "status" => 1,
             "jenis" => 0,
+            "ket" => 'Pasien',
             "pasien_id" => $request->id_antri
         ]);
         return Redirect::to('/antri_dokter')->with('success', 'Selesai ditangani!');
@@ -102,7 +103,7 @@ class AntriDokterController extends Controller
     public function edit($id)
     {
         $pasien = Antri::where('dokter', Auth::user()->id)->where('status', 1)->count();
-        $saldo = TopUp::where('dokter', Auth::user()->email)->where('status', 1)->sum('jumlah');
+        $saldo = TopUp::where('dokter', Auth::user()->id)->where('status', 1)->sum('jumlah');
 
         if (($saldo - ($pasien * 2000)) < 2000) {
             return Redirect::to('/antri_dokter')->with('message', 'Saldo kurang, mohon segera Top Up!.');

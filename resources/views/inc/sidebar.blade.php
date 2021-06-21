@@ -18,6 +18,9 @@
             case 3 :
             $menu = config('sidemenu.dokter');
             break;
+            case 5 :
+            $menu = config('sidemenu.akun');
+            break;
             default :
             $menu = config('sidemenu.pasien');
             }

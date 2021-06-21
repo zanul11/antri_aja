@@ -40,9 +40,10 @@
                                     @elseif($dt->status==1)
                                     <span class="badge badge-success"> Selesai </span>
 
-                                    @endif</td>
+                                    @endif
+                                </td>
                                 <td>
-                                    <a href="antri/{{$dt->id}}/edit"><i data-feather="eye" class="text-warning"></i></a>
+                                    <a href="antri/{{$dt->id}}/edit"><i data-feather="search" class="text-warning"></i></a>
                                     <a href="#" onclick="deleteData('/antri','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                 </td>
                             </tr>

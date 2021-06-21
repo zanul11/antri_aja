@@ -33,10 +33,14 @@
                                                             @if($profile->role!=4)
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
-                                                                    <label for="nikDr">NIK</label>
-                                                                    <input type="text" class="form-control mb-4" id="nikDr" name="nik" placeholder="Nik" value="{{$profile->nik}}" required>
+                                                                    <label for="nikDr">Username</label>
+                                                                    <input type="text" class="form-control mb-4" id="nikDr" name="username" value="{{$profile->username}}" required>
                                                                 </div>
                                                             </div>
+                                                            @endif
+                                                            @if($profile->role==5)
+                                                            <input type="hidden" name="email" value="{{$profile->email}}">
+
                                                             @endif
                                                             <div class="{{($profile->role!=4)?'col-sm-6':'col-sm-12'}}">
                                                                 <div class="form-group">
@@ -50,7 +54,7 @@
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
                                                                     <label for="noHp">Email</label>
-                                                                    <input type="email" class="form-control mb-4" id="noHp" name="email" value="{{$profile->email}}" required>
+                                                                    <input type="email" class="form-control mb-4" id="noHp" name="email" value="{{$profile->email}}" required {{(Auth::user()->role==5)?'disabled':''}}>
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6">

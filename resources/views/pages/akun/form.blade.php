@@ -10,10 +10,10 @@
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
                     <h3 class=""> {{$page_name}} / {{$category_name}} </h3>
-                    <a href="{{url('/dokter')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
+                    <a href="{{url('/akun')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                    <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/dokter':'/dokter/'.$dokter->id}}">
+                    <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/akun':'/akun/'.$akun->id}}">
                         @if($action=='Edit')
                         @method('PUT')
                         @endif
@@ -34,19 +34,19 @@
                                         <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="country">NIK</label>
-                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" type="number" class="form-control mb-4" name="nik" id="nik" placeholder="Nik user" value="{{(isset($dokter))?$dokter->nik:(old('nik')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" type="number" class="form-control mb-4" name="nik" id="nik" placeholder="Nik user" value="{{(isset($akun))?$akun->nik:(old('nik')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div> -->
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
-                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($dokter))?$dokter->name:(old('nama')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($akun))?$akun->name:(old('nama')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="email">Email</label>
-                                                <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($dokter))?$dokter->email:(old('email')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <label for="email">Usename</label>
+                                                <input type="text" class="form-control mb-4" name="username" id="username" placeholder="Username (tanpa spasi)" value="{{(isset($akun))?$akun->username:(old('username')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -58,7 +58,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">No Hp</label>
-                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($dokter))?$dokter->no_hp:(old('no_hp')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($akun))?$akun->no_hp:(old('no_hp')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
 
@@ -67,7 +67,7 @@
                                                 <label for="no_hp">Spesialis</label>
                                                 <select class="placeholder js-states form-control" name="spesialis" required {{($action=='Edit')?'disabled':''}}>
                                                     @foreach($data_spesialis as $dt)
-                                                    <option value="{{$dt->id}}" {{($action!='Tambah')?(($dokter->spesialis==$dt->id)?'selected':''):''}}>{{$dt->spesialis}}</option>
+                                                    <option value="{{$dt->id}}" {{($action!='Tambah')?(($akun->spesialis==$dt->id)?'selected':''):''}}>{{$dt->spesialis}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -75,14 +75,14 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pengalaman">Pengalaman</label>
-                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($akun))?$akun->pengalaman:(old('pengalaman')??'')}}" required {{($action=='Edit')?'readonly':''}}>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="alamat">Deskripsi pribadi dokter</label>
-                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2" {{($action=='Edit')?'readonly':''}}>{{(isset($dokter))?$dokter->deskripsi:(old('deskripsi')??'')}}</textarea>
+                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2" {{($action=='Edit')?'readonly':''}}>{{(isset($akun))?$akun->deskripsi:(old('deskripsi')??'')}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +108,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="alamat">Alamat Detail Praktek</label>
-                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10" {{($action=='Edit')?'readonly':''}}>{{(isset($dokter))?$dokter->alamat:(old('alamat')??'')}}</textarea>
+                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10" {{($action=='Edit')?'readonly':''}}>{{(isset($akun))?$akun->alamat:(old('alamat')??'')}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -116,7 +116,7 @@
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="hidden" name="latlong" id="longlat" value="{{(isset($dokter))?$dokter->latlong:(old('latlong')??'')}}">
+                                                <input type="hidden" name="latlong" id="longlat" value="{{(isset($akun))?$akun->latlong:(old('latlong')??'')}}">
                                             </div>
                                         </div>
 
@@ -156,7 +156,7 @@
 
     var map;
     var areaOverlays = [];
-    var markerHandle = "<?php echo (isset($dokter) ? $dokter->latlong : '') ?>";
+    var markerHandle = "<?php echo (isset($akun) ? $akun->latlong : '') ?>";
 
     initMap();
 

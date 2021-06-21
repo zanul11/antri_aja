@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profile;
 use App\Http\Controllers\Controller;
+use App\Models\Marketing;
 use App\Models\Spesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,15 +89,15 @@ class ProfileController extends Controller
     public function update(Request $request, Profile $profile)
     {
         // return $request;
-        if ($request->email != $profile->email && $request->nik != $profile->nik) {
-            $cek = Marketing::where('email', $request->email)->orWhere('nik', $request->nik)->get();
+        if ($request->username != $profile->username) {
+            $cek = Marketing::where('username', $request->username)->get();
             if (count($cek) > 0) {
-                return Redirect::to('/profile')->withErrors(['Duplicate email/nik!.'])->withInput()->with('message', 'Duplicate email/nik!.');
+                return Redirect::to('/profile')->withErrors(['Duplicate username!.'])->withInput()->with('message', 'Duplicate username!.');
             } else {
                 if ($request->hasFile('file')) {
                     $image = $request->file('file');
                     $path = public_path() . '/uploads/';
-                    $foto = 'foto' . $request->nik . '.' . $image->getClientOriginalExtension();
+                    $foto = 'foto' . $request->username . '.' . $image->getClientOriginalExtension();
                     if (is_file($path . $profile->foto))
                         unlink($path . $profile->foto);
                     $image->move($path, $foto);
@@ -104,7 +105,7 @@ class ProfileController extends Controller
                 }
                 $profile->email = $request->email;
                 $profile->name = $request->nama;
-                $profile->nik = $request->nik;
+                $profile->username = $request->username;
                 $profile->no_hp = $request->no_hp;
                 $profile->alamat = $request->alamat;
                 $profile->spesialis = $request->spesialis;
@@ -128,7 +129,7 @@ class ProfileController extends Controller
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
                 $path = public_path() . '/uploads/';
-                $foto = 'foto' . $request->nik . '.' . $image->getClientOriginalExtension();
+                $foto = 'foto' . $request->username . '.' . $image->getClientOriginalExtension();
                 if (is_file($path . $profile->foto))
                     unlink($path . $profile->foto);
                 $image->move($path, $foto);
@@ -136,7 +137,7 @@ class ProfileController extends Controller
             }
             $profile->email = $request->email;
             $profile->name = $request->nama;
-            $profile->nik = $request->nik;
+            // $profile->username = $request->username;
             $profile->no_hp = $request->no_hp;
             $profile->alamat = $request->alamat;
             $profile->spesialis = $request->spesialis;

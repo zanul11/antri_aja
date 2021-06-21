@@ -72,7 +72,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="">Spesialis</label>
-                                                    <select class="placeholder js-states form-control" name="spesialis" readonly>
+                                                    <select class="placeholder js-states form-control" name="spesialis" disabled>
                                                         @foreach($data_spesialis as $dt)
                                                         <option value="{{$dt->id}}" {{($dokter->spesialis==$dt->id)?'selected':''}}>{{$dt->spesialis}}</option>
                                                         @endforeach

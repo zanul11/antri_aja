@@ -32,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('marketing', 'MarketingController');
     Route::resource('dokter', 'DokterController');
 
+    Route::resource('akun', 'AkunController');
+
     Route::get('/jadwal/getJadwal', 'JadwalController@getJadwal');
     Route::get('/jadwal/getData', 'JadwalController@getData');
     Route::post('/jadwal/delete', 'JadwalController@delete');

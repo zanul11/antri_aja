@@ -47,8 +47,8 @@ class SaldoController extends Controller
 
     public function getSaldo()
     {
-        $kredit = TopUp::where('dokter', Auth::user()->email)->where('status', 1)->where('jenis', 0)->sum('jumlah');
-        $saldo = TopUp::where('dokter', Auth::user()->email)->where('status', 1)->where('jenis', 1)->sum('jumlah');
+        $kredit = TopUp::where('dokter', Auth::user()->id)->where('status', 1)->where('jenis', 0)->sum('jumlah');
+        $saldo = TopUp::where('dokter', Auth::user()->id)->where('status', 1)->where('jenis', 1)->sum('jumlah');
         return $saldo - $kredit;
     }
 
@@ -137,7 +137,7 @@ class SaldoController extends Controller
         $body['cancelUrl']  = url('/') . '/saldo';
         $body['notifyUrl']  = url('/') . '/ipaymu-success';
         $body['name']  = Auth::user()->name;
-        $body['email']  = Auth::user()->email;
+        $body['email']  = Auth::user()->id;
         $body['phone']  = Auth::user()->no_hp;
 
         //khusus direct
@@ -195,7 +195,7 @@ class SaldoController extends Controller
                 TopUp::create([
                     // "session_id" => $res['Data']['SessionID'],
                     "trx_id" => $res['Data']['TransactionId'],
-                    "dokter" => Auth::user()->email,
+                    "dokter" => Auth::user()->id,
                     "jumlah" => $request->jumlah,
                     "uid" => $generateUid,
                     "fee" => $res['Data']['Fee'],

@@ -13,13 +13,13 @@
                     <a href="{{url('dokter/create')}}" class="mt-2 edit-profile"> <i data-feather="plus" class="text-defaulr"> </i></a>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
-                    <!-- <table id="zero-config" class="table table-hover" style="width:100%">
+                    <table id="zero-config" class="table table-hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>NIK</th>
+                                <th>Username</th>
                                 <th>Nama</th>
-                                <th>No Hp/email</th>
+                                <th>No Hp</th>
                                 <th>Alamat</th>
                                 <th class="no-content"></th>
                             </tr>
@@ -28,26 +28,25 @@
                             @foreach($data_dokter as $dt)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$dt->nik}}</td>
+                                <td>{{$dt->username}}</td>
                                 <td>{{$dt->name}}</td>
-                                <td>{{$dt->no_hp}}/{{$dt->email}}</td>
+                                <td>{{$dt->no_hp}}</td>
                                 <td>{{$dt->alamat}}</td>
                                 <td>
-                                    <a href="dokter/{{$dt->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>
+                                    <a href="dokter/{{$dt->id}}/edit"><i data-feather="search" class="text-warning"></i></a>
                                     <a href="#" onclick="deleteData('/dokter','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
 
-                    </table> -->
-                    <div class="flex-tree-container">
+                    </table>
+                    <!-- <div class="flex-tree-container">
                         <ul>
                             <li>
                                 <p><img src="{{asset('assets/img/90x90.jpg')}}" alt="avatar"> <br>
                                     {{$jaringan->name}} <br>
-                                    <!-- <button onclick="getData('{{$jaringan->id}}')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm">Detail</button>
-                                    <button class="btn btn-warning btn-sm">Lihat</button> -->
+
                                 </p>
 
                                 @if(count($jaringan->children)>0)
@@ -55,23 +54,13 @@
                                     @foreach($jaringan->children as $child)
                                     <li>
                                         <p>
-                                            <!-- <i data-feather="users"></i> -->
+
                                             <img src="{{asset('assets/img/90x90.jpg')}} " alt="avatar">
                                             <br>{{$child->name}} <br>
                                             <a href="dokter/{{$child->id}}/edit"><i data-feather="eye" class="text-warning"></i></a>
                                             <a href="#" onclick="deleteData('/dokter','{{$child->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                         </p>
-                                        <!-- @if(count($child->childrenRekursif)>0)
-                                        <ul>
-                                            @foreach($child->childrenRekursif as $childRekursif)
-                                            <li>
-                                                <p> <img src="{{asset('assets/img/90x90.jpg')}}" alt="avatar"> <br>{{$childRekursif->name}} <br>
-                                                    <button onclick="getData('{{$childRekursif->id}}')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary btn-sm">Detail</button>
-                                                    <a href="/admin/jaringans/sub/{{$childRekursif->id}}" class="btn btn-warning btn-sm">Lihat</a></p>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                        @endif -->
+
                                     </li>
                                     @endforeach
                                 </ul>
@@ -79,7 +68,7 @@
 
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

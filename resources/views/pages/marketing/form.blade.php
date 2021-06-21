@@ -31,12 +31,12 @@
                             <div class="row">
                                 <div class="col-md-11 mx-auto">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <!-- <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="country">NIK</label>
+                                                <label for="country">Username</label>
                                                 <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" type="number" class="form-control mb-4" name="nik" id="nik" placeholder="Nik user" value="{{(isset($marketing))?$marketing->nik:(old('nik')??'')}}" required>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
@@ -55,13 +55,13 @@
                                                 <input type="password" class="form-control mb-4" name="password" id="password" placeholder="Write your password" {{($action=='Tambah')?'required':''}}>
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="no_hp">No Hp</label>
                                                 <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($marketing))?$marketing->no_hp:(old('no_hp')??'')}}" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="alamat">Alamat</label>
                                                 <textarea class="form-control" placeholder="Description" name="alamat" rows="3">{{(isset($marketing))?$marketing->alamat:(old('alamat')??'')}}</textarea>

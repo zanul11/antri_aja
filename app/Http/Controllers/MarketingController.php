@@ -54,15 +54,15 @@ class MarketingController extends Controller
      */
     public function store(Request $request)
     {
-        $cek = Marketing::where('email', $request->email)->orWhere('nik', $request->nik)->get();
+        $cek = Marketing::where('email', $request->email)->get();
         if (count($cek) > 0) {
-            return Redirect::to('/marketing/create')->withErrors(['Duplicate marketing email/nik!.'])->withInput()->with('message', 'Duplicate marketing email/nik!.');
+            return Redirect::to('/marketing/create')->withErrors(['Duplicate marketing email/username!.'])->withInput()->with('message', 'Duplicate marketing email/username!.');
         } else {
             Marketing::create([
                 "name" => $request->nama,
                 "email" => $request->email,
                 "password" => bcrypt($request->password),
-                "nik" => $request->nik,
+                "username" => $request->email,
                 "no_hp" => $request->no_hp,
                 "alamat" => $request->alamat,
                 "role" => 2
@@ -111,16 +111,16 @@ class MarketingController extends Controller
      */
     public function update(Request $request, Marketing $marketing)
     {
-        if ($request->email != $marketing->email && $request->nik != $marketing->nik) {
-            $cek = Marketing::where('email', $request->email)->orWhere('nik', $request->nik)->get();
+        if ($request->email != $marketing->email) {
+            $cek = Marketing::where('email', $request->email)->get();
             if (count($cek) > 0) {
-                return Redirect::to('/marketing/' . $marketing->id . '/edit')->withErrors(['Duplicate user email/nik!.'])->withInput()->with('message', 'Duplicate user email/nik!.');
+                return Redirect::to('/marketing/' . $marketing->id . '/edit')->withErrors(['Duplicate user email/username!.'])->withInput()->with('message', 'Duplicate user email/username!.');
             } else {
                 if (isset($request->password) || $request->password != '')
                     $marketing->password = bcrypt($request->password);
                 $marketing->email = $request->email;
                 $marketing->name = $request->nama;
-                $marketing->nik = $request->nik;
+                $marketing->username = $request->email;
                 $marketing->no_hp = $request->no_hp;
                 $marketing->alamat = $request->alamat;
                 $marketing->save();
@@ -131,7 +131,7 @@ class MarketingController extends Controller
                 $marketing->password = bcrypt($request->password);
             $marketing->email = $request->email;
             $marketing->name = $request->nama;
-            $marketing->nik = $request->nik;
+            $marketing->username = $request->email;
             $marketing->no_hp = $request->no_hp;
             $marketing->alamat = $request->alamat;
             $marketing->save();
