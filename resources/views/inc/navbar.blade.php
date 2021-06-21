@@ -8,7 +8,7 @@
         <ul class="navbar-item theme-brand flex-row  text-center">
             <li class="nav-item theme-logo">
                 <a href="{{url('/dashboard')}}">
-                    <img src="{{asset('assets/img/favicon.ico')}}" class="navbar-logo" alt="logo">
+                    <img src="{{asset('assets/img/logo.png')}}" class="navbar-logo" alt="logo">
                 </a>
             </li>
             <li class="nav-item theme-text">
@@ -36,7 +36,7 @@
             <li class="nav-item dropdown user-profile-dropdown">
                 <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="color: white;">
 
-                    <img src="{{asset('assets/img/favicon.ico')}}" alt="avatar"> {{Auth::user()->name}}
+                    <img src="{{asset('assets/img/logo.png')}}" alt="avatar"> {{Auth::user()->name}}
                 </a>
                 <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
                     <div class="">

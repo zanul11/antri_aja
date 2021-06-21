@@ -156,6 +156,8 @@ class SaldoController extends Controller
         $timestamp    = Date('YmdHis');
         //End Generate Signature
 
+        // return $signature . ' - ' . $timestamp;
+
 
         $ch = curl_init($url);
 

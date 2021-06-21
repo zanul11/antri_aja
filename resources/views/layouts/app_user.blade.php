@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{config('app.name')}} | {{$category_name}}</title>
-    <link rel="icon" type="image/x-icon" href="{{asset('assets/img/favicon.ico')}}" />
+    <link rel="icon" type="image/x-icon" href="{{asset('assets/img/logo.png')}}" />
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
