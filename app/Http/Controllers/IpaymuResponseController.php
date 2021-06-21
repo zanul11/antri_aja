@@ -11,9 +11,15 @@ use Auth;
 
 class IpaymuResponseController extends Controller
 {
-    public function success($email, $uid)
+    public function success(Request $request)
     {
-        TopUp::where('dokter', $email)->where('uid', $uid)->update(["status" => 1]);
+        $trx_id = $request->trx_id;
+        $sid = $request->sid;
+        $status = $request->status;
+        if ($request->status == 'berhasil')
+            TopUp::where('trx_id',  $trx_id)->update(["status" => 1]);
+        else
+            TopUp::where('trx_id',  $trx_id)->update(["status" => 0]);
         return view('ipaymu_success');
     }
 

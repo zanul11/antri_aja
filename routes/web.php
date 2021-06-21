@@ -1307,7 +1307,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/sales', 'HomeController@index');
 
-Route::any('/ipaymu-success/{email}/{uid}', 'IpaymuResponseController@success');
+// Route::any('/ipaymu-success/{email}/{uid}', 'IpaymuResponseController@success');
+Route::any('/ipaymu-success', 'IpaymuResponseController@success');
 Route::any('/topup-success', 'IpaymuResponseController@successView');
 
 Route::get('/antri/waktu/{antri}', 'AntriController@pilihJam');
