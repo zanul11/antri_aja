@@ -95,7 +95,7 @@ class ApiController extends Controller
 
     public function getDokterTernama()
     {
-        return $antri = Dokter::where('role', 3)->withCount(['antri' => function ($q) {
+        return $antri = Dokter::where('role', 3)->with('spesialis_detail')->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->orderBy('antri_count', 'desc')->take(5)->get();
     }

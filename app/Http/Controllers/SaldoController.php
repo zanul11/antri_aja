@@ -109,13 +109,13 @@ class SaldoController extends Controller
     {
 
         //production
-        // $va           = '1179001227977474'; 
-        // $secret       = 'BE93365D-9A7A-469F-B34D-7B96EA454568'; 
-        $va           = '1179002340758828'; //sandbox dev
-        $secret       = '2BC8D477-98DC-414F-9DC1-8D9B7B9C9CDA'; //sandbox dev
+        $va           = '1179001227977474';
+        $secret       = 'BE93365D-9A7A-469F-B34D-7B96EA454568';
+        //$va           = '1179002340758828'; //sandbox dev
+        //$secret       = '2BC8D477-98DC-414F-9DC1-8D9B7B9C9CDA'; //sandbox dev
 
         // $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; //redirect
-        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct'; //direct
+        $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; //direct
         $method       = 'POST'; //method
 
         $generateUid =  substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 9);
@@ -188,11 +188,12 @@ class SaldoController extends Controller
         } else {
 
             $res = json_decode($ret, true);
-            // return $res;
+            return url('/') . '/ipaymu-success/' . Auth::user()->email . '/' . $generateUid;
+            return $res;
             if ($res['Status'] == 200) {
                 TopUp::create([
                     // "session_id" => $res['Data']['SessionID'],
-                    "session_id" => $res['Data']['SessionId'],
+                    "trx_id" => $res['Data']['TransactionId'],
                     "dokter" => Auth::user()->email,
                     "jumlah" => $request->jumlah,
                     "uid" => $generateUid,
