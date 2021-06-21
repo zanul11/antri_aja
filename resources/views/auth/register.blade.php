@@ -38,8 +38,8 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">LOGIN USER</h1>
-                        <p class="">Masuk sebagai</p>
+                        <img src="{{asset('assets/img/logo2.png')}}" class="navbar-logo" alt="logo">
+                        <p class="">Masuk sebagai user :</p>
                         <form method="POST" action="{{ url('/daftar') }}" class="text-left">
                             @csrf
                             <div class="form">
@@ -140,6 +140,11 @@
                                         <a href="{{url('/')}}" style="color:blue">Login disini !</a>
                                     </div>
                                 </center> -->
+                                <center>
+                                    <div class="footer-section f-section-1" style="margin-top: 20px;">
+                                        <a href="{{url('/')}}" style="color:blue">Login Dokter !</a>
+                                    </div>
+                                </center>
                                 <center>
                                     <div class="footer-section f-section-1" style="margin-top: 20px;">
                                         <p class="">Copyright © {{date('Y')}} Antrian Aja</p>

@@ -37,7 +37,7 @@
                 <div class="form-container">
                     <div class="form-content">
 
-                        <h1 class="">ANTRI AJA</h1>
+                        <img src="{{asset('assets/img/logo2.png')}}" class="navbar-logo" alt="logo">
                         <p class="">Log in to your account to continue.</p>
 
                         <form method="POST" action="{{ route('login') }}" class="text-left">
