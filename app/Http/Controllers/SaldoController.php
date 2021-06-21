@@ -133,9 +133,9 @@ class SaldoController extends Controller
         $body['qty']        = array('1');
         $body['price']      = array($request->jumlah);
         // $body['amount']     = $request->jumlah;
-        $body['returnUrl']  = url('/') . '/ipaymu-success/' . Auth::user()->email . '/' . $generateUid;
-        $body['cancelUrl']  = 'http://antriaja.com/';
-        $body['notifyUrl']  = 'http://antriaja.com/';
+        $body['returnUrl']  = url('/') . '/topup-success';
+        $body['cancelUrl']  = url('/') . '/saldo';
+        $body['notifyUrl']  = url('/') . '/ipaymu-success/' . Auth::user()->email . '/' . $generateUid;
         $body['name']  = Auth::user()->name;
         $body['email']  = Auth::user()->email;
         $body['phone']  = Auth::user()->no_hp;
@@ -188,8 +188,7 @@ class SaldoController extends Controller
         } else {
 
             $res = json_decode($ret, true);
-            return url('/') . '/ipaymu-success/' . Auth::user()->email . '/' . $generateUid;
-            return $res;
+            // return $res;
             if ($res['Status'] == 200) {
                 TopUp::create([
                     // "session_id" => $res['Data']['SessionID'],
@@ -211,7 +210,7 @@ class SaldoController extends Controller
                 return view('pages.saldo.pembayaran')->with($data);
                 // return Redirect::to($res['Data']['Url']);
             } else {
-                return Redirect::to('/saldo')->with('message', $res['Message']);
+                return Redirect::to('/saldo')->with('message', "The amount must be at least 5000!");
             }
             // return $res['Data']['Url'];
 
