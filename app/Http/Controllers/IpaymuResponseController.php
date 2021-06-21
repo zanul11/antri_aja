@@ -18,8 +18,6 @@ class IpaymuResponseController extends Controller
         $status = $request->status;
         if ($request->status == 'berhasil')
             TopUp::where('trx_id',  $trx_id)->update(["status" => 1]);
-        else
-            TopUp::where('trx_id',  $trx_id)->update(["status" => 0]);
         return view('ipaymu_success');
     }
 

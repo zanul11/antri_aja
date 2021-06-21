@@ -135,7 +135,7 @@ class SaldoController extends Controller
         // $body['amount']     = $request->jumlah;
         $body['returnUrl']  = url('/') . '/topup-success';
         $body['cancelUrl']  = url('/') . '/saldo';
-        $body['notifyUrl']  = url('/') . '/ipaymu-success/' . Auth::user()->email . '/' . $generateUid;
+        $body['notifyUrl']  = url('/') . '/ipaymu-success';
         $body['name']  = Auth::user()->name;
         $body['email']  = Auth::user()->email;
         $body['phone']  = Auth::user()->no_hp;
