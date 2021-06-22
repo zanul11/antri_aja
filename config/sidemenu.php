@@ -50,6 +50,11 @@ return [
             'url' => '/user'
         ],
         [
+            'icon' => '<i data-feather="percent" ></i>',
+            'title' => 'Persentase Bonus',
+            'url' => '/persen'
+        ],
+        [
             'icon' => '<i data-feather="activity" ></i>',
             'title' => 'Data Spesialis',
             'url' => '/spesialis'

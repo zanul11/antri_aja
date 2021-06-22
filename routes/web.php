@@ -33,6 +33,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('dokter', 'DokterController');
 
     Route::resource('akun', 'AkunController');
+    Route::resource('persen', 'PersenController');
 
     Route::get('/jadwal/getJadwal', 'JadwalController@getJadwal');
     Route::get('/jadwal/getData', 'JadwalController@getData');
