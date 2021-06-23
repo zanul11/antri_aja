@@ -92,6 +92,11 @@ return [
             'title' => 'Data Dokter',
             'url' => '/dokter'
         ],
+        [
+            'icon' => '<i data-feather="dollar-sign" ></i>',
+            'title' => 'Saldo',
+            'url' => '/saldo'
+        ],
 
     ],
     'dokter' => [

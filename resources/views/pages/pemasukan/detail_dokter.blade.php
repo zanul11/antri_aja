@@ -67,6 +67,7 @@
                         </div>
                     </div>
                     <!-- end -->
+
                     <div class="col-lg-12 ">
                         <div class="bio layout-spacing">
                             <div class="widget-content widget-content-area">
@@ -81,7 +82,8 @@
                                                 <th>Kredit</th>
                                                 <th>Fee</th>
                                                 <th>Saldo </th>
-                                                <th>Saldo Real iPaymu </th>
+                                                <th>Saldo iPaymu </th>
+                                                <th>Pemasukan </th>
                                                 <!-- <th>Saldo Real</th> -->
                                             </tr>
                                         </thead>
@@ -91,6 +93,7 @@
                                             $kredit = 0;
                                             $fee = 0;
                                             $saldo = 0;
+                                            $pemasukan = 0;
                                             @endphp
                                             @foreach($data_dokter->saldo as $dt)
 
@@ -103,6 +106,7 @@
                                             else{
                                             $kredit+=$dt->jumlah;
                                             $saldo-=$dt->jumlah;
+                                            $pemasukan += $dt->jumlah_admin;
                                             }
                                             @endphp
                                             <tr>
@@ -124,6 +128,7 @@
                                                 </td>
                                                 <td> {{number_format($saldo)}}</td>
                                                 <td> {{number_format($saldo-$fee)}}</td>
+                                                <td> {{number_format($dt->jumlah_admin)}}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -139,6 +144,7 @@
                                                 </td>
                                                 <td> {{number_format($saldo)}}</td>
                                                 <td> {{number_format($saldo-$fee)}}</td>
+                                                <td> {{number_format($pemasukan)}}</td>
                                             </tr>
                                         </tfoot>
 
@@ -148,6 +154,10 @@
                             </div>
                         </div>
                     </div>
+
+
+
+
                 </div>
             </div>
         </div>

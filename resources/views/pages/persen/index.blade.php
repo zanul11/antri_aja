@@ -19,7 +19,7 @@
 
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="noHp">Dokter/Marketing (dalam %)</label>
+                                    <label for="noHp">Dokter/Marketing (%)</label>
                                     <input type="number" class="form-control mb-4" onkeyup="ubahDokter()" id="dokter" name="dokter" value="{{$data_persen->dokter}}" required>
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="noHp">#</label><br>
-                                    <button class=" btn btn-primary mb-2 text-center"><i data-feather="refresh-cw"></i> UPDATE PERSENTASE</button>
+                                    <button class=" btn btn-primary mb-2 text-center"><i data-feather="refresh-cw"></i> UPDATE</button>
                                 </div>
                             </div>
                         </div>

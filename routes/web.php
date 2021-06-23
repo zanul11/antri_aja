@@ -20,20 +20,28 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
 
+    Route::group(['middleware' => 'admin'], function () {
+        Route::resource('user', 'UserController');
+        Route::resource('spesialis', 'SpesialisController');
+        Route::resource('marketing', 'MarketingController');
+        Route::resource('persen', 'PersenController');
+        Route::resource('pemasukan', 'PemasukanController');
+    });
+
     // $this->middleware
 
     Route::get('/dashboard', 'HomeController@index');
 
-    Route::resource('user', 'UserController');
+
     Route::resource('profile', 'ProfileController');
     Route::resource('password', 'PasswordController');
-    Route::resource('spesialis', 'SpesialisController');
 
-    Route::resource('marketing', 'MarketingController');
+
+
     Route::resource('dokter', 'DokterController');
 
     Route::resource('akun', 'AkunController');
-    Route::resource('persen', 'PersenController');
+
 
     Route::get('/jadwal/getJadwal', 'JadwalController@getJadwal');
     Route::get('/jadwal/getData', 'JadwalController@getData');
@@ -46,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
     Route::resource('saldo', 'SaldoController');
 
-    Route::resource('pemasukan', 'PemasukanController');
+
 
     // APPS
     Route::prefix('apps')->group(function () {

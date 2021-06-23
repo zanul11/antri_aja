@@ -31,7 +31,9 @@ class SaldoController extends Controller
         //         'key' => $profile['api_key'],
         //     ])
         // ]);
-
+        $dokter = Dokter::where('id', Auth::user()->id)->with(['saldo' => function ($q) {
+            $q->where('status', 1);
+        }])->first();
         // return json_decode($response->getBody(), true);
         $data = [
             'category_name' => 'Saldo',
@@ -40,6 +42,7 @@ class SaldoController extends Controller
             'scrollspy_offset' => '',
             'profile' => $profile,
             'saldo' => $this->getSaldo(),
+            'data_dokter' => $dokter
 
         ];
         return view('pages.saldo.index')->with($data);
@@ -105,7 +108,7 @@ class SaldoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  $id)
+    public function update(Request $request)
     {
 
         //production
@@ -119,6 +122,7 @@ class SaldoController extends Controller
         $method       = 'POST'; //method
 
         $generateUid =  substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 9);
+        // return $request->jumlah;
 
         // if ($request->metode == 'va') {
         //     $fee = 3500;
@@ -137,8 +141,8 @@ class SaldoController extends Controller
         $body['cancelUrl']  = url('/') . '/saldo';
         $body['notifyUrl']  = url('/') . '/ipaymu-success';
         $body['name']  = Auth::user()->name;
-        $body['email']  = Auth::user()->id;
-        $body['phone']  = Auth::user()->no_hp;
+        $body['email']  = Auth::user()->email;
+        $body['phone']  = '081939477455';
 
         //khusus direct
         $body['paymentMethod']  = $request->metode;
@@ -212,7 +216,7 @@ class SaldoController extends Controller
                 return view('pages.saldo.pembayaran')->with($data);
                 // return Redirect::to($res['Data']['Url']);
             } else {
-                return Redirect::to('/saldo')->with('message', "The amount must be at least 5000!");
+                return Redirect::to('/saldo')->with('message', $res['Message']);
             }
             // return $res['Data']['Url'];
 

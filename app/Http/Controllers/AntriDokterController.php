@@ -7,6 +7,7 @@ use App\Models\Antri;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Dokter;
+use App\Models\Persen;
 use App\Models\Spesialis;
 use App\Models\TopUp;
 use Illuminate\Support\Facades\Redirect;
@@ -67,18 +68,49 @@ class AntriDokterController extends Controller
     public function store(Request $request)
     {
 
+        $dokter = Dokter::where('username', Auth::user()->username)->first();
+        $persen = Persen::first();
+        // return ($persen['dokter'] / 100) * $persen['nilai'];
         Antri::where('id', $request->id_antri)
             ->update(["status" => 1, "catatan_dokter" => $request->catatan, "selesai_at" => date('Y-m-d H:i:s')]);
+
+        //input potongan dokter
         TopUp::create([
             // "session_id" => $res['Data']['SessionID'],
             "trx_id" => '-',
             "dokter" => Auth::user()->id,
-            "jumlah" => 2000,
+            "jumlah" => $persen['nilai'],
+            "jumlah_admin" => $persen['nilai'] - (($persen['dokter'] / 100) * $persen['nilai']),
             "status" => 1,
             "jenis" => 0,
-            "ket" => 'Pasien',
+            "ket" => 'Menangani pasien',
             "pasien_id" => $request->id_antri
         ]);
+
+        //bonus parent to saldo
+        TopUp::create([
+            // "session_id" => $res['Data']['SessionID'],
+            "trx_id" => '-',
+            "dokter" => $dokter['parent'],
+            "jumlah" => ($persen['dokter'] / 100) * $persen['nilai'],
+            "status" => 1,
+            "jenis" => 1,
+            "ket" => 'Bonus',
+            "dari" => Auth::user()->username,
+            "pasien_id" => $request->id_antri
+        ]);
+
+        //bonus parent to saldo
+        // TopUp::create([
+        //     // "session_id" => $res['Data']['SessionID'],
+        //     "trx_id" => '-',
+        //     "dokter" => Auth::user()->id,
+        //     "jumlah" => $persen['nilai'] - (($persen['dokter'] / 100) * $persen['nilai']),
+        //     "status" => 1,
+        //     "jenis" => 2,
+        //     "ket" => 'Menangani pasien',
+        //     "pasien_id" => $request->id_antri
+        // ]);
         return Redirect::to('/antri_dokter')->with('success', 'Selesai ditangani!');
         return $request;
     }

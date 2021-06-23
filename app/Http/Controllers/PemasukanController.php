@@ -18,10 +18,10 @@ class PemasukanController extends Controller
      */
     public function index()
     {
-        $pemasukan = TopUp::where('status', 1)->where('jenis', 0)->sum('jumlah');;
+        $pemasukan = TopUp::where('status', 1)->where('jenis', 0)->sum('jumlah_admin');;
         $saldo = TopUp::where('status', 1)->where('jenis', 1)->sum('jumlah');
         $fee = TopUp::where('status', 1)->where('jenis', 1)->sum('fee');
-        $dokter = Dokter::where('role', 3)->with(['saldo' => function ($q) {
+        $dokter = Dokter::whereIN('role', [2, 3, 5])->with(['saldo' => function ($q) {
             $q->where('status', 1);
             $q->where('jenis', 1);
         }])->with(['antri' => function ($q) {
@@ -83,8 +83,11 @@ class PemasukanController extends Controller
     {
         $dokter = Dokter::where('id', $id)->with(['saldo' => function ($q) {
             $q->where('status', 1);
+            $q->where('jenis', '!=', 2);
         }])->first();
-        $pemasukan = TopUp::where('status', 1)->where('jenis', 0)->where('dokter', $dokter['id'])->sum('jumlah');;
+
+        $pemasukan = TopUp::where('status', 1)->where('jenis', 0)->where('dokter', $dokter['id'])->sum('jumlah_admin');
+
         $saldo = TopUp::where('status', 1)->where('jenis', 1)->where('dokter', $dokter['id'])->sum('jumlah');
         $fee = TopUp::where('status', 1)->where('jenis', 1)->where('dokter', $dokter['id'])->sum('fee');
         $data = [
@@ -95,7 +98,8 @@ class PemasukanController extends Controller
             'pemasukan' => $pemasukan,
             'saldo' => $saldo,
             'fee' => $fee,
-            'data_dokter' => $dokter
+            'data_dokter' => $dokter,
+
 
         ];
         return view('pages.pemasukan.detail_dokter')->with($data);

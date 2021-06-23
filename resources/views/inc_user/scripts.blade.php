@@ -71,6 +71,8 @@
   });
 </script>
 
+
+
 <script>
   if ('{{session()->has("message")}}') {
     swal({

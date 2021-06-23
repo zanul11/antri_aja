@@ -78,7 +78,89 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-12 ">
+                    <div class="bio layout-spacing">
+                        <div class="widget-content widget-content-area">
+                            <h3 class="">Data Keuangan</h3>
+                            <div class="table-responsive mb-4 mt-4">
+                                <table id="zero-config" class="table table-hover" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Tanggal</th>
+                                            <th>Debet/TopUp</th>
+                                            <th>Kredit</th>
+                                            <th>Fee</th>
+                                            <th>Saldo </th>
+                                            <th>Ket </th>
+                                            <!-- <th>Saldo Real</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @php
+                                        $debet = 0;
+                                        $kredit = 0;
+                                        $fee = 0;
+                                        $saldo = 0;
+                                        $pemasukan = 0;
+                                        @endphp
+                                        @foreach($data_dokter->saldo as $dt)
 
+                                        @php
+                                        if($dt->jenis==1){
+                                        $debet+=$dt->jumlah;
+                                        $fee+=$dt->fee;
+                                        $saldo+=$dt->jumlah;
+                                        }
+                                        else{
+                                        $kredit+=$dt->jumlah;
+                                        $saldo-=$dt->jumlah;
+                                        $pemasukan += $dt->jumlah_admin;
+                                        }
+                                        @endphp
+                                        <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <!-- <td>{{$dt->nik}}</td> -->
+                                            <td>{{date('d-m-Y', strtotime($dt->created_at))}}</td>
+                                            <td>@if($dt->jenis==1) {{number_format($dt->jumlah)}} @else - @endif</td>
+                                            <td>
+                                                @if($dt->jenis==0)
+                                                {{number_format($dt->jumlah)}}
+                                                @else -
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($dt->jenis==1)
+                                                {{number_format($dt->fee)}}
+                                                @else -
+                                                @endif
+                                            </td>
+                                            <td> {{number_format($saldo)}}</td>
+                                            <td> @if($dt->ket=='Bonus') {{$dt->ket}} dari {{$dt->dari}} @else {{$dt->ket}} @endif</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2">Jumlah</td>
+                                            <td>{{number_format($debet)}} </td>
+                                            <td>
+                                                {{number_format($kredit)}}
+                                            </td>
+                                            <td>
+                                                {{number_format($fee)}}
+                                            </td>
+                                            <td> {{number_format($saldo)}}</td>
+
+                                        </tr>
+                                    </tfoot>
+
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing ">
                     <div class="section general-info">
                         <div class="info ">
