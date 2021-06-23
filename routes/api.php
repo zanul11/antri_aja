@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/login', 'ApiController@login');
 Route::post('/getAntriUser', 'ApiController@getAntriUser');
+Route::post('/getAntriUserDitangani', 'ApiController@getAntriUserDitangani');
 Route::get('/getSpesialis', 'ApiController@getSpesialis');
 Route::post('/getDokterSpesialis', 'ApiController@getDokterSpesialis');
 Route::post('/getJam', 'ApiController@getJam');
