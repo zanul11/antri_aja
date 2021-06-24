@@ -30,3 +30,5 @@ Route::post('/deleteAntrian', 'ApiController@deleteAntrian');
 Route::post('/detailAntrian', 'ApiController@detailAntrian');
 Route::get('/getDokterTernama', 'ApiController@getDokterTernama');
 Route::get('/getSpesialisTernama', 'ApiController@getSpesialisTernama');
+Route::post('/searchDokter', 'ApiController@searchDokter');
+Route::post('/searchSpesialis', 'ApiController@searchSpesialis');

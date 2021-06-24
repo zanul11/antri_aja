@@ -95,6 +95,7 @@ class ApiController extends Controller
         Antri::where('id', $r->id)->delete();
         return response()->json(['status' => true, 'data' =>  'Sukses']);
     }
+
     public function detailAntrian(Request $r)
     {
         return Antri::with('dokter_detail')->with('waktu_detail')->where('id', $r->id)->get();
@@ -115,5 +116,19 @@ class ApiController extends Controller
             $q->where('status', 1);
         }])->orderBy('antri_count', 'desc')->groupBy('spesialis')->limit(5)
             ->get();
+    }
+
+    public function searchDokter(Request $request)
+    {
+        return $antri = Dokter::where('role', 3)->with('spesialis_detail')->withCount(['antri' => function ($q) {
+            $q->where('status', 1);
+        }])->with(['jadwal' => function ($q) {
+            $q->groupBy('hari');
+        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->get();
+    }
+
+    public function searchSpesialis(Request $request)
+    {
+        return Spesialis::where('spesialis', 'like', '%' . $request->key . '%')->get();
     }
 }
