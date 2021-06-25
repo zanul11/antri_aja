@@ -124,7 +124,7 @@ class ApiController extends Controller
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
             $q->groupBy('hari');
-        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->get();
+        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->where('spesialis', $request->spesialis)->get();
     }
 
     public function searchSpesialis(Request $request)
