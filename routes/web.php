@@ -1334,5 +1334,5 @@ Route::get('/password/reset', function () {
 });
 
 Route::get('/', function () {
-    return redirect('/login');
+    return redirect('/daftar');
 });

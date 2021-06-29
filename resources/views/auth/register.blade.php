@@ -142,7 +142,7 @@
                                 </center> -->
                                 <center>
                                     <div class="footer-section f-section-1" style="margin-top: 20px;">
-                                        <a href="{{url('/')}}" style="color:blue">Login Dokter !</a>
+                                        <a href="{{url('/login')}}" style="color:blue">Login di sini!</a>
                                     </div>
                                 </center>
                                 <center>
