@@ -88,8 +88,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Tanggal</th>
-                                            <th>Debet/TopUp</th>
                                             <th>Kredit</th>
+                                            <th>Debet/TopUp</th>
                                             <th>Fee</th>
                                             <th>Saldo </th>
                                             <th>Ket </th>
