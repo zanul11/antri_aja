@@ -23,8 +23,8 @@ class AkunController extends Controller
         $jaringan = User::with('childrenRekursif')->where('id', Auth::id())->firstOrFail();
         $akun = Akun::where('role', 5)->where('email', Auth::user()->email)->get();
         $data = [
-            'category_name' => 'Data Akun',
-            'page_name' => 'Data Akun',
+            'category_name' => 'Data Akun Dokter',
+            'page_name' => 'Data Akun Dokter',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'data_akun' => $akun,
@@ -42,7 +42,7 @@ class AkunController extends Controller
     {
         $spesialis = Spesialis::all();
         $data = [
-            'category_name' => 'Data Akun',
+            'category_name' => 'Data Akun Dokter',
             'page_name' => 'Tambah Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -84,7 +84,7 @@ class AkunController extends Controller
                 "lat" => $tmpLokasi[0],
                 "long" => $tmpLokasi[1],
             ]);
-            return Redirect::to('/akun')->with('success', 'Data Akun added!');
+            return Redirect::to('/akun')->with('success', 'Data Akun Dokter added!');
         }
     }
 
@@ -109,7 +109,7 @@ class AkunController extends Controller
     {
         $spesialis = Spesialis::all();
         $data = [
-            'category_name' => 'Data Akun',
+            'category_name' => 'Data Akun Dokter',
             'page_name' => 'Lihat Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -130,7 +130,42 @@ class AkunController extends Controller
      */
     public function update(Request $request, Akun $akun)
     {
-        //
+        // return $request;
+        $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
+        $tmpLokasi = explode(",", $tmp);
+        if ($request->username != $akun->username) {
+            $cekUser = User::where('username', $request->username)->get();
+            if (count($cekUser) > 0) {
+                return Redirect::to('/akun/' . $akun->id . '/edit')->withErrors(['Duplicate username!.'])->withInput()->with('message', 'Duplicate username!.');
+            } else {
+                if (isset($request->password) || $request->password != '')
+                    $akun->password = bcrypt($request->password);
+                $akun->username = $request->username;
+                $akun->name = $request->nama;
+                $akun->no_hp = $request->no_hp;
+                $akun->pengalaman = $request->pengalaman;
+                $akun->deskripsi = $request->deskripsi;
+                $akun->alamat = $request->alamat;
+                $akun->latlong = $request->latlong;
+                $akun->lat =  $tmpLokasi[0];
+                $akun->long = $tmpLokasi[1];
+                $akun->save();
+                return Redirect::to('/akun')->with('success', 'Data Akun updated!');
+            }
+        } else {
+            if (isset($request->password) || $request->password != '')
+                $akun->password = bcrypt($request->password);
+            $akun->name = $request->nama;
+            $akun->no_hp = $request->no_hp;
+            $akun->pengalaman = $request->pengalaman;
+            $akun->deskripsi = $request->deskripsi;
+            $akun->alamat = $request->alamat;
+            $akun->latlong = $request->latlong;
+            $akun->lat =  $tmpLokasi[0];
+            $akun->long = $tmpLokasi[1];
+            $akun->save();
+            return Redirect::to('/akun')->with('success', 'Data Akun updated!');
+        }
     }
 
     /**

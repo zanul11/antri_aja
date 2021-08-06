@@ -33,7 +33,7 @@
                                 <td>{{$dt->no_hp}}</td>
                                 <td>{{$dt->alamat}}</td>
                                 <td>
-                                    <a href="akun/{{$dt->id}}/edit"><i data-feather="search" class="text-warning"></i></a>
+                                    <a href="akun/{{$dt->id}}/edit"><i data-feather="edit" class="text-warning"></i></a>
                                     <a href="#" onclick="deleteData('/akun','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                 </td>
                             </tr>

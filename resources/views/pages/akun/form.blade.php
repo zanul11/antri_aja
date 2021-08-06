@@ -31,41 +31,36 @@
                             <div class="row">
                                 <div class="col-md-11 mx-auto">
                                     <div class="row">
-                                        <!-- <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="country">NIK</label>
-                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" type="number" class="form-control mb-4" name="nik" id="nik" placeholder="Nik user" value="{{(isset($akun))?$akun->nik:(old('nik')??'')}}" required {{($action=='Edit')?'readonly':''}}>
-                                            </div>
-                                        </div> -->
+
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
-                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($akun))?$akun->name:(old('nama')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($akun))?$akun->name:(old('nama')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="email">Usename</label>
-                                                <input type="text" class="form-control mb-4" name="username" id="username" placeholder="Username (tanpa spasi)" value="{{(isset($akun))?$akun->username:(old('username')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="text" class="form-control mb-4" name="username" id="username" placeholder="Username (tanpa spasi)" value="{{(isset($akun))?$akun->username:(old('username')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}} {{($action=='Edit')?'readonly':''}}>
+                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">No Hp</label>
-                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($akun))?$akun->no_hp:(old('no_hp')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($akun))?$akun->no_hp:(old('no_hp')??'')}}" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">Spesialis</label>
-                                                <select class="placeholder js-states form-control" name="spesialis" required {{($action=='Edit')?'disabled':''}}>
+                                                <select class="placeholder js-states form-control" name="spesialis" required>
                                                     @foreach($data_spesialis as $dt)
                                                     <option value="{{$dt->id}}" {{($action!='Tambah')?(($akun->spesialis==$dt->id)?'selected':''):''}}>{{$dt->spesialis}}</option>
                                                     @endforeach
@@ -75,14 +70,14 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pengalaman">Pengalaman</label>
-                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($akun))?$akun->pengalaman:(old('pengalaman')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($akun))?$akun->pengalaman:(old('pengalaman')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label for="alamat">Deskripsi pribadi dokter</label>
-                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2" {{($action=='Edit')?'readonly':''}}>{{(isset($akun))?$akun->deskripsi:(old('deskripsi')??'')}}</textarea>
+                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2">{{(isset($akun))?$akun->deskripsi:(old('deskripsi')??'')}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -92,12 +87,12 @@
                                             <div class="col-lg-8">
 
                                                 <div class="col-md-12">
-                                                    @if($action==='Tambah')
+
                                                     <div class="form-group">
                                                         <label for="no_hp">Tulis Nama Tempat</label>
                                                         <input type="text" class="form-control mb-4" id="almt" placeholder="Cari Tempat Disini!" onkeydown="clearTimer()" onkeyup="doneTyping()">
                                                     </div>
-                                                    @endif
+
                                                 </div>
 
                                                 <div class="col-md-12 form-group mb-3v " style="{{($action!='Tambah')?'margin-top:50px':''}}">
@@ -108,7 +103,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="alamat">Alamat Detail Praktek</label>
-                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10" {{($action=='Edit')?'readonly':''}}>{{(isset($akun))?$akun->alamat:(old('alamat')??'')}}</textarea>
+                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10">{{(isset($akun))?$akun->alamat:(old('alamat')??'')}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,10 +120,10 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($action==='Tambah')
+
                             <center>
                                 <button class=" btn btn-primary mb-2 text-center"><i data-feather="{{($action=='Tambah')?'plus':'refresh-cw'}}"></i> {{($action=='Tambah')?'SIMPAN':'UPDATE'}}</button>
-                            </center> @endif
+                            </center>
                         </div>
                     </form>
                 </div>

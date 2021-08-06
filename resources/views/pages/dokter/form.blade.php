@@ -10,10 +10,10 @@
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
                     <h3 class=""> {{$page_name}} / {{$category_name}} </h3>
-                    <a href="{{url('/dokter')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
+                    <a href="{{url('/faskes')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
-                    <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/dokter':'/dokter/'.$dokter->id}}">
+                    <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/faskes':'/faskes/'.$dokter->id}}">
                         @if($action=='Edit')
                         @method('PUT')
                         @endif
@@ -40,32 +40,32 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
-                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($dokter))?$dokter->name:(old('nama')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($dokter))?$dokter->name:(old('nama')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="email">Email</label>
-                                                <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($dokter))?$dokter->email:(old('email')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($dokter))?$dokter->email:(old('email')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}} {{($action=='Edit')?'readonly':''}}>
+                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">No Hp</label>
-                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($dokter))?$dokter->no_hp:(old('no_hp')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($dokter))?$dokter->no_hp:(old('no_hp')??'')}}" required>
                                             </div>
                                         </div>
 
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">Spesialis</label>
-                                                <select class="placeholder js-states form-control" name="spesialis" required {{($action=='Edit')?'disabled':''}}>
+                                                <select class="placeholder js-states form-control" name="spesialis" required>
                                                     @foreach($data_spesialis as $dt)
                                                     <option value="{{$dt->id}}" {{($action!='Tambah')?(($dokter->spesialis==$dt->id)?'selected':''):''}}>{{$dt->spesialis}}</option>
                                                     @endforeach
@@ -75,14 +75,33 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pengalaman">Pengalaman</label>
-                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}" required {{($action=='Edit')?'readonly':''}}>
+                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}" required>
                                             </div>
                                         </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nama">Kode Faskes</label>
+                                                <input type="text" class="form-control mb-4" name="kode_faskes" placeholder="Kode Faskes" value="{{(isset($dokter))?$dokter->kode_faskes:(old('kode_faskes')??'')}}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="nama">Nama Faskes</label>
+                                                <input type="text" class="form-control mb-4" name="nama_faskes" placeholder="Nama Faskes" value="{{(isset($dokter))?$dokter->nama_faskes:(old('nama_faskes')??'')}}" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="email">Telepon Faskes</label>
+                                                <input type="text" class="form-control mb-4" name="tlp_faskes" placeholder="Telepon Faskes" value="{{(isset($dokter))?$dokter->tlp_faskes:(old('tlp_faskes')??'')}}" required>
+                                            </div>
+                                        </div>
+
                                         <div class="col-lg-12">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="alamat">Deskripsi pribadi dokter</label>
-                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2" {{($action=='Edit')?'readonly':''}}>{{(isset($dokter))?$dokter->deskripsi:(old('deskripsi')??'')}}</textarea>
+                                                    <label for="alamat">Deskripsi Faskes</label>
+                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2">{{(isset($dokter))?$dokter->deskripsi:(old('deskripsi')??'')}}</textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -108,7 +127,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label for="alamat">Alamat Detail Praktek</label>
-                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10" {{($action=='Edit')?'readonly':''}}>{{(isset($dokter))?$dokter->alamat:(old('alamat')??'')}}</textarea>
+                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10">{{(isset($dokter))?$dokter->alamat:(old('alamat')??'')}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -125,10 +144,10 @@
                                     </div>
                                 </div>
                             </div>
-                            @if($action==='Tambah')
+
                             <center>
                                 <button class=" btn btn-primary mb-2 text-center"><i data-feather="{{($action=='Tambah')?'plus':'refresh-cw'}}"></i> {{($action=='Tambah')?'SIMPAN':'UPDATE'}}</button>
-                            </center> @endif
+                            </center>
                         </div>
                     </form>
                 </div>

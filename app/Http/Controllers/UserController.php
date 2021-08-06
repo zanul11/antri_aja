@@ -122,7 +122,7 @@ class UserController extends Controller
                 if (isset($request->password) || $request->password != '')
                     $user->password = bcrypt($request->password);
                 $user->email = $request->email;
-                $user->username = $request->username;
+                $user->username = $request->email;
                 $user->name = $request->nama;
                 $user->save();
                 return Redirect::to('/user')->with('success', 'Data User updated!');
@@ -131,7 +131,7 @@ class UserController extends Controller
             if (isset($request->password) || $request->password != '')
                 $user->password = bcrypt($request->password);
             $user->email = $request->email;
-            $user->username = $request->username;
+            $user->username = $request->email;
             $user->name = $request->nama;
             $user->save();
             return Redirect::to('/user')->with('success', 'Data User updated!');

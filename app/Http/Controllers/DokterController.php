@@ -23,8 +23,8 @@ class DokterController extends Controller
         $jaringan = User::with('childrenRekursif')->where('id', Auth::id())->firstOrFail();
         $dokter = Dokter::where('role', 3)->where('parent', Auth::user()->id)->get();
         $data = [
-            'category_name' => 'Data Dokter',
-            'page_name' => 'Data Dokter',
+            'category_name' => 'Data Faskes',
+            'page_name' => 'Data Faskes',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'data_dokter' => $dokter,
@@ -42,7 +42,7 @@ class DokterController extends Controller
     {
         $spesialis = Spesialis::all();
         $data = [
-            'category_name' => 'Data Dokter',
+            'category_name' => 'Data Faskes',
             'page_name' => 'Tambah Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -64,7 +64,7 @@ class DokterController extends Controller
         // return $request;
         $cek = Dokter::where('email', $request->email)->get();
         if (count($cek) > 0) {
-            return Redirect::to('/dokter/create')->withErrors(['Duplicate Dokter email/username!.'])->withInput()->with('message', 'Duplicate Dokter email/username!.');
+            return Redirect::to('/faskes/create')->withErrors(['Duplicate Faskes email/username!.'])->withInput()->with('message', 'Duplicate Faskes email/username!.');
         } else {
             $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
             $tmpLokasi = explode(",", $tmp);
@@ -73,7 +73,6 @@ class DokterController extends Controller
                 "email" => $request->email,
                 "username" => $request->email,
                 "password" => bcrypt($request->password),
-
                 "no_hp" => $request->no_hp,
                 "alamat" => $request->alamat,
                 "parent" => Auth::user()->id,
@@ -82,10 +81,13 @@ class DokterController extends Controller
                 "deskripsi" => $request->deskripsi,
                 "role" => 3,
                 "latlong" => $request->latlong,
+                "nama_faskes" => $request->nama_faskes,
+                "kode_faskes" => $request->kode_faskes,
+                "tlp_faskes" => $request->tlp_faskes,
                 "lat" => $tmpLokasi[0],
                 "long" => $tmpLokasi[1],
             ]);
-            return Redirect::to('/dokter')->with('success', 'Data Dokter added!');
+            return Redirect::to('/faskes')->with('success', 'Data Faskes added!');
         }
     }
 
@@ -95,7 +97,7 @@ class DokterController extends Controller
      * @param  \App\Models\Dokter  $dokter
      * @return \Illuminate\Http\Response
      */
-    public function show(Dokter $dokter)
+    public function show(Dokter $faske)
     {
         //
     }
@@ -106,18 +108,22 @@ class DokterController extends Controller
      * @param  \App\Models\Dokter  $dokter
      * @return \Illuminate\Http\Response
      */
-    public function edit(Dokter $dokter)
+    public function edit(Dokter $faske)
     {
+        // return $faske;
         $spesialis = Spesialis::all();
         $data = [
-            'category_name' => 'Data Dokter',
+            'category_name' => 'Data Faskes',
             'page_name' => 'Lihat Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'action' => 'Edit',
             'data_spesialis' => $spesialis,
-            'dokter' => $dokter
+            'dokter' => $faske
         ];
+
+
+
         // return config('sidemenu.administrator');
         return view('pages.dokter.form')->with($data);
     }
@@ -129,56 +135,62 @@ class DokterController extends Controller
      * @param  \App\Models\Dokter  $dokter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Dokter $dokter)
+    public function update(Request $request, Dokter $faske)
     {
         // return $request;
-        if ($request->email != $dokter->email) {
+        if ($request->email != $faske->email) {
             $cek = Dokter::where('email', $request->email)->get();
             if (count($cek) > 0) {
-                return Redirect::to('/dokter/' . $dokter->id . '/edit')->withErrors(['Duplicate dokter email/username!.'])->withInput()->with('message', 'Duplicate dokter email/username!.');
+                return Redirect::to('/faskes/' . $faske->id . '/edit')->withErrors(['Duplicate Faskes email/username!.'])->withInput()->with('message', 'Duplicate Faskes email/username!.');
             } else {
                 if (isset($request->password) || $request->password != '')
-                    $dokter->password = bcrypt($request->password);
-                $dokter->email = $request->email;
-                $dokter->name = $request->nama;
-                $dokter->username = $request->email;
-                $dokter->no_hp = $request->no_hp;
-                $dokter->alamat = $request->alamat;
-                $dokter->spesialis = $request->spesialis;
-                $dokter->pengalaman = $request->pengalaman;
-                $dokter->deskripsi = $request->deskripsi;
+                    $faske->password = bcrypt($request->password);
+                $faske->email = $request->email;
+                $faske->name = $request->nama;
+                $faske->username = $request->email;
+                $faske->no_hp = $request->no_hp;
+                $faske->alamat = $request->alamat;
+                $faske->spesialis = $request->spesialis;
+                $faske->pengalaman = $request->pengalaman;
+                $faske->deskripsi = $request->deskripsi;
+                $faske->kode_faskes = $request->kode_faskes;
+                $faske->nama_faskes = $request->nama_faskes;
+                $faske->tlp_faskes = $request->tlp_faskes;
 
                 if (isset($request->latlong)) {
-                    $dokter->latlong = $request->latlong;
+                    $faske->latlong = $request->latlong;
                     $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
                     $tmpLokasi = explode(",", $tmp);
-                    $dokter->lat = $tmpLokasi[0];
-                    $dokter->long = $tmpLokasi[1];
+                    $faske->lat = $tmpLokasi[0];
+                    $faske->long = $tmpLokasi[1];
                 }
-                $dokter->save();
-                return Redirect::to('/dokter')->with('success', 'Data Dokter updated!');
+                $faske->save();
+                return Redirect::to('/faskes')->with('success', 'Data Faskes updated!');
             }
         } else {
             if (isset($request->password) || $request->password != '')
-                $dokter->password = bcrypt($request->password);
-            $dokter->email = $request->email;
-            $dokter->name = $request->nama;
-            $dokter->username = $request->email;
-            $dokter->no_hp = $request->no_hp;
-            $dokter->alamat = $request->alamat;
-            $dokter->spesialis = $request->spesialis;
-            $dokter->pengalaman = $request->pengalaman;
-            $dokter->deskripsi = $request->deskripsi;
+                $faske->password = bcrypt($request->password);
+            $faske->email = $request->email;
+            $faske->name = $request->nama;
+            $faske->username = $request->email;
+            $faske->no_hp = $request->no_hp;
+            $faske->alamat = $request->alamat;
+            $faske->spesialis = $request->spesialis;
+            $faske->pengalaman = $request->pengalaman;
+            $faske->deskripsi = $request->deskripsi;
+            $faske->kode_faskes = $request->kode_faskes;
+            $faske->nama_faskes = $request->nama_faskes;
+            $faske->tlp_faskes = $request->tlp_faskes;
 
             if (isset($request->latlong)) {
-                $dokter->latlong = $request->latlong;
+                $faske->latlong = $request->latlong;
                 $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
                 $tmpLokasi = explode(",", $tmp);
-                $dokter->lat = $tmpLokasi[0];
-                $dokter->long = $tmpLokasi[1];
+                $faske->lat = $tmpLokasi[0];
+                $faske->long = $tmpLokasi[1];
             }
-            $dokter->save();
-            return Redirect::to('/dokter')->with('success', 'Data Dokter updated!');
+            $faske->save();
+            return Redirect::to('/faskes')->with('success', 'Data Faskes updated!');
         }
     }
 
@@ -188,8 +200,8 @@ class DokterController extends Controller
      * @param  \App\Models\Dokter  $dokter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Dokter $dokter)
+    public function destroy($dokter)
     {
-        //
+        Dokter::where('id', $dokter)->delete();
     }
 }

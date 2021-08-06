@@ -84,8 +84,30 @@
                                                                 </div>
                                                             </div>
 
+                                                            @if($profile->role==3)
+                                                            <div class="col-sm-3">
+                                                                <div class="form-group">
+                                                                    <label for="noHp">Kode Faskes</label>
+                                                                    <input type="text" class="form-control mb-4" name="kode_faskes" value="{{$profile->kode_faskes}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-5">
+                                                                <div class="form-group">
+                                                                    <label for="noHp">Nama Faskes</label>
+                                                                    <input type="text" class="form-control mb-4" name="nama_faskes" value="{{$profile->nama_faskes}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <div class="form-group">
+                                                                    <label for="noHp">Telp. Faskes</label>
+                                                                    <input type="text" class="form-control mb-4" name="tlp_faskes" value="{{$profile->tlp_faskes}}">
+                                                                </div>
+                                                            </div>
+                                                            @endif
+
                                                         </div>
                                                         @endif
+
                                                     </div>
                                                 </div>
                                             </div>

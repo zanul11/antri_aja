@@ -23,8 +23,8 @@ class ProfileController extends Controller
         $spesialis = Spesialis::all();
 
         $data = [
-            'category_name' => 'My Profile',
-            'page_name' => 'My Profile',
+            'category_name' => 'Profile Faskes',
+            'page_name' => 'Profile Faskes',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'profile' => $profile,
@@ -115,6 +115,10 @@ class ProfileController extends Controller
                 $profile->fb = $request->fb;
                 $profile->twitter = $request->twitter;
                 $profile->youtube = $request->youtube;
+
+                $profile->nama_faskes = $request->nama_faskes;
+                $profile->kode_faskes = $request->kode_faskes;
+                $profile->tlp_faskes = $request->tlp_faskes;
                 if (isset($request->latlong)) {
                     $profile->latlong = $request->latlong;
                     $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
@@ -147,6 +151,9 @@ class ProfileController extends Controller
             $profile->fb = $request->fb;
             $profile->twitter = $request->twitter;
             $profile->youtube = $request->youtube;
+            $profile->nama_faskes = $request->nama_faskes;
+            $profile->kode_faskes = $request->kode_faskes;
+            $profile->tlp_faskes = $request->tlp_faskes;
             if (isset($request->latlong)) {
                 $profile->latlong = $request->latlong;
                 $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));

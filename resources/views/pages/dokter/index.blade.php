@@ -10,7 +10,7 @@
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
                     <h3 class=""> {{$page_name}} </h3>
-                    <a href="{{url('dokter/create')}}" class="mt-2 edit-profile"> <i data-feather="plus" class="text-defaulr"> </i></a>
+                    <a href="{{url('faskes/create')}}" class="mt-2 edit-profile"> <i data-feather="plus" class="text-defaulr"> </i></a>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
                     <table id="zero-config" class="table table-hover" style="width:100%">
@@ -18,7 +18,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Username</th>
-                                <th>Nama</th>
+                                <th>Nama Faskes</th>
                                 <th>No Hp</th>
                                 <th>Alamat</th>
                                 <th class="no-content"></th>
@@ -28,13 +28,13 @@
                             @foreach($data_dokter as $dt)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$dt->username}}</td>
                                 <td>{{$dt->name}}</td>
+                                <td>{{$dt->nama_faskes}}</td>
                                 <td>{{$dt->no_hp}}</td>
                                 <td>{{$dt->alamat}}</td>
                                 <td>
-                                    <a href="dokter/{{$dt->id}}/edit"><i data-feather="search" class="text-warning"></i></a>
-                                    <a href="#" onclick="deleteData('/dokter','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
+                                    <a href="faskes/{{$dt->id}}/edit"><i data-feather="edit" class="text-warning"></i></a>
+                                    <a href="#" onclick="deleteData('/faskes','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -57,8 +57,8 @@
 
                                             <img src="{{asset('assets/img/90x90.jpg')}} " alt="avatar">
                                             <br>{{$child->name}} <br>
-                                            <a href="dokter/{{$child->id}}/edit"><i data-feather="eye" class="text-warning"></i></a>
-                                            <a href="#" onclick="deleteData('/dokter','{{$child->id}}')"><i data-feather="trash" class="text-danger"></i></a>
+                                            <a href="faskes/{{$child->id}}/edit"><i data-feather="eye" class="text-warning"></i></a>
+                                            <a href="#" onclick="deleteData('/faskes','{{$child->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                         </p>
 
                                     </li>

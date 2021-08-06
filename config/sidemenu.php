@@ -89,8 +89,8 @@ return [
         ],
         [
             'icon' => '<i data-feather="users" ></i>',
-            'title' => 'Data Dokter',
-            'url' => '/dokter'
+            'title' => 'Data Faskes',
+            'url' => '/faskes'
         ],
         [
             'icon' => '<i data-feather="dollar-sign" ></i>',
@@ -107,7 +107,7 @@ return [
         ],
         [
             'icon' => '<i data-feather="search" ></i>',
-            'title' => 'My Profile',
+            'title' => 'Profile Faskes',
             'url' => '/profile'
         ],
         [
@@ -122,7 +122,7 @@ return [
         ],
         [
             'icon' => '<i data-feather="user" ></i>',
-            'title' => 'Data Akun',
+            'title' => 'Data Akun Dokter',
             'url' => '/akun'
         ],
         [

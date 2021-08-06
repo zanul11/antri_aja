@@ -10,7 +10,7 @@
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
                     <h3 class=""> {{$page_name}} {{$category_name}} </h3>
-                    <a href="{{url('user/create')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
+                    <a href="{{url('/user')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
                     <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/user':'/user/'.$user->id}}">
@@ -35,7 +35,7 @@
                                             <div class="form-group">
                                                 <label for="country">Role</label>
                                                 @if($action=='Tambah')
-                                                <select class="form-control selectpicker" id="country" disabled>
+                                                <select class="form-control selectpicker" id="country">
                                                     <option selected>Administrator</option>
                                                 </select>
                                                 @else
