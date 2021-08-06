@@ -39,6 +39,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/jadwal/getJadwal', 'JadwalController@getJadwal');
     Route::get('/jadwal/getData', 'JadwalController@getData');
     Route::post('/jadwal/delete', 'JadwalController@delete');
+    //akun-jadwal
+    Route::post('/jadwal/getJadwalAkun', 'JadwalController@getJadwalAkun');
+    Route::post('/jadwal/getDataAkun', 'JadwalController@getDataAkun');
+    Route::post('/jadwal/deleteAkun', 'JadwalController@deleteAkun');
+    Route::post('/jadwal/saveAkun', 'JadwalController@saveAkun');
     Route::resource('jadwal', 'JadwalController');
 
     Route::resource('antri_dokter', 'AntriDokterController');
