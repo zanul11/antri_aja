@@ -8,6 +8,7 @@ use App\Models\Jadwal;
 use App\Models\Spesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ApiController extends Controller
@@ -103,7 +104,7 @@ class ApiController extends Controller
 
     public function getDokterTernama()
     {
-        return $antri = Dokter::where('role', 3)->with('spesialis_detail')->withCount(['antri' => function ($q) {
+        return $antri = Dokter::where('role', 5)->with('spesialis_detail')->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
             $q->groupBy('hari');
@@ -112,7 +113,7 @@ class ApiController extends Controller
 
     public function getSpesialisTernama()
     {
-        return $antri = Dokter::where('role', 3)->with('spesialis_detail')->withCount(['antri' => function ($q) {
+        return $antri = Dokter::where('role', 5)->with('spesialis_detail')->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->orderBy('antri_count', 'desc')->groupBy('spesialis')->limit(5)
             ->get();
@@ -120,7 +121,7 @@ class ApiController extends Controller
 
     public function searchDokter(Request $request)
     {
-        return $antri = Dokter::where('role', 3)->with('spesialis_detail')->withCount(['antri' => function ($q) {
+        return $antri = Dokter::where('role', 5)->with('spesialis_detail')->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
             $q->groupBy('hari');
@@ -130,5 +131,34 @@ class ApiController extends Controller
     public function searchSpesialis(Request $request)
     {
         return Spesialis::where('spesialis', 'like', '%' . $request->key . '%')->get();
+    }
+
+    public function getFaskesTernama()
+    {
+        return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3  ORDER BY akun DESC limit 5");
+    }
+    public function getFaskesAll()
+    {
+        return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3  ORDER BY a.nama_faskes ");
+    }
+
+    public function getDokterFaskes(Request $r)
+    {
+        $dokter = Dokter::with(['jadwal' => function ($q) {
+            $q->groupBy('hari');
+        }])->where('email', $r->email)->where('username', '!=', $r->email)->withCount(['antri' => function ($q) {
+            $q->where('status', 1);
+        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->get();
+        return $dokter;
+    }
+
+    public function searchDokterFaskes(Request $request)
+    {
+        return $antri = Dokter::where('role', 5)->with('spesialis_detail')->withCount(['antri' => function ($q) {
+            $q->where('status', 1);
+        }])->with(['jadwal' => function ($q) {
+            $q->groupBy('hari');
+        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')
+            ->where('email', $request->email)->where('username', '!=', $request->email)->get();
     }
 }

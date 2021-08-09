@@ -32,3 +32,9 @@ Route::get('/getDokterTernama', 'ApiController@getDokterTernama');
 Route::get('/getSpesialisTernama', 'ApiController@getSpesialisTernama');
 Route::post('/searchDokter', 'ApiController@searchDokter');
 Route::post('/searchSpesialis', 'ApiController@searchSpesialis');
+
+
+Route::get('/getFaskesTernama', 'ApiController@getFaskesTernama');
+Route::get('/getFaskesAll', 'ApiController@getFaskesAll');
+Route::post('/getDokterFaskes', 'ApiController@getDokterFaskes');
+Route::post('/searchDokterFaskes', 'ApiController@searchDokterFaskes');
