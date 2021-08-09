@@ -141,6 +141,10 @@ class ApiController extends Controller
     {
         return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3  ORDER BY a.nama_faskes ");
     }
+    public function searchFaskes(Request $r)
+    {
+        return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3 and nama_faskes like '%$r->key%'   ORDER BY a.nama_faskes ");
+    }
 
     public function getDokterFaskes(Request $r)
     {

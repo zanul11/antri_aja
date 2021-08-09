@@ -36,5 +36,6 @@ Route::post('/searchSpesialis', 'ApiController@searchSpesialis');
 
 Route::get('/getFaskesTernama', 'ApiController@getFaskesTernama');
 Route::get('/getFaskesAll', 'ApiController@getFaskesAll');
+Route::post('/searchFaskes', 'ApiController@searchFaskes');
 Route::post('/getDokterFaskes', 'ApiController@getDokterFaskes');
 Route::post('/searchDokterFaskes', 'ApiController@searchDokterFaskes');
