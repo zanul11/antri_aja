@@ -8,6 +8,7 @@ app.controller("JadwalController", [
         $scope.jadwals = [];
         $scope.dJam = null;
         $scope.sJam = null;
+        $scope.estimasi = 0;
         $scope.hari =  [
             { hari: "Pilih Hari", value : null},
             { hari: "Senin", value : 1},
@@ -29,6 +30,7 @@ app.controller("JadwalController", [
                     value: dt['hari'],
                     dJam: $filter('date')(dt['dJam'], 'HH:mm') ,
                     sJam: $filter('date')(dt['sJam'], 'HH:mm') ,
+                    estimasi : dt['estimasi']
                 });
             });
             // $scope.kwitansi = res.data;
@@ -52,7 +54,15 @@ app.controller("JadwalController", [
                         "Field Jam Kosong!",
                         "warning"
                     );
-                }else {
+                }
+                else if($scope.estimasi==0){
+                    Swal.fire(
+                        "Warning!",
+                        "Field Estimasi 0!",
+                        "warning"
+                    );
+                }
+                else {
                     $http({
                         url: "/jadwal",
                         method: "POST",
@@ -61,6 +71,8 @@ app.controller("JadwalController", [
                             value: $scope.selectedHari.value,
                             dJam: $filter('date')($scope.dJam, 'HH:mm:ss') ,
                             sJam: $filter('date')($scope.sJam, 'HH:mm:ss'),
+                            estimasi: $scope.estimasi,
+                            kuota : (($scope.sJam-$scope.dJam)/60000)/$scope.estimasi
                         }
                     }).then(function(res){
                         $scope.jadwals.push({
@@ -68,10 +80,12 @@ app.controller("JadwalController", [
                             value: $scope.selectedHari.value,
                             dJam: $filter('date')($scope.dJam, 'HH:mm:ss') ,
                             sJam: $filter('date')($scope.sJam, 'HH:mm:ss'),
+                            estimasi: $scope.estimasi,
                         });
                         $scope.dJam = null;
                         $scope.sJam = null;
                         $scope.selectedHari = $scope.hari[0];
+                        $scope.estimasi = 0;
                     });
                     
                 }

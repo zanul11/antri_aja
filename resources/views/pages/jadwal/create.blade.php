@@ -21,13 +21,17 @@
                             <select class="form-control" ng-model="selectedHari" ng-options="hari as hari.hari for hari in hari">
                             </select>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <label for="no_hp">Dari Jam</label>
                             <input type="time" class="form-control" placeholder="First name" ng-model="dJam">
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <label for="no_hp">Sampai</label>
                             <input type="time" class="form-control" placeholder="First name" ng-model="sJam">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="no_hp">Estimasi (menit)</label>
+                            <input type="number" class="form-control" placeholder="Estimasi" ng-model="estimasi">
                         </div>
                         <div class="col-lg-2">
                             <label for="no_hp">#</label><br>
@@ -54,6 +58,7 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>JAM</th>
+                                    <th>Estimasi</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -64,6 +69,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.estimasi}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -89,6 +97,7 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>JAM</th>
+                                    <th>Estimasi</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -99,6 +108,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.estimasi}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -123,6 +135,7 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>JAM</th>
+                                    <th>Estimasi</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -133,6 +146,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.estimasi}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -157,6 +173,7 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>JAM</th>
+                                    <th>Estimasi</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -167,6 +184,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.estimasi}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -190,6 +210,7 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>JAM</th>
+                                    <th>Estimasi</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -200,6 +221,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.estimasi}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -224,6 +248,7 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>JAM</th>
+                                    <th>Estimasi</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -234,6 +259,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.estimasi}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -258,6 +286,7 @@
                                 <tr>
                                     <th>NO</th>
                                     <th>JAM</th>
+                                    <th>Estimasi</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -268,6 +297,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.dJam | date : 'HH:mm'}} - @{{dt.sJam | date : 'HH:mm'}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.estimasi}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>

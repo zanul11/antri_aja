@@ -34,6 +34,7 @@ app.controller("WaktuController", [
                             value: dt['hari'],
                             dJam: $filter('date')(dt['dJam'], 'HH:mm') ,
                             sJam: $filter('date')(dt['sJam'], 'HH:mm') ,
+                            kuota: dt['kuota']
                         });
                     });
                 }else {
@@ -51,6 +52,7 @@ app.controller("WaktuController", [
         };
 
         $scope.selectJam = function(data) {
+            console.log(data);
             $http({
                 url: "/antri/getJum",
                 method: "POST",
@@ -60,11 +62,19 @@ app.controller("WaktuController", [
                     tgl : $scope.tgl 
                 }
             }).then(function(res){
-                // console.log(res);
-                $scope.jumlahAntrian = res.data;
-                $scope.info = true;
-                $scope.jam_ = data['dJam']+' - '+data['sJam'];
-                $scope.selectedJam = data;
+                if(data['kuota']>res.data){
+                    $scope.jumlahAntrian = res.data;
+                    $scope.info = true;
+                    $scope.jam_ = data['dJam']+' - '+data['sJam'];
+                    $scope.selectedJam = data;
+                }else {
+                    Swal.fire(
+                        "Warning!",
+                        "Kuota Penuh Pada Jadwal Tersebut!",
+                        "warning"
+                    );
+                }
+                
                 
             });
             

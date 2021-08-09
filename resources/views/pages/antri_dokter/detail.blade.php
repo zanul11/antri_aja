@@ -90,7 +90,7 @@
                             <input type="hidden" name="id_antri" value="{{$antri->id}}" />
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" placeholder="Catatan pasien" name="catatan" rows="2"></textarea>
+                                    <textarea class="form-control" placeholder="Catatan pasien" name="catatan" rows="3">{{(isset($pesan->pesan))?$pesan->pesan:''}}</textarea>
                                 </div>
                             </div>
                             <center>

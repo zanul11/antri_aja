@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Dokter;
 use App\Models\Persen;
+use App\Models\Pesan;
 use App\Models\Spesialis;
 use App\Models\TopUp;
 use Illuminate\Support\Facades\Redirect;
@@ -136,6 +137,7 @@ class AntriDokterController extends Controller
     {
         $pasien = Antri::where('dokter', Auth::user()->id)->where('status', 1)->count();
         $saldo = TopUp::where('dokter', Auth::user()->id)->where('status', 1)->sum('jumlah');
+        $pesan = Pesan::where('dokter', Auth::user()->id)->first();
 
         if (($saldo - ($pasien * 2000)) < 2000) {
             return Redirect::to('/antri_dokter')->with('message', 'Saldo kurang, mohon segera Top Up!.');
@@ -149,7 +151,7 @@ class AntriDokterController extends Controller
                 'scrollspy_offset' => '',
                 'antri' => $antri,
                 'data_spesialis' => $spesialis,
-
+                'pesan' => $pesan,
             ];
             return view('pages.antri_dokter.detail')->with($data);
         }

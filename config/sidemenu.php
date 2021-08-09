@@ -111,6 +111,11 @@ return [
             'url' => '/profile'
         ],
         [
+            'icon' => '<i data-feather="message-circle" ></i>',
+            'title' => 'Template Pesan',
+            'url' => '/pesan'
+        ],
+        [
             'icon' => '<i data-feather="dollar-sign" ></i>',
             'title' => 'Saldo',
             'url' => '/saldo'
@@ -144,8 +149,13 @@ return [
         ],
         [
             'icon' => '<i data-feather="search" ></i>',
-            'title' => 'My Profile',
+            'title' => 'Profile Faskes',
             'url' => '/profile'
+        ],
+        [
+            'icon' => '<i data-feather="message-circle" ></i>',
+            'title' => 'Template Pesan',
+            'url' => '/pesan'
         ],
         [
             'icon' => '<i data-feather="dollar-sign" ></i>',

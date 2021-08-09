@@ -61,7 +61,9 @@ class JadwalController extends Controller
             "id_user" => Auth::user()->id,
             "hari" => $request->value,
             "dJam" => $request->dJam,
-            "sJam" => $request->sJam
+            "sJam" => $request->sJam,
+            "estimasi" => $request->estimasi,
+            "kuota" => $request->kuota
         ]);
         return $request;
     }
@@ -73,7 +75,9 @@ class JadwalController extends Controller
             "id_user" => $request->user_id,
             "hari" => $request->value,
             "dJam" => $request->dJam,
-            "sJam" => $request->sJam
+            "sJam" => $request->sJam,
+            "estimasi" => $request->estimasi,
+            "kuota" => $request->kuota
         ]);
         return $request;
     }
