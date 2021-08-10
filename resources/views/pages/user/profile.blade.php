@@ -23,7 +23,7 @@
                                             <div class="row">
                                                 <div class="col-xl-2 col-lg-12 col-md-4">
                                                     <div class="upload mt-4 pr-md-4">
-                                                        <input type="file" id="input-file-max-fs" class="dropify" name="file" data-default-file="{{(isset($profile->foto))?asset('uploads/'.$profile->foto):asset('assets/img/200x200.jpg')}}" data-max-file-size="2M" />
+                                                        <input type="file" id="input-file-max-fs" class="dropify" name="file" data-default-file="{{(isset($profile->foto))?asset('antri_aja/public/uploads/'.$profile->foto):asset('antri_aja/public/assets/img/200x200.jpg')}}" data-max-file-size="2M" />
                                                         <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> Upload Foto</p>
                                                     </div>
                                                 </div>
