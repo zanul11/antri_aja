@@ -71,6 +71,7 @@ class AntriDokterController extends Controller
 
         $dokter = Dokter::where('username', Auth::user()->username)->first();
         $persen = Persen::first();
+        $antri =  Antri::where('id', $request->id_antri)->first();
         // return ($persen['dokter'] / 100) * $persen['nilai'];
         Antri::where('id', $request->id_antri)
             ->update(["status" => 1, "catatan_dokter" => $request->catatan, "selesai_at" => date('Y-m-d H:i:s')]);
@@ -101,17 +102,33 @@ class AntriDokterController extends Controller
             "pasien_id" => $request->id_antri
         ]);
 
-        //bonus parent to saldo
-        // TopUp::create([
-        //     // "session_id" => $res['Data']['SessionID'],
-        //     "trx_id" => '-',
-        //     "dokter" => Auth::user()->id,
-        //     "jumlah" => $persen['nilai'] - (($persen['dokter'] / 100) * $persen['nilai']),
-        //     "status" => 1,
-        //     "jenis" => 2,
-        //     "ket" => 'Menangani pasien',
-        //     "pasien_id" => $request->id_antri
-        // ]);
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $msg = [
+            'title' => 'Pasien Selesai Ditangani!',
+            'body' => $request->catatan,
+
+        ];
+        $extra = ["message" => $msg];
+        $fcm = [
+            // "to" => "dGQo-iteRVuwxFQ2aOyLmZ:APA91bFfbNGXvG98oSk--xn5NvqbfV8BGt5AlaYB-XayaVJpyldjYI1s_dPRYlYOnae0-JAZrr58PlN5YqggcPe8s5nrWFYWVN_39QpOHhddOxZ3UqIyPw9FoggjsmrI3tlsS548qC06",
+            // "registration_ids" => $antri->notif_id,
+            "to" => $antri->notif_id,
+            "notification" => $msg,
+            "data" => $extra
+        ];
+        $headers = [
+            'Authorization: key=AAAAJjWldH0:APA91bH3gGJvWDe3U6DkR8P5hnqhc9h7xqM3LSY8q8vfzjDJNMPnbGqk-91KRZfpWmF4XvA89GEzht8NvNyN-MJVjnz9x9il8tyZpCTPd_f7AjdsoMqtjkWQbtwJ9WLr55VfuiXizDXY',
+            'Content-Type: application/json'
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcm));
+        $result = curl_exec($ch);
+        curl_close($ch);
         return Redirect::to('/antri_dokter')->with('success', 'Selesai ditangani!');
         return $request;
     }
