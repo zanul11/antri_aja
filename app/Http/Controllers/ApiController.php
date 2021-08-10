@@ -86,7 +86,8 @@ class ApiController extends Controller
             'waktu' => $r->jam,
             'catatan' => $r->catatan,
             'no_hp' => $r->no_hp,
-            'user_name' => $r->username
+            'user_name' => $r->username,
+            'notif_id' => $r->notif_id,
         ]);
         return response()->json(['status' => true, 'data' =>  'Sukses']);
     }

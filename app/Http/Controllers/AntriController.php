@@ -169,9 +169,6 @@ class AntriController extends Controller
         return $jum;
     }
 
-
-
-
     /**
      * Update the specified resource in storage.
      *
