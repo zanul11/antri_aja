@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('marketing', 'MarketingController');
         Route::resource('persen', 'PersenController');
         Route::resource('pemasukan', 'PemasukanController');
+        Route::resource('pasien', 'PasienController');
     });
 
     // $this->middleware
@@ -51,6 +52,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('saldo', 'SaldoController');
 
     Route::resource('pesan', 'PesanController');
+    Route::resource('disposisi', 'DisposisiController');
+
+    //SELECT2
+    Route::get('select2/dokter', 'Select2Controller@dokter')->name('select2.dokter');
 });
 
 Auth::routes();

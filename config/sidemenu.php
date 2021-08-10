@@ -50,6 +50,11 @@ return [
             'url' => '/user'
         ],
         [
+            'icon' => '<i data-feather="file-text" ></i>',
+            'title' => 'Laporan Pasien',
+            'url' => '/pasien'
+        ],
+        [
             'icon' => '<i data-feather="percent" ></i>',
             'title' => 'Persentase Bonus',
             'url' => '/persen'
@@ -65,7 +70,7 @@ return [
             'url' => '/marketing'
         ],
         [
-            'icon' => '<i data-feather="file-text" ></i>',
+            'icon' => '<i data-feather="dollar-sign" ></i>',
             'title' => 'Pemasukan',
             'url' => '/pemasukan'
         ],
@@ -122,8 +127,8 @@ return [
         ],
         [
             'icon' => '<i data-feather="users" ></i>',
-            'title' => 'Data Dokter',
-            'url' => '/dokter'
+            'title' => 'Data Faskes',
+            'url' => '/faskes'
         ],
         [
             'icon' => '<i data-feather="user" ></i>',

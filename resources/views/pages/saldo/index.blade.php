@@ -136,7 +136,7 @@
                                                 @endif
                                             </td>
                                             <td> {{number_format($saldo)}}</td>
-                                            <td> @if($dt->ket=='Bonus') {{$dt->ket}} dari {{$dt->dari}} @else {{$dt->ket}} @endif</td>
+                                            <td> @if($dt->ket=='Bonus') {{$dt->ket}} dari {{$dt->dari}} @elseif($dt->ket=='Disposisi') @if($dt->jenis==1) {{$dt->ket}} dari {{$dt->dari}} @else {{$dt->ket}} ke {{$dt->dari}} @endif @else {{$dt->ket}} @endif</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -161,133 +161,42 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing ">
-                    <div class="section general-info">
-                        <div class="info ">
-                            <h6 class="">Pembayaran</h6>
-                            <div class="alert alert-warning">
-                                PERHATIAN: Virtual Account untuk top up Antri Aja </div>
-                            <center>
-                                <div class=" col-lg-6 inv--product-table-section">
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <thead class="">
-                                                <tr>
 
-                                                    <th scope="col">Items</th>
-
-                                                    <th class="text-right" scope="col">Harga</th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Top Up</td>
-                                                    <td class="text-right">$120</td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="inv--total-amounts">
-                                        <div class="row mt-4">
-                                            <div class="col-sm-5 col-12 order-sm-0 order-1">
-                                            </div>
-                                            <div class="col-sm-7 col-12 order-sm-1 order-0">
-                                                <div class="text-sm-right">
-                                                    <div class="row">
-                                                        <div class="col-sm-8 col-7">
-                                                            <p class="">Sub Total: </p>
-                                                        </div>
-                                                        <div class="col-sm-4 col-5">
-                                                            <p class="">$3155</p>
-                                                        </div>
-                                                        <div class="col-sm-8 col-7">
-                                                            <p class="">Harga Layanan: </p>
-                                                        </div>
-                                                        <div class="col-sm-4 col-5">
-                                                            <p class="">$700</p>
-                                                        </div>
-
-                                                        <div class="col-sm-8 col-7 grand-total-title">
-                                                            <h4 class="">Total : </h4>
-                                                        </div>
-                                                        <div class="col-sm-4 col-5 grand-total-amount">
-                                                            <h4 class="">$3845</h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="pcmall-paymentfe_3ro10m">
-                                        <div class="pcmall-paymentfe_h13V0I">
-                                            <div class="pcmall-paymentfe_jObzzU"><img src="https://shopee.co.id/static/images/img_bankid_mandiri@3x.png"></div>
-                                            <div class="pcmall-paymentfe_2rMsHZ">Bank Mandiri &amp; Bank lainnya (Dicek Otomatis)</div>
-                                        </div>
-                                        <div class="pcmall-paymentfe_380Dqo">
-                                            <div class="pcmall-paymentfe_1ygB7G">No. VA :</div>
-                                            <div class="pcmall-paymentfe_35WPGa">
-
-                                                <div class="pcmall-paymentfe_1J4pBb" id="no_va">
-                                                    <h5>896 0819 3947 7455</h5>
-                                                </div>
-                                                <button class="btn" style="color:blue" onclick="copyToClipboard('#no_va')">SALIN</button>
-
-
-
-                                            </div>
-                                        </div>
-                                       
-                                    </div>
-                                    <button class="btn btn-primary mb-2 text-center layout-top-spacing" type="submit"><i data-feather="check"></i> OK</button>
-
-                                </div>
-                            </center>
-
-
-                        </div>
-                    </div>
-                </div> -->
-                <!-- <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing ">
-                    <div class="section general-info">
-                        <div class="info ">
-                            <h6 class="">Informasi Diri</h6>
-                            <form method="POST" action="/saldo" class="form-info" id="form-register" autocomplete="off" enctype='multipart/form-data'>
+                <div class="col-lg-12 ">
+                    <div class="bio layout-spacing">
+                        <div class="widget-content widget-content-area">
+                            <h3 class="">Disposisi Saldo</h3>
+                            <form action="/disposisi" method="POST">
                                 @csrf
-                                <div class="row">
-                                    <div class="col-lg-11 mx-auto">
-                                        <div class="row">
-                                            <div class="col-xl-2 col-lg-12 col-md-4">
-                                                <div class="upload mt-4 pr-md-4">
-                                                    <input type="file" id="input-file-max-fs" class="dropify" name="file" data-default-file="https://my.ipaymu.com/asset/images/logo-ipaymu.png" data-max-file-size="2M" disabled />
-                                                    <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> iPaymu</p>
-                                                </div>
+                                <div class="invoice-action-btn">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="no_hp">Pilih Dokter Tujuan Disposisi</label>
+                                                <select name="dokter" id="dokter" class="dokter js-states form-control" required>
+                                                    <option value="">-- Pilih Dokter Tujuan Disposisi --</option>
+                                                </select>
                                             </div>
-                                            <div class="col-xl-10 col-lg-12 col-md-8 mt-md-0 mt-4">
-                                                <div class="form">
-                                                    <div class="row">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="no_hp">Jumlah Disposisi</label>
+                                                <input type="number" class="form-control mb-4" id="nikDr" name="jumlah" placeholder="Jumlah top up" required>
 
-                                                        <div class="col-sm-12">
-                                                            <div class="form-group">
-                                                                <label for="nikDr">API KEY iPaymu</label>
-                                                                <input type="text" class="form-control mb-4" id="nikDr" name="api_key" placeholder="Api Key" value="{{$profile->api_key}}" required>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    <center>
+                                        <button class="btn btn-primary mb-2 text-center layout-top-spacing" type="submit"><i data-feather="send"></i> DISPOSISI</button>
                                 </div>
+                            </form>
+                            </center>
                         </div>
                     </div>
-                </div> -->
+                </div>
+
             </div>
         </div>
     </div>

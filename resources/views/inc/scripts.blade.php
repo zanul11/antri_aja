@@ -138,6 +138,33 @@
     placeholder: "Pilih Methode Dulu",
     allowClear: true
   });
+
+  $(".dokter").select2({
+    ajax: {
+      url: "{!! route('select2.dokter') !!}",
+      dataType: 'json',
+      delay: 250,
+      data: function(params) {
+        var query = {
+          key: params.term
+        }
+        return query;
+      },
+      processResults: function(data) {
+
+        return {
+          results: $.map(data, function(item) {
+            return {
+              text: "[ " + item.username + " ] " + item.name,
+              id: item.id
+            }
+          })
+          // results:data
+        };
+      },
+      cache: true,
+    }
+  });
 </script>
 
 <script src="{{asset('plugins/dropify/dropify.min.js')}}"></script>
