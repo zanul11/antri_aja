@@ -75,6 +75,8 @@ class AntriController extends Controller
             'tgl' => $request->tgl,
             'dokter' => $request->dokter,
             'waktu' => $request->jam['id'],
+            'dJam' => $request->jam['dJam'],
+            'sJam' => $request->jam['sJam'],
             'catatan' => $request->catatan,
             'no_hp' => Session::get('no_hp'),
             'user_name' => Session::get('user')

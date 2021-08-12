@@ -76,6 +76,7 @@ class ApiController extends Controller
     public function saveAntrian(Request $r)
     {
         $jum = Antri::where('dokter', $r->dokter)->whereDate('tgl', $r->tgl)->where('waktu', $r->jam)->count();
+        $jam = Jadwal::where('id', $r->jam)->first();
         Antri::create([
             'no_antrian' => $jum + 1,
             'user_id' => $r->user_id,
@@ -84,6 +85,8 @@ class ApiController extends Controller
             'tgl' => $r->tgl,
             'dokter' => $r->dokter,
             'waktu' => $r->jam,
+            'dJam' => $jam->dJam,
+            'sJam' => $jam->sJam,
             'catatan' => $r->catatan,
             'no_hp' => $r->no_hp,
             'user_name' => $r->username,

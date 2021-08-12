@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Antri;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -31,6 +32,7 @@ class PasienController extends Controller
         $terdaftar =  Antri::where('tgl', date('Y-m-d'))->count();
         $ditangani =  Antri::where('tgl', date('Y-m-d'))->where('status', 1)->count();
         $antri = Antri::where('tgl', date('Y-m-d'))->with('waktu_detail')->orderBy('status')->with('dokter_detail')->orderBy('tgl')->orderBy('no_antrian')->get();
+
         $data = [
             'category_name' => 'Laporan Pasien',
             'page_name' => 'Laporan Pasien',
