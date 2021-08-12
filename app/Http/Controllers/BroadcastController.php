@@ -63,8 +63,8 @@ class BroadcastController extends Controller
             ]);
             $url = 'https://fcm.googleapis.com/fcm/send';
             $msg = [
-                'title' => 'Pasien Selesai Ditangani!',
-                'body' => $request->catatan,
+                'title' => 'Kabar Terbaru!',
+                'body' => $request->pesan,
 
             ];
             $extra = ["message" => $msg];
@@ -90,8 +90,8 @@ class BroadcastController extends Controller
             $getnotif = Antri::select('notif_id')->groupby('notif_id')->get()->pluck('notif_id');
             $url = 'https://fcm.googleapis.com/fcm/send';
             $msg = [
-                'title' => 'Pasien Selesai Ditangani!',
-                'body' => $request->catatan,
+                'title' => 'Kabar Terbaru!',
+                'body' => $request->pesan,
 
             ];
             $extra = ["message" => $msg];
