@@ -90,7 +90,7 @@
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$dt->pasien}}</td>
                                                 <td>{{$dt->dokter_detail->name}}</td>
-                                                <td>{{$dt->waktu_detail->dJam}}-{{$dt->waktu_detail->sJam}}</td>
+                                                <td>{{$dt->dJam}}-{{$dt->sJam}}</td>
                                                 <td>@if($dt->status==1)
                                                     <span class="badge badge-success"> Ditangani </span>
                                                     @elseif($dt->status==0)

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\FaskesMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::group(['middleware' => 'auth'], function () {
-
+    Route::get('/dashboard', 'HomeController@index');
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('user', 'UserController');
         Route::resource('spesialis', 'SpesialisController');
@@ -27,35 +28,35 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('persen', 'PersenController');
         Route::resource('pemasukan', 'PemasukanController');
         Route::resource('pasien', 'PasienController');
+        Route::resource('broadcast', 'BroadcastController');
     });
 
     // $this->middleware
+    Route::middleware([FaskesMiddleware::class])->group(function () {
+        Route::resource('profile', 'ProfileController');
+        Route::resource('password', 'PasswordController');
+        Route::resource('faskes', 'DokterController');
+        Route::resource('akun', 'AkunController');
+        Route::get('/jadwal/getJadwal', 'JadwalController@getJadwal');
+        Route::get('/jadwal/getData', 'JadwalController@getData');
+        Route::post('/jadwal/delete', 'JadwalController@delete');
+        //akun-jadwal
+        Route::post('/jadwal/getJadwalAkun', 'JadwalController@getJadwalAkun');
+        Route::post('/jadwal/getDataAkun', 'JadwalController@getDataAkun');
+        Route::post('/jadwal/deleteAkun', 'JadwalController@deleteAkun');
+        Route::post('/jadwal/saveAkun', 'JadwalController@saveAkun');
+        Route::resource('jadwal', 'JadwalController');
 
-    Route::get('/dashboard', 'HomeController@index');
-    Route::resource('profile', 'ProfileController');
-    Route::resource('password', 'PasswordController');
-    Route::resource('faskes', 'DokterController');
-    Route::resource('akun', 'AkunController');
+        Route::resource('antri_dokter', 'AntriDokterController');
+        Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
+        Route::resource('saldo', 'SaldoController');
 
-    Route::get('/jadwal/getJadwal', 'JadwalController@getJadwal');
-    Route::get('/jadwal/getData', 'JadwalController@getData');
-    Route::post('/jadwal/delete', 'JadwalController@delete');
-    //akun-jadwal
-    Route::post('/jadwal/getJadwalAkun', 'JadwalController@getJadwalAkun');
-    Route::post('/jadwal/getDataAkun', 'JadwalController@getDataAkun');
-    Route::post('/jadwal/deleteAkun', 'JadwalController@deleteAkun');
-    Route::post('/jadwal/saveAkun', 'JadwalController@saveAkun');
-    Route::resource('jadwal', 'JadwalController');
+        Route::resource('pesan', 'PesanController');
+        Route::resource('disposisi', 'DisposisiController');
 
-    Route::resource('antri_dokter', 'AntriDokterController');
-    Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
-    Route::resource('saldo', 'SaldoController');
-
-    Route::resource('pesan', 'PesanController');
-    Route::resource('disposisi', 'DisposisiController');
-
-    //SELECT2
-    Route::get('select2/dokter', 'Select2Controller@dokter')->name('select2.dokter');
+        //SELECT2
+        Route::get('select2/dokter', 'Select2Controller@dokter')->name('select2.dokter');
+    });
 });
 
 Auth::routes();

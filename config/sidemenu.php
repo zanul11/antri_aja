@@ -50,6 +50,11 @@ return [
             'url' => '/user'
         ],
         [
+            'icon' => '<i data-feather="send" ></i>',
+            'title' => 'Broadcast',
+            'url' => '/broadcast'
+        ],
+        [
             'icon' => '<i data-feather="file-text" ></i>',
             'title' => 'Laporan Pasien',
             'url' => '/pasien'
