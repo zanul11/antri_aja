@@ -175,6 +175,9 @@ class BroadcastController extends Controller
      */
     public function destroy(Broadcast $broadcast)
     {
-        //
+        $path = public_path() . '/uploads/';
+        if (is_file($path . $broadcast->foto))
+            unlink($path . $broadcast->foto);
+        Broadcast::where('id', $broadcast->id)->delete();
     }
 }
