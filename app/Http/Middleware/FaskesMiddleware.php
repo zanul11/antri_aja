@@ -19,7 +19,7 @@ class FaskesMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->role == 3 || Auth::user()->role == 5 || Auth::user()->role == 2) {
-            $pesan = Broadcast::where('jenis', 1)->whereDATE('batas', '>=', date('Y-m-d'))->get();
+            $pesan = Broadcast::whereIN('jenis', [0, 1])->whereDATE('batas', '>=', date('Y-m-d'))->get();
             \View::share('pesan', $pesan);
             return $next($request);
         }

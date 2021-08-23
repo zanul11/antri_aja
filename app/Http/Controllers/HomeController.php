@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $pesan = Broadcast::where('jenis', 1)->whereDATE('batas', '>=', date('Y-m-d'))->get();
+        $pesan = Broadcast::whereIN('jenis', [0, 1])->whereDATE('batas', '>=', date('Y-m-d'))->get();
         Session::put(['user' => 'KISE']);
         $data = [
             'category_name' => 'Dashboard',

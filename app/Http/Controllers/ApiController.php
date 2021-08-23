@@ -169,4 +169,10 @@ class ApiController extends Controller
         }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')
             ->where('email', $request->email)->where('username', '!=', $request->email)->get();
     }
+
+    public function broadcast()
+    {
+        $bc = DB::select(DB::raw("SELECT *, concat('http://antriaja.com/uploads/',foto) as link_gambar FROM broadcast where jenis IN (0,2) order by created_at desc limit 5"));
+        return $bc;
+    }
 }

@@ -39,3 +39,5 @@ Route::get('/getFaskesAll', 'ApiController@getFaskesAll');
 Route::post('/searchFaskes', 'ApiController@searchFaskes');
 Route::post('/getDokterFaskes', 'ApiController@getDokterFaskes');
 Route::post('/searchDokterFaskes', 'ApiController@searchDokterFaskes');
+
+Route::get('/broadcast', 'ApiController@broadcast');
