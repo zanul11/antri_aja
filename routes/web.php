@@ -75,6 +75,9 @@ Route::resource('antri', 'AntriController');
 
 Route::resource('/daftar', 'RegisterController');
 
+//chart
+Route::get('/chart/getpiedate/{tgl}', 'HomeController@getpiedate');
+
 Route::get('/password/reset', function () {
     return redirect('/login');
 });
