@@ -33,7 +33,7 @@
                                 <td>{{$dt->no_hp}}</td>
                                 <td>{{$dt->alamat}}</td>
                                 <td>
-                                    <!-- <a href="marketing/{{$dt->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a> -->
+                                    <a href="marketing/{{$dt->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>
                                     <a href="#" onclick="deleteData('/marketing','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
                                 </td>
                             </tr>

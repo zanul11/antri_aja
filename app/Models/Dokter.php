@@ -17,6 +17,11 @@ class Dokter extends Model
         return $this->hasMany(Jadwal::class, 'id_user', 'id');
     }
 
+    public function faskes()
+    {
+        return $this->hasOne(Dokter::class, 'email', 'email');
+    }
+
     public function spesialis_detail()
     {
         return $this->hasOne(Spesialis::class, 'id', 'spesialis');

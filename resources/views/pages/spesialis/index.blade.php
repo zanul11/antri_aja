@@ -14,7 +14,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Spesialis</th>
+                                <th>Spesialisasi</th>
                                 <th class="no-content"></th>
                             </tr>
                         </thead>
@@ -42,7 +42,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Spesialis</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Spesialisasi</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
@@ -54,7 +54,7 @@
                             <div class="modal-body">
 
                                 <div class="col-lg-12">
-                                    <label> Nama Spesialis </label>
+                                    <label> Nama Spesialisasi </label>
                                     <input type="text" name="spesialis" id="spesialis" class="form-control" required></input>
                                 </div>
                             </div>

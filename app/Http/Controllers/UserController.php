@@ -16,7 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $user = User::where('role', 1)->get();
         // $user = User::where('role', 1)->get();
         $data = [
             'category_name' => 'User',

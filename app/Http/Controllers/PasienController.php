@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Antri;
+use App\Models\Dokter;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -16,6 +17,7 @@ class PasienController extends Controller
      */
     public function index()
     {
+
         $days = [
             'Minggu',
             'Senin',
@@ -25,13 +27,17 @@ class PasienController extends Controller
             'Jumat',
             'Sabtu'
         ];
-        Session::put('tgl', date('d-m-Y'));
-        Session::put('selectedTgl', date('Y-m-d'));
+        Session::put('dtgl', date('d-m-Y'));
+        Session::put('stgl', date('d-m-Y'));
+        Session::put('dokter', 0);
+        Session::put('selectedTgld', date('Y-m-d'));
+        Session::put('selectedTgls', date('Y-m-d'));
         Session::put('hari', $days[date('w')]);
+        $dokter = Dokter::whereIN('role', [3, 5])->get();
         $semua =  Antri::where('tgl', date('Y-m-d'))->count();
         $terdaftar =  Antri::where('tgl', date('Y-m-d'))->count();
         $ditangani =  Antri::where('tgl', date('Y-m-d'))->where('status', 1)->count();
-        $antri = Antri::where('tgl', date('Y-m-d'))->with('waktu_detail')->orderBy('status')->with('dokter_detail')->orderBy('tgl')->orderBy('no_antrian')->get();
+        $antri = Antri::where('tgl', date('Y-m-d'))->with('waktu_detail')->orderBy('status')->with('dokter_detail.faskes')->orderBy('tgl')->orderBy('no_antrian')->get();
 
         $data = [
             'category_name' => 'Laporan Pasien',
@@ -41,7 +47,8 @@ class PasienController extends Controller
             'semua' => $semua,
             'terdaftar' => $terdaftar,
             'ditangani' => $ditangani,
-            'data_antrian' => $antri
+            'data_antrian' => $antri,
+            'dokter' => $dokter
         ];
         return view('pages.laporan_pasien.index')->with($data);
     }
@@ -73,13 +80,28 @@ class PasienController extends Controller
             'Jumat',
             'Sabtu'
         ];
-        Session::put('tgl', date('d-m-Y', strtotime($request->dtgl)));
-        Session::put('selectedTgl', date('Y-m-d', strtotime($request->dtgl)));
+
+        $dokter = Dokter::whereIN('role', [3, 5])->get();
+
+        Session::put('dtgl', date('d-m-Y', strtotime($request->dtgl)));
+        Session::put('stgl', date('d-m-Y', strtotime($request->stgl)));
+        Session::put('dokter', $request->dokter);
+        Session::put('selectedTgld', date('Y-m-d', strtotime($request->dtgl)));
+        Session::put('selectedTgls', date('Y-m-d', strtotime($request->stgl)));
         Session::put('hari', $days[date('w', strtotime($request->dtgl))]);
-        $semua =  Antri::where('tgl', date('Y-m-d', strtotime($request->dtgl)))->count();
-        $terdaftar =  Antri::where('tgl', date('Y-m-d', strtotime($request->dtgl)))->count();
-        $ditangani =  Antri::where('tgl', date('Y-m-d', strtotime($request->dtgl)))->where('status', 1)->count();
-        $antri = Antri::with('waktu_detail')->orderBy('status')->with('dokter_detail')->where('tgl', date('Y-m-d', strtotime($request->dtgl)))->orderBy('tgl')->orderBy('no_antrian')->get();
+
+        if ($request->dokter == 0) {
+            $semua =  Antri::whereBetween('tgl', [date('Y-m-d', strtotime($request->dtgl)), date('Y-m-d', strtotime($request->stgl))])->count();
+            $terdaftar =  Antri::whereBetween('tgl', [date('Y-m-d', strtotime($request->dtgl)), date('Y-m-d', strtotime($request->stgl))])->count();
+            $ditangani =  Antri::whereBetween('tgl', [date('Y-m-d', strtotime($request->dtgl)), date('Y-m-d', strtotime($request->stgl))])->where('status', 1)->count();
+            $antri = Antri::with('waktu_detail')->orderBy('status')->with('dokter_detail.faskes')->whereBetween('tgl', [date('Y-m-d', strtotime($request->dtgl)), date('Y-m-d', strtotime($request->stgl))])->orderBy('tgl')->orderBy('no_antrian')->get();
+        } else {
+            $semua =  Antri::where('dokter', $request->dokter)->whereBetween('tgl', [date('Y-m-d', strtotime($request->dtgl)), date('Y-m-d', strtotime($request->stgl))])->count();
+            $terdaftar =  Antri::where('dokter', $request->dokter)->whereBetween('tgl', [date('Y-m-d', strtotime($request->dtgl)), date('Y-m-d', strtotime($request->stgl))])->count();
+            $ditangani =  Antri::where('dokter', $request->dokter)->whereBetween('tgl', [date('Y-m-d', strtotime($request->dtgl)), date('Y-m-d', strtotime($request->stgl))])->where('status', 1)->count();
+            $antri = Antri::with('waktu_detail')->orderBy('status')->with('dokter_detail.faskes')->where('dokter', $request->dokter)->whereBetween('tgl', [date('Y-m-d', strtotime($request->dtgl)), date('Y-m-d', strtotime($request->stgl))])->orderBy('tgl')->orderBy('no_antrian')->get();
+        }
+
         $data = [
             'category_name' => 'Laporan Pasien',
             'page_name' => 'Laporan Pasien',
@@ -88,7 +110,8 @@ class PasienController extends Controller
             'semua' => $semua,
             'terdaftar' => $terdaftar,
             'ditangani' => $ditangani,
-            'data_antrian' => $antri
+            'data_antrian' => $antri,
+            'dokter' => $dokter
         ];
         return view('pages.laporan_pasien.index')->with($data);
         return $request;

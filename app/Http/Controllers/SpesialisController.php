@@ -19,8 +19,8 @@ class SpesialisController extends Controller
     {
         $spesialis = Spesialis::all();
         $data = [
-            'category_name' => 'Data Spesialis',
-            'page_name' => 'Spesialis',
+            'category_name' => 'Data Spesialisasi',
+            'page_name' => 'Spesialisasi',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'data_spesialis' => $spesialis
@@ -48,13 +48,13 @@ class SpesialisController extends Controller
     {
         $cekSpesialis = Spesialis::where('spesialis', $request->spesialis)->get();
         if (count($cekSpesialis) > 0) {
-            return Redirect::to('/spesialis')->withErrors(['Duplicate spesialis name!.'])->withInput()->with('message', 'Duplicate spesialis name!.');
+            return Redirect::to('/spesialis')->withErrors(['Duplicate spesialis name!.'])->withInput()->with('message', 'Duplicate spesialisasi name!.');
         } else {
             Spesialis::create([
                 "spesialis" => $request->spesialis,
                 "user" => Auth::user()->name
             ]);
-            return Redirect::to('/spesialis')->with('success', 'Data Spesialis added!');
+            return Redirect::to('/spesialis')->with('success', 'Data Spesialisasi added!');
         }
     }
 
@@ -76,7 +76,8 @@ class SpesialisController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Spesialis $spesiali)
-    { }
+    {
+    }
 
     /**
      * Update the specified resource in storage.
@@ -90,20 +91,20 @@ class SpesialisController extends Controller
         if ($request->spesialis_edit != $spesiali->spesialis) {
             $cek = Spesialis::where('spesialis', $request->spesialis_edit)->get();
             if (count($cek) > 0) {
-                return Redirect::to('/spesialis')->withErrors(['Duplicate Spesialis name!.'])->withInput()->with('message', 'Duplicate Spesialis name!.');
+                return Redirect::to('/spesialis')->withErrors(['Duplicate Spesialisasi name!.'])->withInput()->with('message', 'Duplicate Spesialisasi name!.');
             } else {
 
                 $spesiali->spesialis = $request->spesialis_edit;
                 $spesiali->user = Auth::user()->name;
                 $spesiali->save();
-                return Redirect::to('/spesialis')->with('success', 'Data Spesialis updated!');
+                return Redirect::to('/spesialis')->with('success', 'Data Spesialisasi updated!');
             }
         } else {
 
             $spesiali->spesialis = $request->spesialis_edit;
             $spesiali->user = Auth::user()->name;
             $spesiali->save();
-            return Redirect::to('/spesialis')->with('success', 'Data Spesialis updated!');
+            return Redirect::to('/spesialis')->with('success', 'Data Spesialisasi updated!');
         }
     }
 

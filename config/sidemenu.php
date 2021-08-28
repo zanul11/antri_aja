@@ -50,6 +50,11 @@ return [
             'url' => '/user'
         ],
         [
+            'icon' => '<i data-feather="users" ></i>',
+            'title' => 'Data Marketing',
+            'url' => '/marketing'
+        ],
+        [
             'icon' => '<i data-feather="send" ></i>',
             'title' => 'Broadcast',
             'url' => '/broadcast'
@@ -66,14 +71,10 @@ return [
         ],
         [
             'icon' => '<i data-feather="activity" ></i>',
-            'title' => 'Data Spesialis',
+            'title' => 'Data Spesialisasi',
             'url' => '/spesialis'
         ],
-        [
-            'icon' => '<i data-feather="users" ></i>',
-            'title' => 'Data Marketing',
-            'url' => '/marketing'
-        ],
+
         [
             'icon' => '<i data-feather="dollar-sign" ></i>',
             'title' => 'Pemasukan',

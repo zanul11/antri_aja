@@ -31,7 +31,7 @@
                             <div class="row">
                                 <div class="col-md-11 mx-auto">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <!-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="country">Role</label>
                                                 @if($action=='Tambah')
@@ -42,20 +42,20 @@
                                                 <input type="text" class="form-control mb-4" value="{{($user->role==1)?'Administrator':(($user->role==2)?'Marketing':(($user->role==3)?'Dokter':'Pasien'))}}" disabled>
                                                 @endif
                                             </div>
-                                        </div>
-                                        <div class="col-md-6">
+                                        </div> -->
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
                                                 <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($user))?$user->name:(old('nama')??'')}}" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="email">Email</label>
                                                 <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($user))?$user->email:(old('email')??'')}}" required>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
                                                 <input type="password" class="form-control mb-4" name="password" id="password" placeholder="Write your password" {{($action=='Tambah')?'required':''}}>

@@ -35,19 +35,19 @@ class HomeController extends Controller
             $bln = array();
             $menunggu = array();
             $ditangani = array();
-            $bulan = Antri::select(DB::raw('MONTH(created_at) bulan'))
+            $bulan = Antri::select(DB::raw('MONTH(tgl) bulan'))
                 ->groupby('bulan')
                 ->get();
             foreach ($bulan as $dt) {
-                $fetch_line1 = Antri::where('status', 0)->whereMonth('created_at', $dt->bulan)->whereYear('created_at', date('Y'))->count();
-                $fetch_line2 = Antri::where('status', 1)->whereMonth('created_at', $dt->bulan)->whereYear('created_at', date('Y'))->count();
+                $fetch_line1 = Antri::where('status', 0)->whereMonth('tgl', $dt->bulan)->whereYear('tgl', date('Y'))->count();
+                $fetch_line2 = Antri::where('status', 1)->whereMonth('tgl', $dt->bulan)->whereYear('tgl', date('Y'))->count();
                 array_push($bln, $namaBulan[$dt->bulan]);
                 array_push($menunggu, $fetch_line1);
                 array_push($ditangani, $fetch_line2);
             }
 
-            $pie1 = Antri::where('status', 0)->whereDate('created_at', date('Y-m-d'))->whereYear('created_at', date('Y'))->count();
-            $pie2 = Antri::where('status', 1)->whereDate('created_at', date('Y-m-d'))->whereYear('created_at', date('Y'))->count();
+            $pie1 = Antri::where('status', 0)->whereDate('tgl', date('Y-m-d'))->whereYear('tgl', date('Y'))->count();
+            $pie2 = Antri::where('status', 1)->whereDate('tgl', date('Y-m-d'))->whereYear('tgl', date('Y'))->count();
             array_push($pie, [date('d-m-Y'), $pie1]);
             array_push($pie, [date('d-m-Y'), $pie2]);
 
@@ -72,8 +72,8 @@ class HomeController extends Controller
     {
 
         $pie = array();
-        $pie1 = Antri::where('status', 0)->whereDate('created_at', $tgl)->count();
-        $pie2 = Antri::where('status', 1)->whereDate('created_at', $tgl)->count();
+        $pie1 = Antri::where('status', 0)->whereDate('tgl', $tgl)->count();
+        $pie2 = Antri::where('status', 1)->whereDate('tgl', $tgl)->count();
         array_push($pie, ['a', $pie1]);
         array_push($pie, ['a', $pie2]);
         return $pie;

@@ -12,7 +12,7 @@
                     <div class="col-lg-6 layout-top-spacing">
                         <div class="bio layout-spacing">
                             <div class="widget-content widget-content-area">
-                                <h3 class="">Jumlah Pasien Hari {{Session::get('hari')}}, {{Session::get('tgl')}}</h3>
+                                <h3 class="">Jumlah Pasien Tanggal {{Session::get('dtgl')}} ke {{Session::get('stgl')}}</h3>
                                 <div class="user-info-list layout-spacing">
                                     <div class="text-center">
                                         <h1>
@@ -58,13 +58,30 @@
                                 <form id="contact" method="POST" action="/pasien">
                                     @csrf
                                     <div class="row">
-                                        <div class="form-group col-lg-3" style="margin-right: 20px;">
-                                            <label class="font-normal">Filter Tanggal</label>
+                                        <div class="form-group col-lg-3">
+                                            <label class="font-normal">Filter Tanggal dari</label>
                                             <div class="input-group date">
-                                                <input class="form-control" type="date" name="dtgl" value="{{Session::get('selectedTgl')}}">
+                                                <input class="form-control" type="date" name="dtgl" value="{{Session::get('selectedTgld')}}">
                                             </div>
                                         </div>
-                                        <div class="form-group col-lg-3" style="margin-right: 20px;">
+                                        <div class="form-group col-lg-3">
+                                            <label class="font-normal">sampai</label>
+                                            <div class="input-group date">
+                                                <input class="form-control" type="date" name="stgl" value="{{Session::get('selectedTgls')}}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label class="font-normal">Nakes</label>
+                                            <div class="input-group date">
+                                                <select class="placeholder js-states form-control" name="dokter" required>
+                                                    <option value="0">Semua</option>
+                                                    @foreach($dokter as $dt)
+                                                    <option value="{{$dt->id}}" {{(Session::get('dokter')==$dt->id)?'selected':''}}>{{$dt->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
                                             <label class="font-normal">#</label>
                                             <div class="input-group date">
                                                 <button type="submit" class="btn btn-primary">Filter</button>
@@ -79,7 +96,8 @@
                                             <tr>
                                                 <th>No</th>
                                                 <th>Nama Pasien</th>
-                                                <th>Dokter</th>
+                                                <th>Faskes</th>
+                                                <th>Nakes</th>
                                                 <th>Waktu</th>
                                                 <th>Status </th>
                                             </tr>
@@ -89,6 +107,7 @@
                                             <tr>
                                                 <td>{{$loop->iteration}}</td>
                                                 <td>{{$dt->pasien}}</td>
+                                                <td>{{$dt->dokter_detail->faskes->nama_faskes}}</td>
                                                 <td>{{$dt->dokter_detail->name}}</td>
                                                 <td>{{$dt->dJam}}-{{$dt->sJam}}</td>
                                                 <td>@if($dt->status==1)
@@ -105,6 +124,7 @@
 
                                     </table>
                                 </div>
+                                <br>
                             </div>
                         </div>
 
