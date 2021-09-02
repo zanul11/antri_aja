@@ -11,7 +11,7 @@
     <div class="row sales layout-top-spacing">
 
 
-        @if(Auth::user()->role==1)
+        @if(Auth::user()->role==1||Auth::user()->role==3||Auth::user()->role==5)
         <div class="col-lg-6 layout-spacing">
             <div class="widget widget-chart-one">
                 <div class="widget-heading">
@@ -31,10 +31,20 @@
         <div class="col-lg-6 layout-spacing">
             <div class="widget widget-chart-one">
                 <div class="widget-heading">
-
                     <div id="myChart2"></div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-lg-6" style="margin-right: 20px;">
+                        <label class="font-normal">Filter Tahun</label>
 
-
+                        <div class="input-group date">
+                            <select class="js-states form-control" id="filter-tahun" onchange="getColumnTahun()">
+                                @foreach($tahun as $dt)
+                                <option value="{{$dt->tahun}}">{{$dt->tahun}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,7 +109,7 @@
             pointFormat: '{series.name}: <b>{point.y:.0f}</b>'
         },
         title: {
-            text: 'Grafik Informasi Jumlah Antrian Berdasarkan Hari/Tgl'
+            text: 'Grafik Antrian Berdasarkan Hari/Tgl'
         },
         colors: ['#4ecf1f', '#2b0eeb', 'red', 'yellow'],
         plotOptions: {
@@ -196,7 +206,7 @@
                     pointFormat: '<b>{point.y:.0f}</b>'
                 },
                 title: {
-                    text: 'Grafik Informasi Jumlah Antrian Berdasarkan Hari/Tgl'
+                    text: 'Grafik Antrian Berdasarkan Hari/Tgl'
                 },
                 colors: ['#4ecf1f', '#2b0eeb', 'red', 'yellow'],
                 plotOptions: {
@@ -220,6 +230,68 @@
             });
         });
 
+
+    }
+
+    function getColumnTahun() {
+        var id = document.getElementById('filter-tahun').value;
+        console.log(id);
+        $.get("/chart/getcolumn/" + id, function(data) {
+            Highcharts.chart('myChart2', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Grafik Jumlah Antrian'
+                },
+                subtitle: {
+                    text: 'Berdasarkan Status Antrian'
+                },
+                colors: ['blue', 'green', ],
+                xAxis: {
+                    categories: data[0],
+                    crosshair: true
+                },
+                yAxis: {
+                    allowDecimals: false,
+                    min: 0,
+                    title: {
+                        text: 'Jumlah Antrian'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                        '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    },
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                exporting: {
+                    enabled: true
+                },
+                series: [{
+                    name: 'Menunggu',
+                    data: data[1]
+
+                }, {
+                    name: 'Ditangani',
+                    data: data[2]
+
+                }]
+            });
+        });
 
     }
 </script>

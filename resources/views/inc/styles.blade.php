@@ -7,7 +7,7 @@
 <link href="{{asset('assets/css/scrollspyNav.css')}}" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="{{asset('plugins/font-icons/fontawesome/css/regular.css')}}">
 <link rel="stylesheet" href="{{asset('plugins/font-icons/fontawesome/css/fontawesome.css')}}">
-@if(Auth::user()->role==1)
+@if(Auth::user()->role==1||Auth::user()->role==3||Auth::user()->role==5)
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>

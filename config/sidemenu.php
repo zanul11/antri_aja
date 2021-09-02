@@ -133,12 +133,12 @@ return [
         ],
         [
             'icon' => '<i data-feather="users" ></i>',
-            'title' => 'Data Faskes',
+            'title' => 'Membership',
             'url' => '/faskes'
         ],
         [
             'icon' => '<i data-feather="user" ></i>',
-            'title' => 'Data Akun Dokter',
+            'title' => 'Data Akun Nakes',
             'url' => '/akun'
         ],
         [

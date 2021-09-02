@@ -134,6 +134,19 @@
     allowClear: true
   });
 
+  $(".provinsi").select2({
+    placeholder: "Pilih Provinsi",
+    allowClear: true
+  });
+  $(".kota").select2({
+    placeholder: "Pilih Kota",
+    allowClear: true
+  });
+  $(".kecamatan").select2({
+    placeholder: "Pilih Kecamatan",
+    allowClear: true
+  });
+
   $(".pembayaran").select2({
     placeholder: "Pilih Methode Dulu",
     allowClear: true

@@ -29,7 +29,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{date('m-d-Y', strtotime($dt->batas))}}</td>
                                 <td>{{$dt->isi}}</td>
-                                <td><img src="{{asset('uploads/'.$dt->foto)}}" alt="Girl in a jacket" width="100"></td>
+                                <td><img src="{{asset('antri_aja/public/uploads/'.$dt->foto)}}" alt="Girl in a jacket" width="100"></td>
                                 <td>
                                     <a href="broadcast/{{$dt->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>
                                     <a href="#" onclick="deleteData('/broadcast','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>

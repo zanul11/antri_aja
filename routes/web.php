@@ -56,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         //SELECT2
         Route::get('select2/dokter', 'Select2Controller@dokter')->name('select2.dokter');
+        Route::get('select2/getkota/{provinsi}', 'Select2Controller@getkota');
+        Route::get('select2/getkec/{kota}', 'Select2Controller@getkec');
     });
 });
 
@@ -77,6 +79,7 @@ Route::resource('/daftar', 'RegisterController');
 
 //chart
 Route::get('/chart/getpiedate/{tgl}', 'HomeController@getpiedate');
+Route::get('/chart/getcolumn/{tahun}', 'HomeController@getcolumn');
 
 Route::get('/password/reset', function () {
     return redirect('/login');

@@ -17,7 +17,7 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Username</th>
+                                <th>Email</th>
                                 <th>Nama Faskes</th>
                                 <th>No Hp</th>
                                 <th>Alamat</th>
@@ -28,7 +28,7 @@
                             @foreach($data_dokter as $dt)
                             <tr>
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$dt->name}}</td>
+                                <td>{{$dt->email}}</td>
                                 <td>{{$dt->nama_faskes}}</td>
                                 <td>{{$dt->no_hp}}</td>
                                 <td>{{$dt->alamat}}</td>

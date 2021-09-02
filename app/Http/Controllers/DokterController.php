@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dokter;
 use App\Http\Controllers\Controller;
 use App\Models\Marketing;
+use App\Models\Provinsi;
 use App\Models\Spesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +24,8 @@ class DokterController extends Controller
         $jaringan = User::with('childrenRekursif')->where('id', Auth::id())->firstOrFail();
         $dokter = Dokter::where('role', 3)->where('parent', Auth::user()->id)->get();
         $data = [
-            'category_name' => 'Data Faskes',
-            'page_name' => 'Data Faskes',
+            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
+            'page_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'data_dokter' => $dokter,
@@ -41,13 +42,17 @@ class DokterController extends Controller
     public function create()
     {
         $spesialis = Spesialis::all();
+        $provinsi =  Provinsi::all();
+
         $data = [
-            'category_name' => 'Data Faskes',
+            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
             'page_name' => 'Tambah Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'action' => 'Tambah',
-            'data_spesialis' => $spesialis
+            'data_spesialis' => $spesialis,
+            'data_provinsi' => $provinsi,
+
         ];
         // return config('sidemenu.administrator');
         return view('pages.dokter.form')->with($data);
@@ -66,8 +71,8 @@ class DokterController extends Controller
         if (count($cek) > 0) {
             return Redirect::to('/faskes/create')->withErrors(['Duplicate Faskes email/username!.'])->withInput()->with('message', 'Duplicate Faskes email/username!.');
         } else {
-            $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
-            $tmpLokasi = explode(",", $tmp);
+            // $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
+            // $tmpLokasi = explode(",", $tmp);
             Dokter::create([
                 "name" => $request->nama,
                 "email" => $request->email,
@@ -80,12 +85,15 @@ class DokterController extends Controller
                 "pengalaman" => $request->pengalaman,
                 "deskripsi" => $request->deskripsi,
                 "role" => 3,
-                "latlong" => $request->latlong,
+                // "latlong" => $request->latlong,
                 "nama_faskes" => $request->nama_faskes,
                 "kode_faskes" => $request->kode_faskes,
                 "tlp_faskes" => $request->tlp_faskes,
-                "lat" => $tmpLokasi[0],
-                "long" => $tmpLokasi[1],
+                "id_province" => $request->province,
+                "id_city" => $request->kota,
+                "id_subdistrict" => $request->kec,
+                // "lat" => $tmpLokasi[0],
+                // "long" => $tmpLokasi[1],
             ]);
             return Redirect::to('/faskes')->with('success', 'Data Faskes added!');
         }
@@ -111,15 +119,17 @@ class DokterController extends Controller
     public function edit(Dokter $faske)
     {
         // return $faske;
+        $provinsi =  Provinsi::all();
         $spesialis = Spesialis::all();
         $data = [
-            'category_name' => 'Data Faskes',
+            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
             'page_name' => 'Lihat Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'action' => 'Edit',
             'data_spesialis' => $spesialis,
-            'dokter' => $faske
+            'dokter' => $faske,
+            'data_provinsi' => $provinsi
         ];
 
 
@@ -156,14 +166,16 @@ class DokterController extends Controller
                 $faske->kode_faskes = $request->kode_faskes;
                 $faske->nama_faskes = $request->nama_faskes;
                 $faske->tlp_faskes = $request->tlp_faskes;
-
-                if (isset($request->latlong)) {
-                    $faske->latlong = $request->latlong;
-                    $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
-                    $tmpLokasi = explode(",", $tmp);
-                    $faske->lat = $tmpLokasi[0];
-                    $faske->long = $tmpLokasi[1];
-                }
+                $faske->id_province = $request->province;
+                $faske->id_city = $request->kota;
+                $faske->id_subdistrict = $request->kec;
+                // if (isset($request->latlong)) {
+                //     $faske->latlong = $request->latlong;
+                //     $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
+                //     $tmpLokasi = explode(",", $tmp);
+                //     $faske->lat = $tmpLokasi[0];
+                //     $faske->long = $tmpLokasi[1];
+                // }
                 $faske->save();
                 return Redirect::to('/faskes')->with('success', 'Data Faskes updated!');
             }
@@ -181,14 +193,17 @@ class DokterController extends Controller
             $faske->kode_faskes = $request->kode_faskes;
             $faske->nama_faskes = $request->nama_faskes;
             $faske->tlp_faskes = $request->tlp_faskes;
+            $faske->id_province = $request->province;
+            $faske->id_city = $request->kota;
+            $faske->id_subdistrict = $request->kec;
 
-            if (isset($request->latlong)) {
-                $faske->latlong = $request->latlong;
-                $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
-                $tmpLokasi = explode(",", $tmp);
-                $faske->lat = $tmpLokasi[0];
-                $faske->long = $tmpLokasi[1];
-            }
+            // if (isset($request->latlong)) {
+            //     $faske->latlong = $request->latlong;
+            //     $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
+            //     $tmpLokasi = explode(",", $tmp);
+            //     $faske->lat = $tmpLokasi[0];
+            //     $faske->long = $tmpLokasi[1];
+            // }
             $faske->save();
             return Redirect::to('/faskes')->with('success', 'Data Faskes updated!');
         }

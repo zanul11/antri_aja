@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dokter;
+use App\Models\Kecamatan;
+use App\Models\Provinsi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,5 +32,14 @@ class Select2Controller extends Controller
             return response()->json($data);
         }
         return response()->json([]);
+    }
+
+    public function getkota(Provinsi $provinsi)
+    {
+        return $provinsi->kota;
+    }
+    public function getkec($kota)
+    {
+        return Kecamatan::where('city_id', $kota)->get();
     }
 }

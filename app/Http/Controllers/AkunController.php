@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Akun;
 use App\Http\Controllers\Controller;
+use App\Models\Dokter;
 use Illuminate\Http\Request;
 use App\Models\Marketing;
+use App\Models\Provinsi;
 use App\Models\Spesialis;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -23,8 +25,8 @@ class AkunController extends Controller
         $jaringan = User::with('childrenRekursif')->where('id', Auth::id())->firstOrFail();
         $akun = Akun::where('role', 5)->where('email', Auth::user()->email)->get();
         $data = [
-            'category_name' => 'Data Akun Dokter',
-            'page_name' => 'Data Akun Dokter',
+            'category_name' => 'Data Akun Nakes',
+            'page_name' => 'Data Akun Nakes',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'data_akun' => $akun,
@@ -41,13 +43,17 @@ class AkunController extends Controller
     public function create()
     {
         $spesialis = Spesialis::all();
+        $provinsi =  Provinsi::all();
+
         $data = [
-            'category_name' => 'Data Akun Dokter',
+            'category_name' => 'Data Akun Nakes',
             'page_name' => 'Tambah Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'action' => 'Tambah',
-            'data_spesialis' => $spesialis
+            'data_spesialis' => $spesialis,
+            'data_provinsi' => $provinsi,
+
         ];
         // return config('sidemenu.administrator');
         return view('pages.akun.form')->with($data);
@@ -66,8 +72,6 @@ class AkunController extends Controller
         if (count($cek) > 0) {
             return Redirect::to('/akun/create')->withErrors(['Duplicate Akun username!.'])->withInput()->with('message', 'Duplicate Akun username!.');
         } else {
-            $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
-            $tmpLokasi = explode(",", $tmp);
             Akun::create([
                 "name" => $request->nama,
                 "username" => $request->username,
@@ -80,11 +84,12 @@ class AkunController extends Controller
                 "pengalaman" => $request->pengalaman,
                 "deskripsi" => $request->deskripsi,
                 "role" => 5,
-                "latlong" => $request->latlong,
-                "lat" => $tmpLokasi[0],
-                "long" => $tmpLokasi[1],
+
+                "id_province" => $request->province,
+                "id_city" => $request->kota,
+                "id_subdistrict" => $request->kec,
             ]);
-            return Redirect::to('/akun')->with('success', 'Data Akun Dokter added!');
+            return Redirect::to('/akun')->with('success', 'Data Akun Nakes added!');
         }
     }
 
@@ -108,14 +113,16 @@ class AkunController extends Controller
     public function edit(Akun $akun)
     {
         $spesialis = Spesialis::all();
+        $provinsi =  Provinsi::all();
         $data = [
-            'category_name' => 'Data Akun Dokter',
+            'category_name' => 'Data Akun Nakes',
             'page_name' => 'Lihat Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'action' => 'Edit',
             'data_spesialis' => $spesialis,
-            'akun' => $akun
+            'akun' => $akun,
+            'data_provinsi' => $provinsi
         ];
         // return config('sidemenu.administrator');
         return view('pages.akun.form')->with($data);
@@ -131,8 +138,6 @@ class AkunController extends Controller
     public function update(Request $request, Akun $akun)
     {
         // return $request;
-        $tmp =  str_replace(']', '', str_replace('[', '', $request->latlong));
-        $tmpLokasi = explode(",", $tmp);
         if ($request->username != $akun->username) {
             $cekUser = User::where('username', $request->username)->get();
             if (count($cekUser) > 0) {
@@ -146,9 +151,9 @@ class AkunController extends Controller
                 $akun->pengalaman = $request->pengalaman;
                 $akun->deskripsi = $request->deskripsi;
                 $akun->alamat = $request->alamat;
-                $akun->latlong = $request->latlong;
-                $akun->lat =  $tmpLokasi[0];
-                $akun->long = $tmpLokasi[1];
+                $akun->id_province = $request->province;
+                $akun->id_city = $request->kota;
+                $akun->id_subdistrict = $request->kec;
                 $akun->save();
                 return Redirect::to('/akun')->with('success', 'Data Akun updated!');
             }
@@ -160,9 +165,9 @@ class AkunController extends Controller
             $akun->pengalaman = $request->pengalaman;
             $akun->deskripsi = $request->deskripsi;
             $akun->alamat = $request->alamat;
-            $akun->latlong = $request->latlong;
-            $akun->lat =  $tmpLokasi[0];
-            $akun->long = $tmpLokasi[1];
+            $akun->id_province = $request->province;
+            $akun->id_city = $request->kota;
+            $akun->id_subdistrict = $request->kec;
             $akun->save();
             return Redirect::to('/akun')->with('success', 'Data Akun updated!');
         }

@@ -64,7 +64,7 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="no_hp">Spesialis</label>
+                                                <label for="no_hp">Spesialisasi</label>
                                                 <select class="placeholder js-states form-control" name="spesialis" required>
                                                     @foreach($data_spesialis as $dt)
                                                     <option value="{{$dt->id}}" {{($action!='Tambah')?(($dokter->spesialis==$dt->id)?'selected':''):''}}>{{$dt->spesialis}}</option>
@@ -75,7 +75,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pengalaman">Pengalaman</label>
-                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}" required>
+                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -98,17 +98,52 @@
                                         </div>
 
                                         <div class="col-lg-12">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label for="alamat">Deskripsi Faskes</label>
-                                                    <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2">{{(isset($dokter))?$dokter->deskripsi:(old('deskripsi')??'')}}</textarea>
-                                                </div>
+
+                                            <div class="form-group">
+                                                <label for="alamat">Deskripsi Faskes</label>
+                                                <textarea class="form-control" placeholder="Deskripsi" name="deskripsi" rows="2">{{(isset($dokter))?$dokter->deskripsi:(old('deskripsi')??'')}}</textarea>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="no_hp">Provinsi</label>
+                                                <select class="provinsi js-states form-control" id="provinsi" name="province" onchange="getKota(this.value)" required>
+                                                    <option value="">Pilih Provinsi</option>
+                                                    @foreach($data_provinsi as $dt)
+                                                    <option value="{{$dt->province_id}}" {{($action!='Tambah')?(($dokter->id_province==$dt->province_id)?'selected':''):''}}>{{$dt->province}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="no_hp">Kabupaten/Kota</label>
+                                                <select class="kota js-states form-control" name="kota" id="kota" onchange="getKec(this.value)" required>
+                                                    <!-- <option value="">Pilih Provinsi Dulu!</option> -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="no_hp">Kecamatan</label>
+                                                <select class="kecamatan js-states form-control" id="kec" name="kec" required>
+
+                                                </select>
                                             </div>
                                         </div>
 
+                                        <div class="col-lg-12">
 
+                                            <div class="form-group">
+                                                <label for="alamat">Alamat Detail Praktek</label>
+                                                <textarea class="form-control" placeholder="Alamat" name="alamat" rows="5">{{(isset($dokter))?$dokter->alamat:(old('alamat')??'')}}</textarea>
+                                            </div>
+
+                                        </div>
                                         <div class="col-lg-12 row">
-                                            <div class="col-lg-8">
+                                            <!-- <div class="col-lg-8">
 
                                                 <div class="col-md-12">
                                                     @if($action==='Tambah')
@@ -122,22 +157,15 @@
                                                 <div class="col-md-12 form-group mb-3v " style="{{($action!='Tambah')?'margin-top:50px':''}}">
                                                     <div id="map-container" style="width:100%;height:200px;z-index:1"></div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="alamat">Alamat Detail Praktek</label>
-                                                        <textarea class="form-control" placeholder="Alamat" name="alamat" rows="10">{{(isset($dokter))?$dokter->alamat:(old('alamat')??'')}}</textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            </div> -->
+
                                         </div>
 
-                                        <div class="col-md-12">
+                                        <!-- <div class="col-md-12">
                                             <div class="form-group">
                                                 <input type="hidden" name="latlong" id="longlat" value="{{(isset($dokter))?$dokter->latlong:(old('latlong')??'')}}">
                                             </div>
-                                        </div>
+                                        </div> -->
 
 
 
@@ -158,10 +186,61 @@
 
 </div>
 
-
-<script src="{{asset('assets/leaflet/leaflet.js')}}"></script>
-<script src="{{asset('assets/leaflet/draw/leaflet.draw.js')}}"></script>
 <script>
+
+</script>
+
+@endsection
+<script>
+    getKota = (id) => {
+        console.log('{{$action}}');
+        $("#kota").empty();
+        var select = document.getElementById('kota');
+        $.ajax({
+            url: '/select2/getkota/' + id,
+            type: 'GET',
+            success: function(result) {
+                $.each(result, function(i, item) {
+                    var opt = document.createElement('option');
+                    opt.value = item['city_id'];
+                    opt.innerHTML = item['type'] + ' ' + item['city_name'];
+                    select.appendChild(opt);
+                });
+                if ('{{$action}}' != 'Tambah')
+                    $("#kota").val('{{(isset($dokter))?$dokter->id_city:""}}');
+            },
+        });
+    }
+
+    getKec = (id) => {
+        console.log(id);
+        $("#kec").empty();
+        var select = document.getElementById('kec');
+        $.ajax({
+            url: '/select2/getkec/' + id,
+            type: 'GET',
+            success: function(result) {
+                $.each(result, function(i, item) {
+                    var opt = document.createElement('option');
+                    opt.value = item['subdistrict_id'];
+                    opt.innerHTML = item['subdistrict_name'];
+                    select.appendChild(opt);
+                });
+                if ('{{$action}}' != 'Tambah')
+                    $("#kec").val('{{(isset($dokter))?$dokter->id_subdistrict:""}}');
+            },
+        });
+    }
+    if ('{{$action}}' != 'Tambah') {
+        getKota('{{(isset($dokter))?$dokter->id_province:""}}');
+        getKec('{{(isset($dokter))?$dokter->id_city:""}}');
+
+    }
+</script>
+
+<!-- <script src="{{asset('assets/leaflet/leaflet.js')}}"></script> -->
+<!-- <script src="{{asset('assets/leaflet/draw/leaflet.draw.js')}}"></script> -->
+<!-- <script>
     var typingTimer; //timer identifier
     var doneTypingInterval = 2000; // 3sec
     function clearTimer() {
@@ -282,5 +361,4 @@
             });
 
     }
-</script>
-@endsection
+</script> -->
