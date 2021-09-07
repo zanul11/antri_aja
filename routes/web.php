@@ -29,6 +29,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('pemasukan', 'PemasukanController');
         Route::resource('pasien', 'PasienController');
         Route::resource('broadcast', 'BroadcastController');
+        Route::resource('disposisi-admin', 'DisposisiAdminController');
+        Route::get('select2/getDataDisposisi', 'Select2Controller@getDataDisposisi')->name('select2.getdata');
     });
 
     // $this->middleware

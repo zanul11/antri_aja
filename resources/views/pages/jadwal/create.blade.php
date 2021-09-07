@@ -102,7 +102,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-sm">
-                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 2 }">
+                                <tr ng-repeat="dt in jadwals | orderBy:'dJam' | filter:{ value: 2 }">
                                     <td align="center">
                                         @{{$index+1}}
                                     </td>
@@ -140,7 +140,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-sm">
-                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 3 }">
+                                <tr ng-repeat="dt in jadwals | orderBy:'dJam' | filter:{ value: 3 }">
                                     <td align="center">
                                         @{{$index+1}}
                                     </td>
@@ -178,7 +178,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-sm">
-                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 4 }">
+                                <tr ng-repeat="dt in jadwals | orderBy:'dJam' | filter:{ value: 4 }">
                                     <td align="center">
                                         @{{$index+1}}
                                     </td>
@@ -215,7 +215,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-sm">
-                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 5 }">
+                                <tr ng-repeat="dt in jadwals | orderBy:'dJam' | filter:{ value: 5 }">
                                     <td align="center">
                                         @{{$index+1}}
                                     </td>
@@ -253,7 +253,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-sm">
-                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 6 }">
+                                <tr ng-repeat="dt in jadwals | orderBy:'dJam' | filter:{ value: 6 }">
                                     <td align="center">
                                         @{{$index+1}}
                                     </td>
@@ -291,7 +291,7 @@
                                 </tr>
                             </thead>
                             <tbody class="table-sm">
-                                <tr ng-repeat="dt in jadwals | orderBy:'value' | filter:{ value: 0 }">
+                                <tr ng-repeat="dt in jadwals | orderBy:'dJam' | filter:{ value: 0 }">
                                     <td align="center">
                                         @{{$index+1}}
                                     </td>

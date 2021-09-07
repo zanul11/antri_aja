@@ -172,9 +172,9 @@
                                     <div class="row">
                                         <div class="col-md-8">
                                             <div class="form-group">
-                                                <label for="no_hp">Pilih Dokter Tujuan Disposisi</label>
+                                                <label for="no_hp">Pilih Nakes Tujuan Disposisi</label>
                                                 <select name="dokter" id="dokter" class="dokter js-states form-control" required>
-                                                    <option value="">-- Pilih Dokter Tujuan Disposisi --</option>
+                                                    <option value="">-- Pilih Nakes Tujuan Disposisi --</option>
                                                 </select>
                                             </div>
                                         </div>

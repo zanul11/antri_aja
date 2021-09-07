@@ -42,4 +42,16 @@ class Select2Controller extends Controller
     {
         return Kecamatan::where('city_id', $kota)->get();
     }
+    public function getDataDisposisi(Request $request)
+    {
+        if ($request->has('key')) {
+            $cari = str_replace(" ", "%", $request->key);
+            $data = Dokter::query()
+                ->whereRaw("concat(name,' ',username) like '%" . $cari . "%'")
+                ->where('id', '!=', Auth::user()->id)
+                ->get();
+            return response()->json($data);
+        }
+        return response()->json([]);
+    }
 }

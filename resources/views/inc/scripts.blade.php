@@ -178,6 +178,34 @@
       cache: true,
     }
   });
+
+  $(".disposisi-admin").select2({
+    minimumInputLength: 3,
+    ajax: {
+      url: "{!! route('select2.getdata') !!}",
+      dataType: 'json',
+      delay: 250,
+      data: function(params) {
+        var query = {
+          key: params.term
+        }
+        return query;
+      },
+      processResults: function(data) {
+
+        return {
+          results: $.map(data, function(item) {
+            return {
+              text: "[ " + item.username + " ] " + item.name,
+              id: item.id
+            }
+          })
+          // results:data
+        };
+      },
+      cache: true,
+    }
+  });
 </script>
 
 <script src="{{asset('plugins/dropify/dropify.min.js')}}"></script>
