@@ -11,8 +11,10 @@
                 <div class="d-flex justify-content-between">
                     <h3 class=""> {{$page_name}} </h3>
                     <a href="{{url('marketing/create')}}" class="mt-2 edit-profile"> <i data-feather="plus" class="text-defaulr"> </i></a>
+
                 </div>
                 <div class="table-responsive mb-4 mt-4">
+                    <a href="/export-marketing" class="btn btn-success">Export Excel</a><br><br>
                     <table id="zero-config" class="table table-hover" style="width:100%">
                         <thead>
                             <tr>

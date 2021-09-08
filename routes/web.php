@@ -27,7 +27,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('marketing', 'MarketingController');
         Route::resource('persen', 'PersenController');
         Route::resource('pemasukan', 'PemasukanController');
+        //PASIEN
         Route::resource('pasien', 'PasienController');
+
+        //EXPORT
+        Route::get('export-pasien', 'PasienController@ExportPasien');
+        Route::get('export-marketing', 'MarketingController@ExportPasien');
+
         Route::resource('broadcast', 'BroadcastController');
         Route::resource('disposisi-admin', 'DisposisiAdminController');
         Route::get('select2/getDataDisposisi', 'Select2Controller@getDataDisposisi')->name('select2.getdata');

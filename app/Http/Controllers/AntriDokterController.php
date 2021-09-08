@@ -28,7 +28,7 @@ class AntriDokterController extends Controller
         //     ->where('status', 0)
         //     ->groupBy('tgl')
         //     ->get();
-        $antri = Antri::where('dokter', Auth::user()->id)->with('waktu_detail')->orderBy('status')->orderBy('tgl')->orderBy('no_antrian')->get();
+        $antri = Antri::where('dokter', Auth::user()->id)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
 
 
 
@@ -161,6 +161,34 @@ class AntriDokterController extends Controller
         } else {
             $spesialis = Spesialis::all();
             $antri = Antri::with('waktu_detail')->where('dokter', Auth::user()->id)->where('id', $id)->first();
+
+            $daftar_antrian = Antri::select('notif_id')->where('dokter', Auth::user()->id)->where('tgl', $antri['tgl'])->where('waktu', $antri['waktu'])->get()->pluck('notif_id');
+
+            $url = 'https://fcm.googleapis.com/fcm/send';
+            $msg = [
+                'title' => 'Update Antrian!',
+                'body' => 'Nakes sedang menangani pasien dengan nomor antrian ' . $antri['no_antrian'] .  ', silahkan bersiap untuk nomor antrian berikutnya!',
+
+            ];
+            $extra = ["message" => $msg];
+            $fcm = [
+                "registration_ids" =>  $daftar_antrian,
+                "notification" => $msg,
+                "data" => $extra
+            ];
+            $headers = [
+                'Authorization: key=AAAAJjWldH0:APA91bH3gGJvWDe3U6DkR8P5hnqhc9h7xqM3LSY8q8vfzjDJNMPnbGqk-91KRZfpWmF4XvA89GEzht8NvNyN-MJVjnz9x9il8tyZpCTPd_f7AjdsoMqtjkWQbtwJ9WLr55VfuiXizDXY',
+                'Content-Type: application/json'
+            ];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcm));
+            $result = curl_exec($ch);
+            curl_close($ch);
             $data = [
                 'category_name' => 'Daftar Antrian',
                 'page_name' => 'Pilih Waktu',

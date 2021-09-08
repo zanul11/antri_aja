@@ -89,6 +89,7 @@
             </li>
 
         </ul>
+        @if($page_name=='Dashboard')
         <marquee scrollamount="7" style="margin-right: 10px;">
             @if(Auth::user()->role==3||Auth::user()->role==5)
             @foreach($pesan as $dt)
@@ -96,7 +97,7 @@
             @endforeach
             @endif
         </marquee>
-
+        @endif
         <!-- <ul class="navbar-nav flex-row ml-auto ">
             <li class="nav-item more-dropdown">
                 <div class="dropdown  custom-dropdown-icon">

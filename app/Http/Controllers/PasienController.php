@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanPasien;
 use App\Models\Antri;
 use App\Models\Dokter;
 use App\Models\Jadwal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PasienController extends Controller
 {
@@ -51,6 +53,14 @@ class PasienController extends Controller
             'dokter' => $dokter
         ];
         return view('pages.laporan_pasien.index')->with($data);
+    }
+
+
+
+    public function ExportPasien()
+    {
+
+        return Excel::download(new LaporanPasien(Session::get('dokter'), Session::get('selectedTgld'), Session::get('selectedTgls')), 'export_laporan_pasien.xlsx');
     }
 
     /**

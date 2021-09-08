@@ -85,8 +85,10 @@
                                             <label class="font-normal">#</label>
                                             <div class="input-group date">
                                                 <button type="submit" class="btn btn-primary">Filter</button>
+                                                <a href="/export-pasien" class="btn btn-success">Export Excel</a>
                                             </div>
                                         </div>
+
                                     </div>
                                 </form>
 

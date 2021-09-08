@@ -40,7 +40,11 @@
                                     @if($dt->tgl < date('Y-m-d')) <span class="badge badge-primary"> Skip </span>
 
                                         @else
+                                        @if(date('H:m:i')> date('H:m:i', strtotime($dt->waktu_detail->dJam)))
+                                        <span class="badge badge-warning"> Menunggu (waktu sudah lewat) </span>
+                                        @else
                                         <span class="badge badge-warning"> Menunggu </span>
+                                        @endif
                                         @endif
                                         @elseif($dt->status==1)
                                         <span class="badge badge-success"> Selesai </span>

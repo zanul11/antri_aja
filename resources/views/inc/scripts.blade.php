@@ -64,8 +64,8 @@
     "lengthMenu": [7, 10, 20, 50],
     "pageLength": 7,
     "order": [
-      [5, "asc"],
-      [0, "asc"],
+      [0, "desc"],
+      [6, "asc"],
       [1, "asc"]
     ]
   });

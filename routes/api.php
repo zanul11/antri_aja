@@ -41,3 +41,9 @@ Route::post('/getDokterFaskes', 'ApiController@getDokterFaskes');
 Route::post('/searchDokterFaskes', 'ApiController@searchDokterFaskes');
 
 Route::get('/broadcast', 'ApiController@broadcast');
+
+
+Route::get('/get-provinsi', 'ApiController@getProvinsi');
+Route::get('/cari-provinsi/{cari}', 'ApiController@cariProvinsi');
+Route::get('/get-kota/{provinsi}', 'ApiController@getKota');
+Route::get('/get-kec/{kota}', 'ApiController@getKec');

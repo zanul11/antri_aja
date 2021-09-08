@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Antri;
 use App\Models\Dokter;
 use App\Models\Jadwal;
+use App\Models\Kecamatan;
+use App\Models\Provinsi;
 use App\Models\Spesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -174,5 +176,25 @@ class ApiController extends Controller
     {
         $bc = DB::select(DB::raw("SELECT *, concat('http://antriaja.com/uploads/',foto) as link_gambar FROM broadcast where jenis IN (0,2) order by created_at desc limit 5"));
         return $bc;
+    }
+
+
+    public function getProvinsi()
+    {
+        return Provinsi::all();
+    }
+    public function cariProvinsi($cari)
+    {
+        return Provinsi::where('province', 'like', '%' . $cari . '%')->get();
+    }
+
+    public function getkota(Provinsi $provinsi)
+    {
+        return $provinsi->kota;
+    }
+
+    public function getkec($kota)
+    {
+        return Kecamatan::where('city_id', $kota)->get();
     }
 }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanMarketing;
 use App\Models\Marketing;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MarketingController extends Controller
 {
@@ -26,6 +28,11 @@ class MarketingController extends Controller
             'data_marketing' => $marketing
         ];
         return view('pages.marketing.index')->with($data);
+    }
+
+    public function ExportPasien()
+    {
+        return Excel::download(new LaporanMarketing(), 'export_laporan_marketing.xlsx');
     }
 
     /**
