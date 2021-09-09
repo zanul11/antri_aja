@@ -185,7 +185,7 @@ class ApiController extends Controller
     }
     public function cariProvinsi($cari)
     {
-        if ($cari == '')
+        if ($cari != '')
             return Provinsi::where('province', 'like', '%' . $cari . '%')->get();
         else
             return Provinsi::all();
