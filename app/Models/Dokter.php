@@ -36,4 +36,18 @@ class Dokter extends Model
     {
         return $this->hasMany(TopUp::class, 'dokter', 'id');
     }
+
+    public function provinsi()
+    {
+        return $this->hasOne(Provinsi::class, 'province_id', 'id_province');
+    }
+
+    public function kota()
+    {
+        return $this->hasOne(Kota::class, 'city_id', 'id_city');
+    }
+    public function kecamatan()
+    {
+        return $this->hasOne(Kecamatan::class, 'subdistrict_id', 'id_subdistrict');
+    }
 }

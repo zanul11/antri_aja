@@ -59,7 +59,7 @@ class ApiController extends Controller
             $q->groupBy('hari');
         }])->where('spesialis', $r->spesialis)->withCount(['antri' => function ($q) {
             $q->where('status', 1);
-        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->get();
+        }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
         return $dokter;
     }
 
@@ -114,7 +114,7 @@ class ApiController extends Controller
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
             $q->groupBy('hari');
-        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->take(5)->get();
+        }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->take(5)->get();
     }
 
     public function getSpesialisTernama()
@@ -131,7 +131,7 @@ class ApiController extends Controller
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
             $q->groupBy('hari');
-        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->where('spesialis', $request->spesialis)->get();
+        }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->where('spesialis', $request->spesialis)->get();
     }
 
     public function searchSpesialis(Request $request)
@@ -158,7 +158,7 @@ class ApiController extends Controller
             $q->groupBy('hari');
         }])->where('email', $r->email)->where('username', '!=', $r->email)->withCount(['antri' => function ($q) {
             $q->where('status', 1);
-        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->get();
+        }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
         return $dokter;
     }
 
@@ -168,7 +168,7 @@ class ApiController extends Controller
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
             $q->groupBy('hari');
-        }])->with('spesialis_detail')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')
+        }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')
             ->where('email', $request->email)->where('username', '!=', $request->email)->get();
     }
 
@@ -185,7 +185,10 @@ class ApiController extends Controller
     }
     public function cariProvinsi($cari)
     {
-        return Provinsi::where('province', 'like', '%' . $cari . '%')->get();
+        if ($cari == '')
+            return Provinsi::where('province', 'like', '%' . $cari . '%')->get();
+        else
+            return Provinsi::all();
     }
 
     public function getkota(Provinsi $provinsi)
@@ -196,5 +199,58 @@ class ApiController extends Controller
     public function getkec($kota)
     {
         return Kecamatan::where('city_id', $kota)->get();
+    }
+
+    public function getDokterWilayah(Request $r)
+    {
+        if (isset($r->kecamatan)) {
+            $dokter = Dokter::with(['jadwal' => function ($q) {
+                $q->groupBy('hari');
+            }])
+                ->where('id_province', $r->provinsi)
+                ->where('id_city', $r->kota)
+                ->where('id_subdistrict', $r->kecamatan)
+                ->whereIN('role', [3, 5])->withCount(['antri' => function ($q) {
+                    $q->where('status', 1);
+                }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
+        } else {
+            $dokter = Dokter::with(['jadwal' => function ($q) {
+                $q->groupBy('hari');
+            }])
+                ->where('id_province', $r->provinsi)
+                ->where('id_city', $r->kota)
+                ->whereIN('role', [3, 5])->withCount(['antri' => function ($q) {
+                    $q->where('status', 1);
+                }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
+        }
+
+        return $dokter;
+    }
+    public function cariDokterWilayah(Request $r)
+    {
+        if (isset($r->kecamatan)) {
+            $dokter = Dokter::with(['jadwal' => function ($q) {
+                $q->groupBy('hari');
+            }])
+                ->where('id_province', $r->provinsi)
+                ->where('id_city', $r->kota)
+                ->where('id_subdistrict', $r->kecamatan)
+                ->where('name', 'like', '%' . $r->key . '%')
+                ->whereIN('role', [3, 5])->withCount(['antri' => function ($q) {
+                    $q->where('status', 1);
+                }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
+        } else {
+            $dokter = Dokter::with(['jadwal' => function ($q) {
+                $q->groupBy('hari');
+            }])
+                ->where('id_province', $r->provinsi)
+                ->where('id_city', $r->kota)
+                ->where('name', 'like', '%' . $r->key . '%')
+                ->whereIN('role', [3, 5])->withCount(['antri' => function ($q) {
+                    $q->where('status', 1);
+                }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
+        }
+
+        return $dokter;
     }
 }

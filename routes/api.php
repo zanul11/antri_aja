@@ -47,3 +47,6 @@ Route::get('/get-provinsi', 'ApiController@getProvinsi');
 Route::get('/cari-provinsi/{cari}', 'ApiController@cariProvinsi');
 Route::get('/get-kota/{provinsi}', 'ApiController@getKota');
 Route::get('/get-kec/{kota}', 'ApiController@getKec');
+
+Route::post('/get-dokter-wilayah', 'ApiController@getDokterWilayah');
+Route::post('/search-dokter-wilayah', 'ApiController@cariDokterWilayah');
