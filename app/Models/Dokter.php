@@ -50,4 +50,9 @@ class Dokter extends Model
     {
         return $this->hasOne(Kecamatan::class, 'subdistrict_id', 'id_subdistrict');
     }
+
+    public function akun_faskes()
+    {
+        return $this->hasMany(Dokter::class, 'email', 'email');
+    }
 }

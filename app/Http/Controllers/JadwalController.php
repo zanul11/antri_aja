@@ -151,9 +151,10 @@ class JadwalController extends Controller
     {
         $user = Akun::where('id', $jadwal)->first();
         $data = [
-            'category_name' => 'Data Akun Dokter',
+            'category_name' => 'Data Akun Nakes',
             'page_name' => 'Tambah Data',
             'has_scrollspy' => 0,
+            'action' => 'Tambah',
             'scrollspy_offset' => '',
             'user' => $user
         ];

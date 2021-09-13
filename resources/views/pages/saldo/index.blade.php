@@ -161,7 +161,7 @@
                         </div>
                     </div>
                 </div>
-
+                @if(Auth::user()->role!=5)
                 <div class="col-lg-12 ">
                     <div class="bio layout-spacing">
                         <div class="widget-content widget-content-area">
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                 </div>
-
+                @endif
             </div>
         </div>
     </div>

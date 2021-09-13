@@ -59,6 +59,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -72,6 +73,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.estimasi}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.kuota}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -98,6 +102,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -111,6 +116,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.estimasi}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.kuota}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -136,6 +144,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -149,6 +158,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.estimasi}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.kuota}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -174,6 +186,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -187,6 +200,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.estimasi}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.kuota}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -211,6 +227,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -224,6 +241,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.estimasi}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.kuota}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -249,6 +269,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -262,6 +283,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.estimasi}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.kuota}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>
@@ -287,6 +311,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -300,6 +325,9 @@
                                     </td>
                                     <td align="center">
                                         @{{dt.estimasi}}
+                                    </td>
+                                    <td align="center">
+                                        @{{dt.kuota}}
                                     </td>
                                     <td align="center">
                                         <a ng-click="removeItem(dt)"><i data-feather="x"></i></a>

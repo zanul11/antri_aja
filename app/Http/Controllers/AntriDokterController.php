@@ -222,6 +222,6 @@ class AntriDokterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Antri::where('id', $id)->delete();
     }
 }

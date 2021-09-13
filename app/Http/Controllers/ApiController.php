@@ -40,12 +40,12 @@ class ApiController extends Controller
 
     public function getAntriUser(Request $r)
     {
-        return $antri = Antri::with('dokter_detail')->with('waktu_detail')->where('user_id', $r->user_id)->where('status', 0)->get();
+        return $antri = Antri::with('dokter_detail')->with('waktu_detail')->where('no_hp', $r->user_id)->where('status', 0)->get();
     }
 
     public function getAntriUserDitangani(Request $r)
     {
-        return $antri = Antri::with('dokter_detail')->with('waktu_detail')->where('user_id', $r->user_id)->where('status', 1)->get();
+        return $antri = Antri::with('dokter_detail')->with('waktu_detail')->where('no_hp', $r->user_id)->where('status', 1)->get();
     }
 
     public function getSpesialis()

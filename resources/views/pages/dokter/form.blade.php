@@ -191,52 +191,7 @@
 </script>
 
 @endsection
-<script>
-    getKota = (id) => {
-        console.log('{{$action}}');
-        $("#kota").empty();
-        var select = document.getElementById('kota');
-        $.ajax({
-            url: '/select2/getkota/' + id,
-            type: 'GET',
-            success: function(result) {
-                $.each(result, function(i, item) {
-                    var opt = document.createElement('option');
-                    opt.value = item['city_id'];
-                    opt.innerHTML = item['type'] + ' ' + item['city_name'];
-                    select.appendChild(opt);
-                });
-                if ('{{$action}}' != 'Tambah')
-                    $("#kota").val('{{(isset($dokter))?$dokter->id_city:""}}');
-            },
-        });
-    }
 
-    getKec = (id) => {
-        console.log(id);
-        $("#kec").empty();
-        var select = document.getElementById('kec');
-        $.ajax({
-            url: '/select2/getkec/' + id,
-            type: 'GET',
-            success: function(result) {
-                $.each(result, function(i, item) {
-                    var opt = document.createElement('option');
-                    opt.value = item['subdistrict_id'];
-                    opt.innerHTML = item['subdistrict_name'];
-                    select.appendChild(opt);
-                });
-                if ('{{$action}}' != 'Tambah')
-                    $("#kec").val('{{(isset($dokter))?$dokter->id_subdistrict:""}}');
-            },
-        });
-    }
-    if ('{{$action}}' != 'Tambah') {
-        getKota('{{(isset($dokter))?$dokter->id_province:""}}');
-        getKec('{{(isset($dokter))?$dokter->id_city:""}}');
-
-    }
-</script>
 
 <!-- <script src="{{asset('assets/leaflet/leaflet.js')}}"></script> -->
 <!-- <script src="{{asset('assets/leaflet/draw/leaflet.draw.js')}}"></script> -->

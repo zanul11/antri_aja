@@ -125,6 +125,45 @@
   }
 </script>
 
+@if($page_name=='Data Nakes')
+<script>
+  function deleteDataAkun(url, id, faskes) {
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to delete this!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+      padding: '2em'
+    }).then(function(result) {
+      if (result.value) {
+        $.ajax({
+          url: url + "/" + id,
+          type: "DELETE",
+          data: {
+            _token: "{{ csrf_token() }}"
+          },
+          success: function(response) {
+            swal(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success'
+            ).then(result => {
+              window.location.href = '/data-faskes/' + faskes;
+            });
+            // You will get response from your PHP page (what you echo or print)
+          },
+          error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+          }
+        });
+      }
+    })
+  }
+</script>
+
+@endif
+
 <script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
 <script src="{{asset('plugins/select2/select2.min.js')}}"></script>
 <!-- <script src="{{asset('plugins/select2/custom-select2.js')}}"></script> -->
@@ -215,6 +254,177 @@
 <script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
 
 
+@if($category_name=='Data Faskes')
+
+@if($page_name=='Data Akun')
+
+<script>
+  getKota = (id) => {
+    console.log('{{$action}}');
+    $("#kota").empty();
+    var select = document.getElementById('kota');
+    $.ajax({
+      url: '/select2/getkota/' + id,
+      type: 'GET',
+      success: function(result) {
+        var tmpNilaiKota = '';
+        $.each(result, function(i, item) {
+          var opt = document.createElement('option');
+          opt.value = item['city_id'];
+          opt.innerHTML = item['type'] + ' ' + item['city_name'];
+          select.appendChild(opt);
+          if (i == 0)
+            tmpNilaiKota = item['city_id'];
+        });
+
+        if ('{{$action}}' != 'Tambah')
+          $("#kota").val('{{(isset($akun))?$akun->id_city:""}}');
+        else
+          getKec(tmpNilaiKota);
+      },
+    });
+  }
+
+  getKec = (id) => {
+    console.log(id);
+    $("#kec").empty();
+    var select = document.getElementById('kec');
+    $.ajax({
+      url: '/select2/getkec/' + id,
+      type: 'GET',
+      success: function(result) {
+        $.each(result, function(i, item) {
+          var opt = document.createElement('option');
+          opt.value = item['subdistrict_id'];
+          opt.innerHTML = item['subdistrict_name'];
+          select.appendChild(opt);
+        });
+        if ('{{$action}}' != 'Tambah')
+          $("#kec").val('{{(isset($akun))?$akun->id_subdistrict:""}}');
+      },
+    });
+  }
+  if ('{{$action}}' != 'Tambah') {
+    getKota('{{(isset($akun))?$akun->id_province:""}}');
+    getKec('{{(isset($akun))?$akun->id_city:""}}');
+
+  }
+</script>
+
+@else
+<script>
+  getKota = (id) => {
+    console.log('{{$action}}');
+    $("#kota").empty();
+    var select = document.getElementById('kota');
+    $.ajax({
+      url: '/select2/getkota/' + id,
+      type: 'GET',
+      success: function(result) {
+        var tmpNilaiKota = '';
+        $.each(result, function(i, item) {
+          var opt = document.createElement('option');
+          opt.value = item['city_id'];
+          opt.innerHTML = item['type'] + ' ' + item['city_name'];
+          select.appendChild(opt);
+          if (i == 0)
+            tmpNilaiKota = item['city_id'];
+        });
+
+        if ('{{$action}}' != 'Tambah')
+          $("#kota").val('{{(isset($dokter))?$dokter->id_city:""}}');
+        else
+          getKec(tmpNilaiKota);
+      },
+    });
+  }
+
+  getKec = (id) => {
+    console.log(id);
+    $("#kec").empty();
+    var select = document.getElementById('kec');
+    $.ajax({
+      url: '/select2/getkec/' + id,
+      type: 'GET',
+      success: function(result) {
+        $.each(result, function(i, item) {
+          var opt = document.createElement('option');
+          opt.value = item['subdistrict_id'];
+          opt.innerHTML = item['subdistrict_name'];
+          select.appendChild(opt);
+        });
+        if ('{{$action}}' != 'Tambah')
+          $("#kec").val('{{(isset($dokter))?$dokter->id_subdistrict:""}}');
+      },
+    });
+  }
+  if ('{{$action}}' != 'Tambah') {
+    getKota('{{(isset($dokter))?$dokter->id_province:""}}');
+    getKec('{{(isset($dokter))?$dokter->id_city:""}}');
+
+  }
+</script>
+
+@endif
+
+@endif
+
+@if($category_name=='Data Akun Nakes')
+
+<script>
+  getKota = (id) => {
+    console.log('{{$action}}');
+    $("#kota").empty();
+    var select = document.getElementById('kota');
+    $.ajax({
+      url: '/select2/getkota/' + id,
+      type: 'GET',
+      success: function(result) {
+        var tmpNilaiKota = '';
+        $.each(result, function(i, item) {
+          var opt = document.createElement('option');
+          opt.value = item['city_id'];
+          opt.innerHTML = item['type'] + ' ' + item['city_name'];
+          select.appendChild(opt);
+          if (i == 0)
+            tmpNilaiKota = item['city_id'];
+        });
+
+        if ('{{$action}}' != 'Tambah')
+          $("#kota").val('{{(isset($akun))?$akun->id_city:""}}');
+        else
+          getKec(tmpNilaiKota);
+      },
+    });
+  }
+
+  getKec = (id) => {
+    console.log(id);
+    $("#kec").empty();
+    var select = document.getElementById('kec');
+    $.ajax({
+      url: '/select2/getkec/' + id,
+      type: 'GET',
+      success: function(result) {
+        $.each(result, function(i, item) {
+          var opt = document.createElement('option');
+          opt.value = item['subdistrict_id'];
+          opt.innerHTML = item['subdistrict_name'];
+          select.appendChild(opt);
+        });
+        if ('{{$action}}' != 'Tambah')
+          $("#kec").val('{{(isset($akun))?$akun->id_subdistrict:""}}');
+      },
+    });
+  }
+  if ('{{$action}}' != 'Tambah') {
+    getKota('{{(isset($akun))?$akun->id_province:""}}');
+    getKec('{{(isset($akun))?$akun->id_city:""}}');
+
+  }
+</script>
+
+@endif
 
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->

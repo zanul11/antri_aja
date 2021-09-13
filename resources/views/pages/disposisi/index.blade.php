@@ -115,7 +115,7 @@
                                     <!-- <td>
                                         {{number_format($fee)}}
                                     </td> -->
-                                    <td> {{number_format($saldo)}}</td>
+                                    <!-- <td> {{number_format($saldo)}}</td> -->
 
                                 </tr>
                             </tfoot>

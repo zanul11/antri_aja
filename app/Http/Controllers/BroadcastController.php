@@ -55,6 +55,7 @@ class BroadcastController extends Controller
     public function store(Request $request)
     {
         // return $request;
+        // return substr(strip_tags($request->pesan), 0, 110) . "...";
         $foto = null;
         if ($request->hasFile('file')) {
             $image = $request->file('file');
@@ -83,7 +84,7 @@ class BroadcastController extends Controller
             $url = 'https://fcm.googleapis.com/fcm/send';
             $msg = [
                 'title' => 'Kabar Terbaru!',
-                'body' => $request->pesan,
+                'body' => substr(strip_tags($request->pesan), 0, 110) . "...",
 
             ];
             $extra = ["message" => $msg];

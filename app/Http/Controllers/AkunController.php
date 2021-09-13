@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Akun;
 use App\Http\Controllers\Controller;
+use App\Models\Antri;
 use App\Models\Dokter;
 use Illuminate\Http\Request;
 use App\Models\Marketing;
@@ -30,6 +31,7 @@ class AkunController extends Controller
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'data_akun' => $akun,
+            'action' => 'Tambah',
             'jaringan' => $jaringan
         ];
         return view('pages.akun.index')->with($data);
@@ -101,7 +103,21 @@ class AkunController extends Controller
      */
     public function show(Akun $akun)
     {
-        //
+        $antri = Antri::where('dokter', $akun->id)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
+        $data = [
+            'category_name' => 'Data Akun Nakes',
+            'page_name' => 'Daftar Antrian',
+            'has_scrollspy' => 0,
+            'action' => 'Tambah',
+            'scrollspy_offset' => '',
+            'data_antri' => $antri,
+            'akun' => $akun
+
+        ];
+
+        return view('pages.akun.antrian')->with($data);
+
+        return $akun;
     }
 
     /**
