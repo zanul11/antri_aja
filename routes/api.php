@@ -42,8 +42,13 @@ Route::post('/getFaskesTernamaWilayah', 'ApiController@getFaskesTernamaWilayah')
 Route::post('/getFaskesAllWilayah', 'ApiController@getFaskesAllWilayah');
 Route::post('/searchFaskesWilayah', 'ApiController@searchFaskesWilayah');
 
+Route::get('/getDokterTernamaWilayah', 'ApiController@getDokterTernamaWilayah');
+Route::post('/searchDokterWilayah', 'ApiController@searchDokterWilayah');
+
 Route::post('/getDokterFaskes', 'ApiController@getDokterFaskes');
 Route::post('/searchDokterFaskes', 'ApiController@searchDokterFaskes');
+Route::post('/getDokterSpesialisWilayah', 'ApiController@getDokterSpesialisWilayah');
+
 
 Route::get('/broadcast', 'ApiController@broadcast');
 
