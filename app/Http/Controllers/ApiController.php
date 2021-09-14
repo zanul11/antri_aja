@@ -143,13 +143,42 @@ class ApiController extends Controller
     {
         return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3  ORDER BY akun DESC limit 5");
     }
+
+    public function getFaskesTernamaWilayah(Request $r)
+    {
+        if (isset($r->kecamatan)) {
+            return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3 AND `id_province` = '$r->provinsi' AND `id_city` = '$r->kota' AND `id_subdistrict` = '$r->kecamatan'  ORDER BY akun DESC limit 5");
+        } else {
+            return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3 AND `id_province` = '$r->provinsi' AND `id_city` = '$r->kota' ORDER BY akun DESC limit 5");
+        }
+    }
+
     public function getFaskesAll()
     {
         return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3  ORDER BY a.nama_faskes ");
     }
+
+    public function getFaskesAllWilayah(Request $r)
+    {
+        if (isset($r->kecamatan)) {
+            return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3 AND `id_province` = '$r->provinsi' AND `id_city` = '$r->kota' AND `id_subdistrict` = '$r->kecamatan'  ORDER BY a.nama_faskes ");
+        } else {
+            return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3 AND `id_province` = '$r->provinsi' AND `id_city` = '$r->kota' ORDER BY a.nama_faskes ");
+        }
+    }
+
     public function searchFaskes(Request $r)
     {
         return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3 and nama_faskes like '%$r->key%'   ORDER BY a.nama_faskes ");
+    }
+
+    public function searchFaskesWilayah(Request $r)
+    {
+        if (isset($r->kecamatan)) {
+            return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3 and nama_faskes like '%$r->key%' AND `id_province` = '$r->provinsi' AND `id_city` = '$r->kota' AND `id_subdistrict` = '$r->kecamatan' ORDER BY a.nama_faskes ");
+        } else {
+            return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3 and nama_faskes like '%$r->key%' AND `id_province` = '$r->provinsi' AND `id_city` = '$r->kota' ORDER BY a.nama_faskes ");
+        }
     }
 
     public function getDokterFaskes(Request $r)
