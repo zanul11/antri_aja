@@ -102,6 +102,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -143,6 +144,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -184,6 +186,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -224,6 +227,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -265,6 +269,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
@@ -306,6 +311,7 @@
                                     <th>NO</th>
                                     <th>JAM</th>
                                     <th>Estimasi</th>
+                                    <th>Kuota</th>
                                     <th class="no-content">#</th>
                                 </tr>
                             </thead>
