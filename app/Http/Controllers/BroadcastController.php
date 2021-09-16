@@ -55,7 +55,7 @@ class BroadcastController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        // return substr(strip_tags($request->pesan), 0, 110) . "...";
+        // return substr(strip_tags(str_replace('<br>', '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;', $request->pesan)), 0, 50) . "...";
         $foto = null;
         if ($request->hasFile('file')) {
             $image = $request->file('file');

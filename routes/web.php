@@ -86,7 +86,11 @@ Route::post('/antri/getJam', 'AntriController@getJam');
 Route::post('/antri/getJum', 'AntriController@getJum');
 Route::resource('antri', 'AntriController');
 
-Route::resource('/daftar', 'RegisterController');
+Route::resource('/daftar', 'RegisterController', [
+    'names' => [
+        'index' => 'daftar'
+    ]
+]);
 
 //chart
 Route::get('/chart/getpiedate/{tgl}', 'HomeController@getpiedate');
@@ -96,6 +100,6 @@ Route::get('/password/reset', function () {
     return redirect('/login');
 });
 
-Route::get('/', function () {
-    return redirect('/daftar');
-});
+// Route::get('/', function () {
+//     return redirect('/');
+// });
