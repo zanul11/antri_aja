@@ -22,12 +22,6 @@
                                     <textarea id="summernote" type="text" class="form-control mb-4" name="pesan" rows="10" required>{{(isset($broadcast))?$broadcast->isi:(old('pesan')??'')}}</textarea>
                                 </div>
                             </div>
-                            <div class="col-sm-8">
-                                <div class="form-group">
-                                    <label for="noHp">Summer Note</label>
-                                    <textarea id="summernote" type="text" class="form-control mb-4" name="pesan" rows="5" required>{{(isset($broadcast))?$broadcast->isi:(old('pesan')??'')}}</textarea>
-                                </div>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <div class="upload mt-4 pr-md-4">
@@ -76,12 +70,19 @@
 
 @endsection
 
+
 @section('page_script')
-<!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 <script>
     $(document).ready(function() {
-        $('#summernote').summernote();
+        $('#summernote').summernote({
+            placeholder: 'Isi broascast',
+            tabsize: 2,
+            height: 200
+        });
     });
-</script> -->
+</script>
 @endsection

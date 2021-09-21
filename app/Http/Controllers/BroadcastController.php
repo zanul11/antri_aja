@@ -106,10 +106,40 @@ class BroadcastController extends Controller
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcm));
             $result = curl_exec($ch);
             curl_close($ch);
+            $this->notifNakes($request->pesan);
         }
 
         return Redirect::to('/broadcast')->with('success', 'Data Broadcast Sent!');
         return $request;
+    }
+
+    public function notifNakes($pesan)
+    {
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $msg = [
+            'title' => 'Kabar Terbaru!',
+            'body' => substr(strip_tags($pesan), 0, 110) . "...",
+
+        ];
+        $extra = ["message" => $msg, "variable" => 'tes Variabel', "click_action" => 'FLUTTER_NOTIFICATION_CLICK'];
+        $fcm = [
+            "to" =>  'eBFdXrLJSQ-_53WjMHHvwq:APA91bFfM6sMVKlNOgsg4MkR9GslPkCBYOThoUPIPoaL3x_KavLf8FRDoODwkSsKNo4zJbkbLIAgKqFMJ1LQrjgQPj1lLsrBA0oFpp1YVdAMV3TG3LQXcq1wtLEcqRb_mwqEpPT9HOGd',
+            "notification" => $msg,
+            "data" => $extra
+        ];
+        $headers = [
+            'Authorization: key=AAAA2BU4go4:APA91bGPl4BUpyENr52_pbDNAVvMO_CztuHh370psnvNcegJt2sB7QlEwUfc-W3f6aXRiPBPP9Hp4RLRqn0h_pd-x5-MlL3ykfg02ebaKNZDCefU3vsXXkGnLoNIo9emq1UG7a10Y_an',
+            'Content-Type: application/json'
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcm));
+        $result = curl_exec($ch);
+        curl_close($ch);
     }
 
     /**
