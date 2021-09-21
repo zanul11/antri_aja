@@ -55,6 +55,11 @@ return [
             'url' => '/marketing'
         ],
         [
+            'icon' => '<i data-feather="users" ></i>',
+            'title' => 'Data Faskes',
+            'url' => '/data-faskes'
+        ],
+        [
             'icon' => '<i data-feather="message-square" ></i>',
             'title' => 'Broadcast',
             'url' => '/broadcast'

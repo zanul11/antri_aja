@@ -21,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index');
+
+    //SELECT2
+    Route::get('select2/dokter', 'Select2Controller@dokter')->name('select2.dokter');
+    Route::get('select2/getkota/{provinsi}', 'Select2Controller@getkota');
+    Route::get('select2/getkec/{kota}', 'Select2Controller@getkec');
     Route::group(['middleware' => 'admin'], function () {
         Route::resource('user', 'UserController');
         Route::resource('spesialis', 'SpesialisController');
@@ -33,6 +38,9 @@ Route::group(['middleware' => 'auth'], function () {
         //EXPORT
         Route::get('export-pasien', 'PasienController@ExportPasien');
         Route::get('export-marketing', 'MarketingController@ExportPasien');
+
+        Route::resource('data-faskes', 'FaskesController');
+        Route::resource('data-akun', 'FaskesAkunController');
 
         Route::resource('broadcast', 'BroadcastController');
         Route::resource('disposisi-admin', 'DisposisiAdminController');
@@ -61,11 +69,6 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::resource('pesan', 'PesanController');
         Route::resource('disposisi', 'DisposisiController');
-
-        //SELECT2
-        Route::get('select2/dokter', 'Select2Controller@dokter')->name('select2.dokter');
-        Route::get('select2/getkota/{provinsi}', 'Select2Controller@getkota');
-        Route::get('select2/getkec/{kota}', 'Select2Controller@getkec');
     });
 });
 
@@ -83,7 +86,11 @@ Route::post('/antri/getJam', 'AntriController@getJam');
 Route::post('/antri/getJum', 'AntriController@getJum');
 Route::resource('antri', 'AntriController');
 
-Route::resource('/daftar', 'RegisterController');
+Route::resource('/daftar', 'RegisterController', [
+    'names' => [
+        'index' => 'daftar'
+    ]
+]);
 
 //chart
 Route::get('/chart/getpiedate/{tgl}', 'HomeController@getpiedate');
@@ -93,6 +100,6 @@ Route::get('/password/reset', function () {
     return redirect('/login');
 });
 
-Route::get('/', function () {
-    return redirect('/daftar');
-});
+// Route::get('/', function () {
+//     return redirect('/');
+// });

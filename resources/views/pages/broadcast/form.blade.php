@@ -19,7 +19,7 @@
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label for="noHp">Pesan</label>
-                                    <textarea type="text" class="form-control mb-4" name="pesan" rows="5" required>{{(isset($broadcast))?$broadcast->isi:(old('pesan')??'')}}</textarea>
+                                    <textarea id="summernote" type="text" class="form-control mb-4" name="pesan" rows="10" required>{{(isset($broadcast))?$broadcast->isi:(old('pesan')??'')}}</textarea>
                                 </div>
                             </div>
                             <div class="col-sm-8">

@@ -25,12 +25,14 @@ app.controller("JadwalController", [
             url: "/jadwal/getData"
         }).then(res => {
             angular.forEach(res.data, function(dt) {
+                console.log(dt);
                 $scope.jadwals.push({
                     hari:'-',
                     value: dt['hari'],
                     dJam: $filter('date')(dt['dJam'], 'HH:mm') ,
                     sJam: $filter('date')(dt['sJam'], 'HH:mm') ,
-                    estimasi : dt['estimasi']
+                    estimasi : dt['estimasi'],
+                    kuota : dt['kuota']
                 });
             });
             // $scope.kwitansi = res.data;
@@ -81,6 +83,7 @@ app.controller("JadwalController", [
                             dJam: $filter('date')($scope.dJam, 'HH:mm:ss') ,
                             sJam: $filter('date')($scope.sJam, 'HH:mm:ss'),
                             estimasi: $scope.estimasi,
+                            kuota : (($scope.sJam-$scope.dJam)/60000)/$scope.estimasi
                         });
                         $scope.dJam = null;
                         $scope.sJam = null;

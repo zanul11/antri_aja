@@ -37,8 +37,18 @@ Route::post('/searchSpesialis', 'ApiController@searchSpesialis');
 Route::get('/getFaskesTernama', 'ApiController@getFaskesTernama');
 Route::get('/getFaskesAll', 'ApiController@getFaskesAll');
 Route::post('/searchFaskes', 'ApiController@searchFaskes');
+
+Route::post('/getFaskesTernamaWilayah', 'ApiController@getFaskesTernamaWilayah');
+Route::post('/getFaskesAllWilayah', 'ApiController@getFaskesAllWilayah');
+Route::post('/searchFaskesWilayah', 'ApiController@searchFaskesWilayah');
+
+Route::post('/getDokterTernamaWilayah', 'ApiController@getDokterTernamaWilayah');
+Route::post('/searchDokterWilayah', 'ApiController@searchDokterWilayah');
+Route::post('/getDokterSpesialisWilayah', 'ApiController@getDokterSpesialisWilayah');
+
 Route::post('/getDokterFaskes', 'ApiController@getDokterFaskes');
 Route::post('/searchDokterFaskes', 'ApiController@searchDokterFaskes');
+
 
 Route::get('/broadcast', 'ApiController@broadcast');
 
@@ -50,3 +60,9 @@ Route::get('/get-kec/{kota}', 'ApiController@getKec');
 
 Route::post('/get-dokter-wilayah', 'ApiController@getDokterWilayah');
 Route::post('/search-dokter-wilayah', 'ApiController@cariDokterWilayah');
+
+
+//NAKES
+Route::post('/auth', 'Api\ApiController@login');
+Route::get('/antrian-nakes/{id}/{tgl}', 'Api\ApiController@antrianNakes');
+Route::post('/antrian-selesai', 'Api\ApiController@antrianSelesai');

@@ -167,7 +167,7 @@ class AntriDokterController extends Controller
             $url = 'https://fcm.googleapis.com/fcm/send';
             $msg = [
                 'title' => 'Update Antrian!',
-                'body' => 'Nakes sedang menangani pasien dengan nomor antrian ' . $antri['no_antrian'] .  ', silahkan bersiap untuk nomor antrian berikutnya!',
+                'body' => 'Antrian No. ' . $antri['no_antrian'] .  ', atas nama ' . $antri['pasien'] . ' sedang ditangani. Silahkan bersiap untuk nomor antrian berikutnya!',
 
             ];
             $extra = ["message" => $msg];
@@ -222,6 +222,6 @@ class AntriDokterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Antri::where('id', $id)->delete();
     }
 }

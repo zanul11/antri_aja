@@ -9,7 +9,7 @@
 
             <div class="widget-content widget-content-area br-6 ">
                 <div class="d-flex justify-content-between">
-                    <h3 class=""> {{$page_name}} </h3>
+                    <h3 class=""> {{$page_name}} - {{$akun->name}} </h3>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
                     <table id="antrian" class="table table-hover" style="width:100%">
@@ -23,7 +23,7 @@
                                 <th>Catatan</th>
                                 <th>Waktu</th>
                                 <th>Status</th>
-                                <th class="no-content"></th>
+                                <!-- <th class="no-content"></th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -50,13 +50,7 @@
                                         <span class="badge badge-success"> Selesai </span>
                                         @endif
                                 </td>
-                                <td>
-                                    @if($dt->tgl==date('Y-m-d') && $dt->status==0)
 
-                                    <a href="antri_dokter/{{$dt->id}}/edit" class="btn btn-primary"><i data-feather="check"></i></a>
-                                    @endif
-                                    <a href="#" onclick="deleteData('/antri_dokter','{{$dt->id}}')"><i data-feather="trash" class="text-danger"></i></a>
-                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -69,5 +63,7 @@
     </div>
 
 </div>
+
+
 
 @endsection

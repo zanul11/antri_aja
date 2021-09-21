@@ -82,7 +82,7 @@
             </div>
             <div class="bio layout-spacing ">
                 <div class="widget-content widget-content-area">
-                    <h3 class="">Aksi</h3>
+                    <h3 class="">Catatan untuk pasien</h3>
                     <form action="/antri_dokter" method="POST">
                         @csrf
 

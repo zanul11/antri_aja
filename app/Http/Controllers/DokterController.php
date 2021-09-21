@@ -28,6 +28,7 @@ class DokterController extends Controller
             'page_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
+            'action' => 'Tambah',
             'data_dokter' => $dokter,
             'jaringan' => $jaringan
         ];

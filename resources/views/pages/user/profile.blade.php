@@ -139,6 +139,12 @@
                                 <h5 class="">Alamat Praktek</h5>
                                 <div class="row">
                                     <div class="col-md-11 mx-auto">
+                                        <div class="form-group">
+                                            <label for="aboutBio">Alamat</label>
+                                            <textarea class="form-control" id="aboutBio" name="deskripsi" placeholder="Tell something interesting about yourself" rows="5">{{$profile->alamat}}</textarea>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="col-md-11 mx-auto">
                                         <div class="platform-div">
                                             <div class="col-lg-12 row">
                                                 <div class="col-lg-8">
@@ -171,7 +177,7 @@
                                             </div>
                                         </div>
 
-                                    </div>
+                                    </div> -->
 
                                 </div>
                             </div>
@@ -294,7 +300,7 @@
     </div>
     </form>
 </div>
-
+<!-- 
 <script src="{{asset('assets/leaflet/leaflet.js')}}"></script>
 <script src="{{asset('assets/leaflet/draw/leaflet.draw.js')}}"></script>
 <script>
@@ -419,4 +425,4 @@
 
     }
 </script>
-@endsection
+@endsection -->
