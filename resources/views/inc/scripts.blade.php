@@ -30,6 +30,7 @@
 <script src="{{asset('plugins/sweetalerts/sweetalert2.min.js')}}"></script>
 <script src="{{asset('plugins/sweetalerts/custom-sweetalert.js')}}"></script>
 <script src="{{asset('plugins/table/datatable/datatables.js')}}"></script>
+
 <script>
   $('#zero-config').DataTable({
     "oLanguage": {
