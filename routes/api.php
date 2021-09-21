@@ -60,3 +60,9 @@ Route::get('/get-kec/{kota}', 'ApiController@getKec');
 
 Route::post('/get-dokter-wilayah', 'ApiController@getDokterWilayah');
 Route::post('/search-dokter-wilayah', 'ApiController@cariDokterWilayah');
+
+
+//NAKES
+Route::post('/auth', 'Api\ApiController@login');
+Route::get('/antrian-nakes/{id}/{tgl}', 'Api\ApiController@antrianNakes');
+Route::post('/antrian-selesai', 'Api\ApiController@antrianSelesai');
