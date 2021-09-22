@@ -43,6 +43,7 @@ class BroadcastController extends Controller
             'action' => 'Tambah'
 
         ];
+        // $this->notifNakes('tes dong');
         return view('pages.broadcast.form')->with($data);
     }
 
@@ -123,7 +124,7 @@ class BroadcastController extends Controller
         ];
         $extra = ["message" => $msg, "variable" => 'tes Variabel', "click_action" => 'FLUTTER_NOTIFICATION_CLICK'];
         $fcm = [
-            "to" =>  'eBFdXrLJSQ-_53WjMHHvwq:APA91bFfM6sMVKlNOgsg4MkR9GslPkCBYOThoUPIPoaL3x_KavLf8FRDoODwkSsKNo4zJbkbLIAgKqFMJ1LQrjgQPj1lLsrBA0oFpp1YVdAMV3TG3LQXcq1wtLEcqRb_mwqEpPT9HOGd',
+            "to" =>  'eQB32sEuQ-mXkyWETF4akb:APA91bG5UkDcuShj3dBYvxuEdFraCvYkYpDod4gEG2Vqs2cf_TsHnwDv-BtT05uEk3cmLudrJetsJ7deZxhS-Ue8kius77XTrlN5mrk-6E9etvVobFxzoqCZABnGb7Cp2kvF5ZI9YB7z',
             "notification" => $msg,
             "data" => $extra
         ];
