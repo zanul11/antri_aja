@@ -25,7 +25,7 @@ class ApiController extends Controller
             } else {
                 Dokter::where('username', $request->input('username'))->update(['api_key' => $request->input('api_key')]);
                 return $this->success(
-                    Dokter::where('username', $request->input('username'))->first()
+                    Dokter::where('username', $request->input('username'))->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->first()
                 );
             }
         } catch (\Exception $error) {
