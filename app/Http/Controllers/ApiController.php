@@ -56,7 +56,6 @@ class ApiController extends Controller
     public function getDokterSpesialis(Request $r)
     {
         $dokter = Dokter::whereIN('role', [3, 5])->with(['jadwal' => function ($q) {
-            $q->groupBy('hari');
         }])->where('spesialis', $r->spesialis)->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
@@ -67,7 +66,6 @@ class ApiController extends Controller
     {
         if (isset($r->kecamatan)) {
             $dokter = Dokter::with(['jadwal' => function ($q) {
-                $q->groupBy('hari');
             }])
                 ->whereIN('role', [3, 5])
                 ->where('id_province', $r->provinsi)
@@ -78,7 +76,6 @@ class ApiController extends Controller
                 }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
         } else {
             $dokter = Dokter::with(['jadwal' => function ($q) {
-                $q->groupBy('hari');
             }])->whereIN('role', [3, 5])
                 ->where('id_province', $r->provinsi)
                 ->where('id_city', $r->kota)
@@ -140,7 +137,6 @@ class ApiController extends Controller
         return $antri = Dokter::whereIN('role', [3, 5])->with('spesialis_detail')->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
-            $q->groupBy('hari');
         }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->take(5)->get();
     }
 
@@ -154,7 +150,6 @@ class ApiController extends Controller
                 ->with('spesialis_detail')->withCount(['antri' => function ($q) {
                     $q->where('status', 1);
                 }])->with(['jadwal' => function ($q) {
-                    $q->groupBy('hari');
                 }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->take(5)->get();
         } else {
             return $antri = Dokter::whereIN('role', [3, 5])
@@ -163,7 +158,6 @@ class ApiController extends Controller
                 ->with('spesialis_detail')->withCount(['antri' => function ($q) {
                     $q->where('status', 1);
                 }])->with(['jadwal' => function ($q) {
-                    $q->groupBy('hari');
                 }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->take(5)->get();
         }
     }
@@ -181,7 +175,6 @@ class ApiController extends Controller
         return $antri = Dokter::whereIN('role', [3, 5])->with('spesialis_detail')->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
-            $q->groupBy('hari');
         }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->where('spesialis', $request->spesialis)->get();
     }
 
@@ -195,7 +188,6 @@ class ApiController extends Controller
                 ->with('spesialis_detail')->withCount(['antri' => function ($q) {
                     $q->where('status', 1);
                 }])->with(['jadwal' => function ($q) {
-                    $q->groupBy('hari');
                 }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->where('spesialis', $request->spesialis)->get();
         } else {
             return $antri = Dokter::whereIN('role', [3, 5])
@@ -204,7 +196,6 @@ class ApiController extends Controller
                 ->with('spesialis_detail')->withCount(['antri' => function ($q) {
                     $q->where('status', 1);
                 }])->with(['jadwal' => function ($q) {
-                    $q->groupBy('hari');
                 }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->where('spesialis', $request->spesialis)->get();
         }
     }
@@ -259,7 +250,6 @@ class ApiController extends Controller
     public function getDokterFaskes(Request $r)
     {
         $dokter = Dokter::with(['jadwal' => function ($q) {
-            $q->groupBy('hari');
         }])->where('email', $r->email)->where('username', '!=', $r->email)->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
@@ -271,7 +261,6 @@ class ApiController extends Controller
         return $antri = Dokter::whereIN('role', [3, 5])->with('spesialis_detail')->withCount(['antri' => function ($q) {
             $q->where('status', 1);
         }])->with(['jadwal' => function ($q) {
-            $q->groupBy('hari');
         }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')
             ->where('email', $request->email)->where('username', '!=', $request->email)->get();
     }
@@ -309,7 +298,6 @@ class ApiController extends Controller
     {
         if (isset($r->kecamatan)) {
             $dokter = Dokter::with(['jadwal' => function ($q) {
-                $q->groupBy('hari');
             }])
                 ->where('id_province', $r->provinsi)
                 ->where('id_city', $r->kota)
@@ -319,7 +307,6 @@ class ApiController extends Controller
                 }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
         } else {
             $dokter = Dokter::with(['jadwal' => function ($q) {
-                $q->groupBy('hari');
             }])
                 ->where('id_province', $r->provinsi)
                 ->where('id_city', $r->kota)
@@ -334,7 +321,6 @@ class ApiController extends Controller
     {
         if (isset($r->kecamatan)) {
             $dokter = Dokter::with(['jadwal' => function ($q) {
-                $q->groupBy('hari');
             }])
                 ->where('id_province', $r->provinsi)
                 ->where('id_city', $r->kota)
@@ -345,7 +331,6 @@ class ApiController extends Controller
                 }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
         } else {
             $dokter = Dokter::with(['jadwal' => function ($q) {
-                $q->groupBy('hari');
             }])
                 ->where('id_province', $r->provinsi)
                 ->where('id_city', $r->kota)
