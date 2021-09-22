@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Antri;
 use App\Models\Dokter;
 use App\Models\Persen;
+use App\Models\Pesan;
 use App\Models\TopUp;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
@@ -19,11 +20,14 @@ class ApiController extends Controller
         try {
             $credentials['username'] = $request->input('username');
             $credentials['password'] = $request->input('password');
-            if (!Auth::attempt($credentials))
+            if (!Auth::attempt($credentials)) {
                 return $this->error('Unauthorized', 401);
-            return $this->success(
-                Dokter::where('username', $request->input('username'))->first()
-            );
+            } else {
+                Dokter::where('username', $request->input('username'))->update(['api_key' => $request->input('api_key')]);
+                return $this->success(
+                    Dokter::where('username', $request->input('username'))->first()
+                );
+            }
         } catch (\Exception $error) {
 
             return $this->error($error->getMessage(), 500);
@@ -36,6 +40,59 @@ class ApiController extends Controller
         return $this->success(
             $antri
         );
+    }
+
+
+    public function antrianNotif(Request $request)
+    {
+        $iddokter = $request->id_dokter;
+        $idantri = $request->id_antri;
+
+        $pasien = Antri::where('dokter', $iddokter)->where('status', 1)->count();
+        $saldo = TopUp::where('dokter', $iddokter)->where('status', 1)->sum('jumlah');
+        $pesan = Pesan::where('dokter', $iddokter)->first();
+
+        if (($saldo - ($pasien * 2000)) < 2000) {
+            return $this->success(
+                null,
+                'Saldo Kurang!'
+            );
+        } else {
+
+            $antri = Antri::with('waktu_detail')->where('dokter', $iddokter)->where('id', $idantri)->first();
+
+            $daftar_antrian = Antri::select('notif_id')->where('dokter', $iddokter)->where('tgl', $antri['tgl'])->where('waktu', $antri['waktu'])->get()->pluck('notif_id');
+
+            $url = 'https://fcm.googleapis.com/fcm/send';
+            $msg = [
+                'title' => 'Update Antrian!',
+                'body' => 'Antrian No. ' . $antri['no_antrian'] .  ', atas nama ' . $antri['pasien'] . ' sedang ditangani. Silahkan bersiap untuk nomor antrian berikutnya!',
+
+            ];
+            $extra = ["message" => $msg];
+            $fcm = [
+                "registration_ids" =>  $daftar_antrian,
+                "notification" => $msg,
+                "data" => $extra
+            ];
+            $headers = [
+                'Authorization: key=AAAAJjWldH0:APA91bH3gGJvWDe3U6DkR8P5hnqhc9h7xqM3LSY8q8vfzjDJNMPnbGqk-91KRZfpWmF4XvA89GEzht8NvNyN-MJVjnz9x9il8tyZpCTPd_f7AjdsoMqtjkWQbtwJ9WLr55VfuiXizDXY',
+                'Content-Type: application/json'
+            ];
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fcm));
+            $result = curl_exec($ch);
+            curl_close($ch);
+            return $this->success(
+                null,
+                $pesan['pesan']
+            );
+        }
     }
 
     public function antrianSelesai(Request $request)
