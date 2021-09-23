@@ -81,6 +81,12 @@
                                                 <div class="pcmall-paymentfe_jObzzU"><img src="{{asset('assets/img/bank_bni.png')}}" height="50px"></div>
                                                 @elseif ($dt_pembayaran['Channel']=='MANDIRI')
                                                 <div class="pcmall-paymentfe_jObzzU"><img src="{{asset('assets/img/bank_mandiri.png')}}" height="50px"></div>
+                                                @elseif ($dt_pembayaran['Channel']=='BCA')
+                                                <div class="pcmall-paymentfe_jObzzU"><img src="{{asset('assets/img/bank_bca.png')}}" height="50px"></div>
+                                                @elseif ($dt_pembayaran['Channel']=='BRI')
+                                                <div class="pcmall-paymentfe_jObzzU"><img src="{{asset('assets/img/bank_bri.png')}}" height="50px"></div>
+                                                @elseif ($dt_pembayaran['Channel']=='BMI')
+                                                <div class="pcmall-paymentfe_jObzzU"><img src="{{asset('assets/img/bank_muammalat.jpg')}}" height="50px"></div>
                                                 @else
                                                 <div class="pcmall-paymentfe_jObzzU"><img src="{{asset('assets/img/bank_cimb.png')}}" height="50px"></div>
                                                 @endif

@@ -97,7 +97,8 @@ class SaldoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    { }
+    {
+    }
 
     /**
      * Update the specified resource in storage.
@@ -108,14 +109,15 @@ class SaldoController extends Controller
      */
     public function update(Request $request)
     {
-
+        // return $request;
         //production
         $va           = '1179001227977474';
         $secret       = 'BE93365D-9A7A-469F-B34D-7B96EA454568';
-        //$va           = '1179002340758828'; //sandbox dev
-        //$secret       = '2BC8D477-98DC-414F-9DC1-8D9B7B9C9CDA'; //sandbox dev
+        // $va           = '1179002340758828'; //sandbox dev
+        // $secret       = '2BC8D477-98DC-414F-9DC1-8D9B7B9C9CDA'; //sandbox dev
 
         // $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; //redirect
+        // $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct';
         $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; //direct
         $method       = 'POST'; //method
 
@@ -192,18 +194,18 @@ class SaldoController extends Controller
         } else {
 
             $res = json_decode($ret, true);
-            // return $res;
+
             if ($res['Status'] == 200) {
-                TopUp::create([
-                    // "session_id" => $res['Data']['SessionID'],
-                    "trx_id" => $res['Data']['TransactionId'],
-                    "dokter" => Auth::user()->id,
-                    "jumlah" => $request->jumlah,
-                    "uid" => $generateUid,
-                    "fee" => $res['Data']['Fee'],
-                    "metode" => $request->metode,
-                    "channel" => $request->paymentChannel
-                ]);
+                // TopUp::create([
+                //     // "session_id" => $res['Data']['SessionID'],
+                //     "trx_id" => $res['Data']['TransactionId'],
+                //     "dokter" => Auth::user()->id,
+                //     "jumlah" => $request->jumlah,
+                //     "uid" => $generateUid,
+                //     "fee" => $res['Data']['Fee'],
+                //     "metode" => $request->metode,
+                //     "channel" => $request->paymentChannel
+                // ]);
                 $data = [
                     'category_name' => 'Saldo',
                     'page_name' => 'Saldo',

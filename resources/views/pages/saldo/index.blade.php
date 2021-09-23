@@ -45,7 +45,7 @@
                                                     <select class="pembayaran js-states form-control" id="metode" name="metode" onchange="pilihMetode()" required>
                                                         <option value="">Pilih metode pembayaran</option>
                                                         <option value="va">Virtual Akun</option>
-                                                        <option value="banktransfer">Bank Transfer</option>
+                                                        <!-- <option value="banktransfer">Bank Transfer</option> -->
                                                         <option value="qris">QRIS</option>
                                                     </select>
                                                 </div>
@@ -224,8 +224,16 @@
         var metode = document.getElementById("metode").value;
         var select = document.getElementById('paymentChannel');
         var va = [{
+                id: 'bca',
+                text: 'BCA'
+            },
+            {
                 id: 'bni',
                 text: 'BNI'
+            },
+            {
+                id: 'bri',
+                text: 'BRI'
             },
             {
                 id: 'cimb',
@@ -234,7 +242,11 @@
             {
                 id: 'mandiri',
                 text: 'Mandiri'
-            }
+            },
+            {
+                id: 'bmi',
+                text: 'Muamalat '
+            },
         ];
         var tf = [{
             id: 'bca',
@@ -242,7 +254,7 @@
         }];
         var qris = [{
             id: 'linkaja',
-            text: 'Link Aja'
+            text: 'Link Aja, Dana, OVO, Dll'
         }];
 
 
