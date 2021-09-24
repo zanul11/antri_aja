@@ -67,3 +67,6 @@ Route::post('/auth', 'Api\ApiController@login');
 Route::get('/antrian-nakes/{id}/{tgl}', 'Api\ApiController@antrianNakes');
 Route::post('/antrian-selesai', 'Api\ApiController@antrianSelesai');
 Route::post('/antrian-notif', 'Api\ApiController@antrianNotif');
+Route::get('/getSaldo/{id}', 'Api\ApiController@getSaldo');
+Route::get('/getHistori/{id}', 'Api\ApiController@getHistori');
+Route::post('/generate-pembayaran', 'Api\ApiController@generatePembayaran');

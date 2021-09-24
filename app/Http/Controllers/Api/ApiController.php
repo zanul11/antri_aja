@@ -166,4 +166,123 @@ class ApiController extends Controller
             'berhasil simpan'
         );
     }
+
+    public function getSaldo($id)
+    {
+        $kredit = TopUp::where('dokter', $id)->where('status', 1)->where('jenis', 0)->sum('jumlah');
+        $saldo = TopUp::where('dokter', $id)->where('status', 1)->where('jenis', 1)->sum('jumlah');
+        return $this->success(
+            $saldo - $kredit
+        );
+    }
+
+    public function getHistori($id)
+    {
+        $his = TopUp::where('dokter', $id)->where('ket', 'Top Up')->get();
+        return $this->success(
+            $his
+        );
+    }
+
+    public function generatePembayaran(Request $request)
+    {
+
+        $dokter = Dokter::where('id', $request->id_user)->first();
+        //production
+        // $va           = '1179001227977474';
+        // $secret       = 'BE93365D-9A7A-469F-B34D-7B96EA454568';
+        //sandbox dev
+        $va           = '1179002340758828';
+        $secret       = '2BC8D477-98DC-414F-9DC1-8D9B7B9C9CDA';
+
+        // $url          = 'https://sandbox.ipaymu.com/api/v2/payment'; //redirect
+        $url          = 'https://sandbox.ipaymu.com/api/v2/payment/direct';
+        // $url          = 'https://my.ipaymu.com/api/v2/payment/direct'; //direct
+        $method       = 'POST'; //method
+
+        $generateUid =  substr(base_convert(sha1(uniqid(mt_rand())), 16, 36), 0, 9);
+        //Request Body//
+        $body['product']    = array('Top Up Saldo Antri Aja');
+        $body['qty']        = array('1');
+        $body['price']      = array($request->jumlah);
+        // $body['amount']     = $request->jumlah;
+        $body['returnUrl']  = url('/') . '/topup-success';
+        $body['cancelUrl']  = url('/') . '/saldo';
+        $body['notifyUrl']  = url('/') . '/ipaymu-success';
+        $body['name']  = $dokter['name'];
+        $body['email']  = $dokter['email'];
+        $body['phone']  = (isset($dokter['no_hp'])) ? $dokter['no_hp'] : '082242424300';
+
+        //khusus direct
+        $body['paymentMethod']  = $request->metode;
+        $body['paymentChannel']  = $request->paymentChannel;
+        $body['amount']     = $request->jumlah;
+
+        //End Request Body//
+
+        //Generate Signature
+        // *Don't change this
+        $jsonBody     = json_encode($body, JSON_UNESCAPED_SLASHES);
+        $requestBody  = strtolower(hash('sha256', $jsonBody));
+        $stringToSign = strtoupper($method) . ':' . $va . ':' . $requestBody . ':' . $secret;
+        $signature    = hash_hmac('sha256', $stringToSign, $secret);
+        $timestamp    = Date('YmdHis');
+        //End Generate Signature
+
+        // return $signature . ' - ' . $timestamp;
+
+
+        $ch = curl_init($url);
+
+        $headers = array(
+            'Accept: application/json',
+            'Content-Type: application/json',
+            'va: ' . $va,
+            'signature: ' . $signature,
+            'timestamp: ' . $timestamp
+        );
+
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        curl_setopt($ch, CURLOPT_POST, count($body));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonBody);
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        $err = curl_error($ch);
+        $ret = curl_exec($ch);
+        curl_close($ch);
+        // header('Location: https://www.facebook.com/');
+        if ($err) {
+            // echo $err;
+            return $this->error(
+                'error',
+                400
+            );
+        } else {
+            $res = json_decode($ret, true);
+            if ($res['Status'] == 200) {
+                TopUp::create([
+                    // "session_id" => $res['Data']['SessionID'],
+                    "trx_id" => $res['Data']['TransactionId'],
+                    "dokter" => $request->id_user,
+                    "jumlah" => $request->jumlah,
+                    "uid" => $generateUid,
+                    "fee" => $res['Data']['Fee'],
+                    "metode" => $request->metode,
+                    "channel" => $request->paymentChannel
+                ]);
+                return $this->success(
+                    $res
+                );
+            } else {
+                return $this->error(
+                    $res['Message'],
+                    400
+                );
+            }
+        }
+    }
 }
