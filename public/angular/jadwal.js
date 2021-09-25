@@ -4,7 +4,8 @@ app.controller("JadwalController", [
     "$scope",
     "$http",
     "$filter",
-    function JadwalController($scope, $http, $filter) {
+    "$window",
+    function JadwalController($scope, $http, $filter, $window) {
         $scope.jadwals = [];
         $scope.dJam = null;
         $scope.sJam = null;
@@ -74,7 +75,7 @@ app.controller("JadwalController", [
                             dJam: $filter('date')($scope.dJam, 'HH:mm:ss') ,
                             sJam: $filter('date')($scope.sJam, 'HH:mm:ss'),
                             estimasi: $scope.estimasi,
-                            kuota : (($scope.sJam-$scope.dJam)/60000)/$scope.estimasi
+                            kuota : $window.Math.round((($scope.sJam-$scope.dJam)/60000)/$scope.estimasi)
                         }
                     }).then(function(res){
                         $scope.jadwals.push({
@@ -83,7 +84,7 @@ app.controller("JadwalController", [
                             dJam: $filter('date')($scope.dJam, 'HH:mm:ss') ,
                             sJam: $filter('date')($scope.sJam, 'HH:mm:ss'),
                             estimasi: $scope.estimasi,
-                            kuota : (($scope.sJam-$scope.dJam)/60000)/$scope.estimasi
+                            kuota : $window.Math.round((($scope.sJam-$scope.dJam)/60000)/$scope.estimasi)
                         });
                         $scope.dJam = null;
                         $scope.sJam = null;
