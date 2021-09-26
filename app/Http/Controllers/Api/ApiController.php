@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Antri;
 use App\Models\Dokter;
+use App\Models\Jadwal;
 use App\Models\Persen;
 use App\Models\Pesan;
 use App\Models\TopUp;
@@ -90,7 +91,7 @@ class ApiController extends Controller
             curl_close($ch);
             return $this->success(
                 null,
-                $pesan['pesan']
+                (isset($pesan['pesan'])) ? $pesan['pesan'] : '-'
             );
         }
     }
@@ -284,5 +285,36 @@ class ApiController extends Controller
                 );
             }
         }
+    }
+
+
+    public function getJadwal($id, $waktu)
+    {
+        $jadwal = Jadwal::where('id_user', $id)->where('hari', $waktu)->orderBy('dJam')->get();
+        return $jadwal;
+    }
+
+    public function addJadwal(Request $request)
+    {
+        Jadwal::create([
+            "id_user" => $request->id_dokter,
+            "hari" => $request->hari,
+            "dJam" => $request->dJam,
+            "sJam" => $request->sJam,
+            "estimasi" => $request->estimasi,
+            "kuota" => $request->kuota
+        ]);
+        return $this->success(
+            'berhasil simpan'
+        );
+    }
+
+
+    public function deleteJadwal($id)
+    {
+        Jadwal::where('id', $id)->delete();
+        return $this->success(
+            'berhasil hapus'
+        );
     }
 }
