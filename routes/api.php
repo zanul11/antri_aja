@@ -65,6 +65,7 @@ Route::post('/search-dokter-wilayah', 'ApiController@cariDokterWilayah');
 //NAKES
 Route::post('/auth', 'Api\ApiController@login');
 Route::get('/antrian-nakes/{id}/{tgl}', 'Api\ApiController@antrianNakes');
+Route::get('/antrian-ditangani-nakes/{id}/{tgl}', 'Api\ApiController@antrianDitanganiNakes');
 Route::post('/antrian-selesai', 'Api\ApiController@antrianSelesai');
 Route::post('/antrian-notif', 'Api\ApiController@antrianNotif');
 Route::get('/getSaldo/{id}', 'Api\ApiController@getSaldo');

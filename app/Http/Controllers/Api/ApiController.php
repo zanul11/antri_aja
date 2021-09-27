@@ -37,7 +37,15 @@ class ApiController extends Controller
 
     public function antrianNakes($id, $tgl)
     {
-        $antri = Antri::with('dokter_detail')->where('dokter', $id)->where('tgl', $tgl)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
+        $antri = Antri::with('dokter_detail')->where('status', 0)->where('dokter', $id)->where('tgl', $tgl)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
+        return $this->success(
+            $antri
+        );
+    }
+
+    public function antrianDitanganiNakes($id, $tgl)
+    {
+        $antri = Antri::with('dokter_detail')->where('status', 1)->where('dokter', $id)->where('tgl', $tgl)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
         return $this->success(
             $antri
         );
