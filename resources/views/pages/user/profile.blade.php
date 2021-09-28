@@ -65,7 +65,7 @@
                                                             </div>
 
                                                         </div>
-                                                        @if($profile->role!=4)
+                                                        @if($profile->role!=4||$profile->role!=3)
                                                         <div class="row">
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
