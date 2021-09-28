@@ -25,7 +25,8 @@ class Select2Controller extends Controller
                     ->whereRaw("concat(name,' ',username) like '%" . $cari . "%'")
                     ->where('id', '!=', Auth::user()->id)
                     ->where('parent', Auth::user()->id)
-                    ->orWhere('email', Auth::user()->email)
+                    ->where('role', 5)
+                    // ->orWhere('email', Auth::user()->email)
                     ->get();
             }
 
