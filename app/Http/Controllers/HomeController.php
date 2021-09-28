@@ -145,4 +145,9 @@ class HomeController extends Controller
         $column_chart =  array($bln, $menunggu, $ditangani);
         return $column_chart;
     }
+
+    public function galeh()
+    {
+        return view('galeh');
+    }
 }

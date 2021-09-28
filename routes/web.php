@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
+
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', 'HomeController@index');
 
@@ -27,6 +29,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('select2/getkota/{provinsi}', 'Select2Controller@getkota');
     Route::get('select2/getkec/{kota}', 'Select2Controller@getkec');
     Route::group(['middleware' => 'admin'], function () {
+        Route::get('/galeh', 'HomeController@galeh');
         Route::resource('user', 'UserController');
         Route::resource('spesialis', 'SpesialisController');
         Route::resource('marketing', 'MarketingController');
@@ -77,6 +80,7 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index');
 Route::get('/sales', 'HomeController@index');
+
 
 // Route::any('/ipaymu-success/{email}/{uid}', 'IpaymuResponseController@success');
 Route::post('/ipaymu-success', 'IpaymuResponseController@success');
