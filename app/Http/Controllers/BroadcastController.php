@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Antri;
 use App\Models\Broadcast;
+use App\Models\Notif;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -88,6 +89,13 @@ class BroadcastController extends Controller
                 'body' => substr(strip_tags($request->pesan), 0, 110) . "...",
 
             ];
+            Notif::create([
+                "user" => 'Broadcast',
+                "type" => 1,
+                "judul" => 'Berita Terkini',
+                "dari" => 'Administrator',
+                "isi" => substr(strip_tags($request->pesan), 0, 110) . "...",
+            ]);
             $extra = ["message" => $msg];
             $fcm = [
                 "registration_ids" =>  $getnotif,

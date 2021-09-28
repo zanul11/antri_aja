@@ -52,7 +52,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="password" class="form-control mb-4" name="password" id="password" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}}>
+                                                <input type="text" class="form-control mb-4" name="password" id="password" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -62,7 +62,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">Spesialisasi</label>
                                                 <select class="placeholder js-states form-control" name="spesialis" required>
@@ -77,7 +77,9 @@
                                                 <label for="pengalaman">Pengalaman</label>
                                                 <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}">
                                             </div>
-                                        </div>
+                                        </div> -->
+                                        <input type="hidden" name="pengalaman" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}">
+                                        <input type="hidden" name="spesialis" value="{{$data_spesialis[0]->id}}">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nama">Kode Faskes</label>
@@ -97,7 +99,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-8">
 
                                             <div class="form-group">
                                                 <label for="alamat">Deskripsi Faskes</label>

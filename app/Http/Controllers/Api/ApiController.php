@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Antri;
 use App\Models\Dokter;
+use App\Models\Jadwal;
+use App\Models\Notif;
 use App\Models\Persen;
 use App\Models\Pesan;
+use App\Models\RequestTable;
 use App\Models\TopUp;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
@@ -36,7 +39,15 @@ class ApiController extends Controller
 
     public function antrianNakes($id, $tgl)
     {
-        $antri = Antri::with('dokter_detail')->where('dokter', $id)->where('status', 0)->where('tgl', $tgl)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
+        $antri = Antri::with('dokter_detail')->where('status', 0)->where('dokter', $id)->where('tgl', $tgl)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
+        return $this->success(
+            $antri
+        );
+    }
+
+    public function antrianDitanganiNakes($id, $tgl)
+    {
+        $antri = Antri::with('dokter_detail')->where('status', 1)->where('dokter', $id)->where('tgl', $tgl)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
         return $this->success(
             $antri
         );
@@ -51,6 +62,7 @@ class ApiController extends Controller
         $pasien = Antri::where('dokter', $iddokter)->where('status', 1)->count();
         $saldo = TopUp::where('dokter', $iddokter)->where('status', 1)->sum('jumlah');
         $pesan = Pesan::where('dokter', $iddokter)->first();
+        $dokter = Dokter::where('id', $request->id_dokter)->first();
 
         if (($saldo - ($pasien * 2000)) < 2000) {
             return $this->success(
@@ -60,6 +72,13 @@ class ApiController extends Controller
         } else {
 
             $antri = Antri::with('waktu_detail')->where('dokter', $iddokter)->where('id', $idantri)->first();
+
+            Notif::create([
+                "user" => $antri['no_hp'],
+                "type" => 1,
+                "dari" => $dokter['name'],
+                "isi" => 'Antrian No. ' . $antri['no_antrian'] .  ', atas nama ' . $antri['pasien'] . ' sedang ditangani. Silahkan bersiap untuk nomor antrian berikutnya!',
+            ]);
 
             $daftar_antrian = Antri::select('notif_id')->where('dokter', $iddokter)->where('tgl', $antri['tgl'])->where('waktu', $antri['waktu'])->get()->pluck('notif_id');
 
@@ -104,6 +123,13 @@ class ApiController extends Controller
         $dokter = Dokter::where('id', $iddokter)->first();
         $persen = Persen::first();
         $antri =  Antri::where('id',  $idantri)->first();
+
+        Notif::create([
+            "user" => $antri['no_hp'],
+            "type" => 1,
+            "dari" => $dokter['name'],
+            "isi" => 'Pasien Selesai Ditangani! \n' . $catatan,
+        ]);
 
         Antri::where('id', $idantri)
             ->update(["status" => 1, "catatan_dokter" => $catatan, "selesai_at" => date('Y-m-d H:i:s')]);
@@ -284,5 +310,72 @@ class ApiController extends Controller
                 );
             }
         }
+    }
+
+
+    public function getJadwal($id, $waktu)
+    {
+        $jadwal = Jadwal::where('id_user', $id)->where('hari', $waktu)->orderBy('dJam')->get();
+        return $jadwal;
+    }
+
+    public function addJadwal(Request $request)
+    {
+        Jadwal::create([
+            "id_user" => $request->id_dokter,
+            "hari" => $request->hari,
+            "dJam" => $request->dJam,
+            "sJam" => $request->sJam,
+            "estimasi" => $request->estimasi,
+            "kuota" => $request->kuota
+        ]);
+        return $this->success(
+            'berhasil simpan'
+        );
+    }
+
+
+    public function deleteJadwal($id)
+    {
+        Jadwal::where('id', $id)->delete();
+        return $this->success(
+            'berhasil hapus'
+        );
+    }
+
+    public function getNotif($user)
+    {
+        $notif = Notif::where('user', $user)->orwhere('user', 'Broadcast')->orderBy('created_at', 'desc')->get();
+        return $notif;
+    }
+
+    public function updateNotif($id)
+    {
+        $notif = Notif::where('id', $id)->update(['is_read' => 1]);
+        return $this->success(
+            'berhasil update'
+        );
+    }
+
+    public function addRequest(Request $request)
+    {
+        $iddokter = $request->id_dokter;
+        $jumlah = $request->jumlah;
+        $dokter = Dokter::where('id', $iddokter)->first();
+        // return $dokter['email'];
+        RequestTable::create([
+            "faskes" => $dokter['email'],
+            "nakes" => $iddokter,
+            "request" => $jumlah,
+        ]);
+        return $this->success(
+            'berhasil tambah'
+        );
+    }
+
+    public function getRequest($id)
+    {
+        $req = RequestTable::where('nakes', $id)->orderBy('created_at', 'desc')->get();
+        return $req;
     }
 }

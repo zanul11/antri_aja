@@ -38,6 +38,14 @@ class HelloWorldCommand extends Command
     public function handle()
     {
         // $daftar_antrian = Antri::select('notif_id')->get()->pluck('notif_id');
+        $data = DB::select('select * from antri where tgl >= DATE_ADD(CURRENT_DATE, INTERVAL - 2 DAY) group by dokter');
+        foreach ($data as $dt) {
+            $dokter = Dokter::where('id', $dt->dokter)->first();
+            if (isset($dokter['pagi'])) {
+                $antrian = Antri::where('tgl', '>=', DB::raw('DATE_ADD(CURRENT_DATE, INTERVAL - 2 DAY)'))->where('dokter', $dokter['id'])->pluck('notif_id');
+                //kirim notif
+            }
+        }
 
         info('called every jam 12');
         $url = 'https://fcm.googleapis.com/fcm/send';

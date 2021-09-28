@@ -33,6 +33,7 @@ class SaldoController extends Controller
         // ]);
         $dokter = Dokter::where('id', Auth::user()->id)->with(['saldo' => function ($q) {
             $q->where('status', 1);
+            $q->orderby('created_at');
         }])->first();
         // return json_decode($response->getBody(), true);
         $data = [

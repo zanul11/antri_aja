@@ -65,8 +65,18 @@ Route::post('/search-dokter-wilayah', 'ApiController@cariDokterWilayah');
 //NAKES
 Route::post('/auth', 'Api\ApiController@login');
 Route::get('/antrian-nakes/{id}/{tgl}', 'Api\ApiController@antrianNakes');
+Route::get('/antrian-ditangani-nakes/{id}/{tgl}', 'Api\ApiController@antrianDitanganiNakes');
 Route::post('/antrian-selesai', 'Api\ApiController@antrianSelesai');
 Route::post('/antrian-notif', 'Api\ApiController@antrianNotif');
 Route::get('/getSaldo/{id}', 'Api\ApiController@getSaldo');
 Route::get('/getHistori/{id}', 'Api\ApiController@getHistori');
 Route::post('/generate-pembayaran', 'Api\ApiController@generatePembayaran');
+
+Route::get('/getJadwal/{id}/{waktu}', 'Api\ApiController@getJadwal');
+Route::post('/addJadwal', 'Api\ApiController@addJadwal');
+Route::get('/deleteJadwal/{id}', 'Api\ApiController@deleteJadwal');
+
+Route::get('/getNotif/{user}', 'Api\ApiController@getNotif');
+Route::get('/updateNotif/{id}', 'Api\ApiController@updateNotif');
+Route::post('/addRequest', 'Api\ApiController@addRequest');
+Route::get('/getRequest/{id}', 'Api\ApiController@getRequest');

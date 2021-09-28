@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanFaskes;
+use App\Exports\LaporanNakes;
 use App\Models\Dokter;
 use App\Models\Provinsi;
 use App\Models\Spesialis;
@@ -9,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FaskesController extends Controller
 {
@@ -53,6 +56,16 @@ class FaskesController extends Controller
 
         ];
         return view('pages.data-faskes.form')->with($data);
+    }
+
+    public function ExportFaskes()
+    {
+        return Excel::download(new LaporanFaskes(), 'export_laporan_marketing.xlsx');
+    }
+
+    public function ExportNakes($id)
+    {
+        return Excel::download(new LaporanNakes($id), 'export_laporan_marketing.xlsx');
     }
 
     /**
@@ -113,6 +126,8 @@ class FaskesController extends Controller
         return view('pages.data-faskes.akun')->with($data);
     }
 
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -133,7 +148,7 @@ class FaskesController extends Controller
             'dokter' => $data_faske,
             'data_provinsi' => $provinsi
         ];
-        return view('pages.dokter.form')->with($data);
+        return view('pages.data-faskes.form')->with($data);
     }
 
     /**
@@ -143,9 +158,53 @@ class FaskesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,  Dokter $data_faske)
     {
-        //
+        $faske =  $data_faske;
+        if ($request->email != $faske->email) {
+            $cek = Dokter::where('email', $request->email)->get();
+            if (count($cek) > 0) {
+                return Redirect::to('/data-faskes/' . $faske->id . '/edit')->withErrors(['Duplicate Faskes email/username!.'])->withInput()->with('message', 'Duplicate Faskes email/username!.');
+            } else {
+                if (isset($request->password) || $request->password != '')
+                    $faske->password = bcrypt($request->password);
+                $faske->email = $request->email;
+                $faske->name = $request->nama;
+                $faske->username = $request->email;
+                $faske->no_hp = $request->no_hp;
+                $faske->alamat = $request->alamat;
+                $faske->spesialis = $request->spesialis;
+                $faske->pengalaman = $request->pengalaman;
+                $faske->deskripsi = $request->deskripsi;
+                $faske->kode_faskes = $request->kode_faskes;
+                $faske->nama_faskes = $request->nama_faskes;
+                $faske->tlp_faskes = $request->tlp_faskes;
+                $faske->id_province = $request->province;
+                $faske->id_city = $request->kota;
+                $faske->id_subdistrict = $request->kec;
+                $faske->save();
+                return Redirect::to('/data-faskes')->with('success', 'Data Faskes updated!');
+            }
+        } else {
+            if (isset($request->password) || $request->password != '')
+                $faske->password = bcrypt($request->password);
+            $faske->email = $request->email;
+            $faske->name = $request->nama;
+            $faske->username = $request->email;
+            $faske->no_hp = $request->no_hp;
+            $faske->alamat = $request->alamat;
+            $faske->spesialis = $request->spesialis;
+            $faske->pengalaman = $request->pengalaman;
+            $faske->deskripsi = $request->deskripsi;
+            $faske->kode_faskes = $request->kode_faskes;
+            $faske->nama_faskes = $request->nama_faskes;
+            $faske->tlp_faskes = $request->tlp_faskes;
+            $faske->id_province = $request->province;
+            $faske->id_city = $request->kota;
+            $faske->id_subdistrict = $request->kec;
+            $faske->save();
+            return Redirect::to('/data-faskes')->with('success', 'Data Faskes updated!');
+        }
     }
 
     /**

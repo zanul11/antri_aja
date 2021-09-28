@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
         //EXPORT
         Route::get('export-pasien', 'PasienController@ExportPasien');
         Route::get('export-marketing', 'MarketingController@ExportPasien');
+        Route::get('export-faskes', 'FaskesController@ExportFaskes');
+        Route::get('export-nakes/{id}', 'FaskesController@ExportNakes');
 
         Route::resource('data-faskes', 'FaskesController');
         Route::resource('data-akun', 'FaskesAkunController');
@@ -62,12 +64,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/jadwal/deleteAkun', 'JadwalController@deleteAkun');
         Route::post('/jadwal/saveAkun', 'JadwalController@saveAkun');
         Route::resource('jadwal', 'JadwalController');
-
         Route::resource('antri_dokter', 'AntriDokterController');
         Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
         Route::resource('saldo', 'SaldoController');
-
         Route::resource('pesan', 'PesanController');
+        Route::resource('request-saldo', 'RequestTableController');
+        Route::post('/reminder', 'PesanController@addReminder');
         Route::resource('disposisi', 'DisposisiController');
     });
 });

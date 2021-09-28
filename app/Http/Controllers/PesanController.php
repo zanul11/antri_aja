@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Antri;
+use App\Models\Dokter;
 use App\Models\Pesan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\DB;
 
 class PesanController extends Controller
 {
@@ -85,8 +88,20 @@ class PesanController extends Controller
      */
     public function update(Request $request, Pesan $pesan)
     {
-        //
+        // return $request;
+
     }
+    public function addReminder(Request $request)
+    {
+        $data = Dokter::where('id', Auth::user()->id)->update([
+            'pagi' => $request->pagi,
+            'siang' => $request->siang,
+            'sore' => $request->sore,
+            'malam' => $request->malam,
+        ]);
+        return Redirect::to('/pesan')->with('success', 'Data Reminder updated!');
+    }
+
 
     /**
      * Remove the specified resource from storage.

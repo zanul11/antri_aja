@@ -131,19 +131,24 @@ return [
             'title' => 'Profile Faskes',
             'url' => '/profile'
         ],
-        [
-            'icon' => '<i data-feather="message-circle" ></i>',
-            'title' => 'Template Pesan',
-            'url' => '/pesan'
-        ],
+        // [
+        //     'icon' => '<i data-feather="message-circle" ></i>',
+        //     'title' => 'Template Pesan',
+        //     'url' => '/pesan'
+        // ],
         [
             'icon' => '<i data-feather="dollar-sign" ></i>',
             'title' => 'Saldo',
             'url' => '/saldo'
         ],
         [
+            'icon' => '<i data-feather="trending-down" ></i>',
+            'title' => 'Request Saldo',
+            'url' => '/request-saldo'
+        ],
+        [
             'icon' => '<i data-feather="users" ></i>',
-            'title' => 'Membership',
+            'title' => 'Data Mitra',
             'url' => '/faskes'
         ],
         [
@@ -156,11 +161,11 @@ return [
             'title' => 'Jadwal Pelayanan',
             'url' => '/jadwal'
         ],
-        [
-            'icon' => '<i data-feather="layers" ></i>',
-            'title' => 'Daftar Antrian',
-            'url' => '/antri_dokter'
-        ],
+        // [
+        //     'icon' => '<i data-feather="layers" ></i>',
+        //     'title' => 'Daftar Antrian',
+        //     'url' => '/antri_dokter'
+        // ],
     ],
     'akun' => [
         [

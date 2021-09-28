@@ -66,7 +66,9 @@
 
                                                         </div>
                                                         @if($profile->role!=4)
+
                                                         <div class="row">
+                                                            @if($profile->role!=3)
                                                             <div class="col-sm-6">
                                                                 <div class="form-group">
                                                                     <label for="">Spesialis</label>
@@ -83,7 +85,7 @@
                                                                     <input type="number" class="form-control mb-4" id="noHp" name="pengalaman" value="{{$profile->pengalaman}}">
                                                                 </div>
                                                             </div>
-
+                                                            @endif
                                                             @if($profile->role==3)
                                                             <div class="col-sm-3">
                                                                 <div class="form-group">

@@ -15,7 +15,7 @@
                         <a href="#" class="mt-2 "> <button class="btn btn-primary mb-2"># NO ANTRIAN : {{$antri->no_antrian}}</button></a>
                     </div>
                     <div class="text-center user-info">
-                        <img src="{{(isset($antri->pasien_detail->foto))?asset('uploads/'.$antri->pasien_detail->foto):asset('assets/img/200x200.jpg')}}" alt="avatar" height="50px">
+                        <img src="{{(isset($antri->pasien_detail->foto))?asset('antri_aja/public/uploads/'.$antri->pasien_detail->foto):asset('assets/img/200x200.jpg')}}" alt="avatar" height="50px">
                         <p class="">{{$antri->pasien}}</p>
                     </div>
                     <div class="user-info-list">
