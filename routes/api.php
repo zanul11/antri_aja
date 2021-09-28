@@ -78,3 +78,4 @@ Route::get('/deleteJadwal/{id}', 'Api\ApiController@deleteJadwal');
 
 Route::get('/getNotif/{user}', 'Api\ApiController@getNotif');
 Route::get('/updateNotif/{id}', 'Api\ApiController@updateNotif');
+Route::post('/addRequest', 'Api\ApiController@addRequest');

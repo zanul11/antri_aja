@@ -355,4 +355,25 @@ class ApiController extends Controller
             'berhasil update'
         );
     }
+
+    public function addRequest(Request $request)
+    {
+        $iddokter = $request->id_dokter;
+        $jumlah = $request->jumlah;
+        $dokter = Dokter::where('id', $iddokter)->first();
+        Request::create([
+            "faskes" => $dokter['email'],
+            "nakes" => $iddokter,
+            "request" => $jumlah,
+        ]);
+        return $this->success(
+            'berhasil tambah'
+        );
+    }
+
+    public function getRequest($id)
+    {
+        $req = Request::where('nakes', $id)->orderBy('created_at', 'desc')->get();
+        return $req;
+    }
 }
