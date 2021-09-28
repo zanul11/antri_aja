@@ -35,7 +35,7 @@ class PasienController extends Controller
         Session::put('selectedTgld', date('Y-m-d'));
         Session::put('selectedTgls', date('Y-m-d'));
         Session::put('hari', $days[date('w')]);
-        $dokter = Dokter::whereIN('role', [3, 5])->get();
+        $dokter = Dokter::whereIN('role', [5])->get();
         $semua =  Antri::where('tgl', date('Y-m-d'))->count();
         $terdaftar =  Antri::where('tgl', date('Y-m-d'))->count();
         $ditangani =  Antri::where('tgl', date('Y-m-d'))->where('status', 1)->count();
