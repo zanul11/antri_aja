@@ -36,7 +36,7 @@ class ApiController extends Controller
 
     public function antrianNakes($id, $tgl)
     {
-        $antri = Antri::with('dokter_detail')->where('dokter', $id)->where('tgl', $tgl)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
+        $antri = Antri::with('dokter_detail')->where('dokter', $id)->where('status', 0)->where('tgl', $tgl)->with(['waktu_detail'])->orderBy('tgl', 'desc')->orderBy('dJam')->orderBy('no_antrian')->orderBy('status')->get();
         return $this->success(
             $antri
         );
@@ -90,7 +90,7 @@ class ApiController extends Controller
             curl_close($ch);
             return $this->success(
                 null,
-                $pesan['pesan']
+                (isset($pesan['pesan'])) ? $pesan['pesan'] : '-'
             );
         }
     }
