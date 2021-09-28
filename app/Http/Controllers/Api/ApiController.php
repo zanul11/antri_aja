@@ -9,6 +9,7 @@ use App\Models\Jadwal;
 use App\Models\Notif;
 use App\Models\Persen;
 use App\Models\Pesan;
+use App\Models\RequestTable;
 use App\Models\TopUp;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
@@ -361,7 +362,8 @@ class ApiController extends Controller
         $iddokter = $request->id_dokter;
         $jumlah = $request->jumlah;
         $dokter = Dokter::where('id', $iddokter)->first();
-        Request::create([
+        // return $dokter['email'];
+        RequestTable::create([
             "faskes" => $dokter['email'],
             "nakes" => $iddokter,
             "request" => $jumlah,
@@ -373,7 +375,7 @@ class ApiController extends Controller
 
     public function getRequest($id)
     {
-        $req = Request::where('nakes', $id)->orderBy('created_at', 'desc')->get();
+        $req = RequestTable::where('nakes', $id)->orderBy('created_at', 'desc')->get();
         return $req;
     }
 }

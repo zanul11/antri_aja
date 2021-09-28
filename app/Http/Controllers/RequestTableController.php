@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Request;
+use App\Models\RequestTable;
 use Illuminate\Http\Request;
 
-class RequestController extends Controller
+class RequestTableController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class RequestController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Request  $request
+     * @param  \App\Models\RequestTable  $requestTable
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(RequestTable $requestTable)
     {
         //
     }
@@ -52,10 +52,10 @@ class RequestController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Request  $request
+     * @param  \App\Models\RequestTable  $requestTable
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit(RequestTable $requestTable)
     {
         //
     }
@@ -64,10 +64,10 @@ class RequestController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Request  $request
+     * @param  \App\Models\RequestTable  $requestTable
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Request $request)
+    public function update(Request $request, RequestTable $requestTable)
     {
         //
     }
@@ -75,10 +75,10 @@ class RequestController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Request  $request
+     * @param  \App\Models\RequestTable  $requestTable
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(RequestTable $requestTable)
     {
         //
     }
