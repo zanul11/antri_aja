@@ -64,12 +64,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/jadwal/deleteAkun', 'JadwalController@deleteAkun');
         Route::post('/jadwal/saveAkun', 'JadwalController@saveAkun');
         Route::resource('jadwal', 'JadwalController');
-
         Route::resource('antri_dokter', 'AntriDokterController');
         Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
         Route::resource('saldo', 'SaldoController');
-
         Route::resource('pesan', 'PesanController');
+        Route::post('/reminder', 'PesanController@addReminder');
         Route::resource('disposisi', 'DisposisiController');
     });
 });

@@ -75,3 +75,6 @@ Route::post('/generate-pembayaran', 'Api\ApiController@generatePembayaran');
 Route::get('/getJadwal/{id}/{waktu}', 'Api\ApiController@getJadwal');
 Route::post('/addJadwal', 'Api\ApiController@addJadwal');
 Route::get('/deleteJadwal/{id}', 'Api\ApiController@deleteJadwal');
+
+Route::get('/getNotif/{user}', 'Api\ApiController@getNotif');
+Route::get('/updateNotif/{id}', 'Api\ApiController@updateNotif');
