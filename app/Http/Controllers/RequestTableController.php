@@ -91,7 +91,7 @@ class RequestTableController extends Controller
                 ];
                 $extra = ["message" => $msg, "variable" => 'tes Variabel', "click_action" => 'FLUTTER_NOTIFICATION_CLICK'];
                 $fcm = [
-                    "to" =>   $data->nakes_detail->notif_id,
+                    "to" =>   $data->nakes_detail->api_key,
                     "notification" => $msg,
                     "data" => $extra
                 ];
@@ -128,7 +128,7 @@ class RequestTableController extends Controller
             ];
             $extra = ["message" => $msg, "variable" => 'tes Variabel', "click_action" => 'FLUTTER_NOTIFICATION_CLICK'];
             $fcm = [
-                "to" =>   $data->nakes_detail->notif_id,
+                "to" =>   $data->nakes_detail->api_key,
                 "notification" => $msg,
                 "data" => $extra
             ];
