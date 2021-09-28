@@ -78,6 +78,7 @@ class ApiController extends Controller
                 "type" => 1,
                 "dari" => $dokter['name'],
                 "isi" => 'Antrian No. ' . $antri['no_antrian'] .  ', atas nama ' . $antri['pasien'] . ' sedang ditangani. Silahkan bersiap untuk nomor antrian berikutnya!',
+                'judul' => 'Update Antrian'
             ]);
 
             $daftar_antrian = Antri::select('notif_id')->where('dokter', $iddokter)->where('tgl', $antri['tgl'])->where('waktu', $antri['waktu'])->get()->pluck('notif_id');
@@ -129,6 +130,7 @@ class ApiController extends Controller
             "type" => 1,
             "dari" => $dokter['name'],
             "isi" => 'Pasien Selesai Ditangani! \n' . $catatan,
+            'judul' => 'Update Antrian'
         ]);
 
         Antri::where('id', $idantri)

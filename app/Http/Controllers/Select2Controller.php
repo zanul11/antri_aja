@@ -24,8 +24,9 @@ class Select2Controller extends Controller
                 $data = Dokter::query()
                     ->whereRaw("concat(name,' ',username) like '%" . $cari . "%'")
                     ->where('id', '!=', Auth::user()->id)
-                    ->where('parent', Auth::user()->id)
-                    ->orWhere('email', Auth::user()->email)
+                    ->where('role', 5)
+                    // ->orwhere('parent', Auth::user()->id)
+                    ->where('email', Auth::user()->email)
                     ->get();
             }
 

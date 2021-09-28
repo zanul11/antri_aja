@@ -92,6 +92,7 @@ class BroadcastController extends Controller
             Notif::create([
                 "user" => 'Broadcast',
                 "type" => 1,
+                "judul" => 'Berita Terkini',
                 "dari" => 'Administrator',
                 "isi" => substr(strip_tags($request->pesan), 0, 110) . "...",
             ]);

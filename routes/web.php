@@ -71,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
         Route::resource('saldo', 'SaldoController');
         Route::resource('pesan', 'PesanController');
+        Route::resource('request-saldo', 'RequestTableController');
         Route::post('/reminder', 'PesanController@addReminder');
         Route::resource('disposisi', 'DisposisiController');
     });

@@ -142,6 +142,11 @@ return [
             'url' => '/saldo'
         ],
         [
+            'icon' => '<i data-feather="trending-down" ></i>',
+            'title' => 'Request Saldo',
+            'url' => '/request-saldo'
+        ],
+        [
             'icon' => '<i data-feather="users" ></i>',
             'title' => 'Data Mitra',
             'url' => '/faskes'
