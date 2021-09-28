@@ -13,6 +13,7 @@
                     <a href="{{url('/data-faskes')}}" class="mt-2  text-danger layout-spacing"><i data-feather="x"></i></a>
                 </div>
                 <div class="col-xl-12 col-lg-12 col-md-12 layout-spacing">
+
                     <form id="contact" class="section contact layout-spacing" method="POST" action="{{($action==='Tambah')?'/data-faskes':'/data-faskes/'.$dokter->id}}">
                         @if($action=='Edit')
                         @method('PUT')
@@ -31,12 +32,7 @@
                             <div class="row">
                                 <div class="col-md-11 mx-auto">
                                     <div class="row">
-                                        <!-- <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label for="country">NIK</label>
-                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="16" type="number" class="form-control mb-4" name="nik" id="nik" placeholder="Nik user" value="{{(isset($dokter))?$dokter->nik:(old('nik')??'')}}" required {{($action=='Edit')?'readonly':''}}>
-                                            </div>
-                                        </div> -->
+
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nama">Nama</label>
@@ -62,7 +58,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="no_hp">Spesialisasi</label>
                                                 <select class="placeholder js-states form-control" name="spesialis" required>
@@ -71,13 +67,16 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                        </div>
-                                        <div class="col-md-4">
+                                        </div> -->
+                                        <input type="hidden" name="pengalaman" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}">
+                                        <input type="hidden" name="spesialis" value="{{$data_spesialis[0]->id}}">
+
+                                        <!-- <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="pengalaman">Pengalaman</label>
-                                                <input type="number" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}">
+                                                <input type="hidden" class="form-control mb-4" name="pengalaman" id="pengalaman" placeholder="Dalam tahun" value="{{(isset($dokter))?$dokter->pengalaman:(old('pengalaman')??'')}}">
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="nama">Kode Faskes</label>
@@ -97,7 +96,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-8">
 
                                             <div class="form-group">
                                                 <label for="alamat">Deskripsi Faskes</label>

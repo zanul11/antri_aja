@@ -24,8 +24,8 @@ class DokterController extends Controller
         $jaringan = User::with('childrenRekursif')->where('id', Auth::id())->firstOrFail();
         $dokter = Dokter::where('role', 3)->where('parent', Auth::user()->id)->get();
         $data = [
-            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
-            'page_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
+            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Data Mitra',
+            'page_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Data Mitra',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'action' => 'Tambah',
@@ -46,7 +46,7 @@ class DokterController extends Controller
         $provinsi =  Provinsi::all();
 
         $data = [
-            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
+            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Data Mitra',
             'page_name' => 'Tambah Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -123,7 +123,7 @@ class DokterController extends Controller
         $provinsi =  Provinsi::all();
         $spesialis = Spesialis::all();
         $data = [
-            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Membership',
+            'category_name' => (Auth::user()->role == 2) ? 'Data Faskes' : 'Data Mitra',
             'page_name' => 'Lihat Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',

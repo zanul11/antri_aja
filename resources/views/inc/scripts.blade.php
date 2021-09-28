@@ -255,7 +255,7 @@
 <script src="{{asset('assets/js/scrollspyNav.js')}}"></script>
 
 
-@if($category_name=='Data Faskes')
+@if($category_name=='Data Faskes' ||$category_name=='Data Mitra')
 
 @if($page_name=='Data Akun')
 

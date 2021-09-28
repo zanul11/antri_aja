@@ -38,6 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
         //EXPORT
         Route::get('export-pasien', 'PasienController@ExportPasien');
         Route::get('export-marketing', 'MarketingController@ExportPasien');
+        Route::get('export-faskes', 'FaskesController@ExportFaskes');
+        Route::get('export-nakes/{id}', 'FaskesController@ExportNakes');
 
         Route::resource('data-faskes', 'FaskesController');
         Route::resource('data-akun', 'FaskesAkunController');
