@@ -467,7 +467,6 @@ class ApiController extends Controller
                 "alamat" => $alamat,
                 "no_hp" => $no_hp,
                 "pengalaman" => $pengalaman,
-
             ]);
         return $this->success(
             'berhasil update'
