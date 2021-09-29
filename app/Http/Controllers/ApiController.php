@@ -171,6 +171,12 @@ class ApiController extends Controller
         }])->with(['jadwal' => function ($q) { }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->where('name', 'like', '%' . $request->key . '%')->where('spesialis', $request->spesialis)->get();
     }
 
+    public function detailFaskes($id)
+    {
+        return $antri = Dokter::where('id', $id)
+            ->with('jadwal')->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->first();
+    }
+
     public function searchDokterWilayah(Request $request)
     {
         if (isset($request->kecamatan)) {
