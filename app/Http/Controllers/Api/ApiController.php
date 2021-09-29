@@ -449,4 +449,28 @@ class ApiController extends Controller
             'berhasil update'
         );
     }
+    public function updateProfileNoFoto(Request $request)
+    {
+        $iddokter = $request->id_dokter;
+        $nama = $request->nama;
+        $spesialis = $request->spesialis;
+        $deskripsi = $request->deskripsi;
+        $alamat = $request->alamat;
+        $no_hp = $request->no_hp;
+        $pengalaman = $request->pengalaman;
+
+        Dokter::where('id', $iddokter)
+            ->update([
+                "name" => $nama,
+                "spesialis" => $spesialis,
+                "deskripsi" => $deskripsi,
+                "alamat" => $alamat,
+                "no_hp" => $no_hp,
+                "pengalaman" => $pengalaman,
+
+            ]);
+        return $this->success(
+            'berhasil update'
+        );
+    }
 }
