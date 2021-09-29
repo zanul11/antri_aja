@@ -380,4 +380,10 @@ class ApiController extends Controller
         $req = RequestTable::where('nakes', $id)->orderBy('created_at', 'desc')->get();
         return $req;
     }
+
+    public function detailNakes($id)
+    {
+        return $antri = Dokter::where('id', $id)->with('faskes')
+            ->with('jadwal')->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->first();
+    }
 }
