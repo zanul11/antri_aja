@@ -400,4 +400,51 @@ class ApiController extends Controller
         return $antri = Dokter::where('id', $id)->with('faskes')
             ->with('jadwal')->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->first();
     }
+
+    public function uploadImage(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $image = $request->file('file');
+            $path = public_path() . '/uploads/';
+            $foto = $request->nama . '.' . $image->getClientOriginalExtension();
+
+            if (!$image->move($path, $foto)) {
+                $success = false;
+                $message = "Error while uploading!";
+            } else {
+                $success = true;
+                $message = "Successfully Uploaded";
+            }
+        } else {
+            $success = false;
+            $message = "Error while uploading!";
+        }
+        $response["success"] = $success;
+        $response["message"] = $message;
+        return $response;
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $iddokter = $request->id_dokter;
+        $nama = $request->nama;
+        $spesialis = $request->spesialis;
+        $deskripsi = $request->deskripsi;
+        $alamat = $request->alamat;
+        $no_hp = $request->no_hp;
+        $pengalaman = $request->pengalaman;
+
+        Dokter::where('id', $iddokter)
+            ->update([
+                "name" => $nama,
+                "spesialis" => $spesialis,
+                "deskripsi" => $deskripsi,
+                "alamat" => $alamat,
+                "no_hp" => $no_hp,
+                "pengalaman" => $pengalaman,
+            ]);
+        return $this->success(
+            'berhasil update'
+        );
+    }
 }

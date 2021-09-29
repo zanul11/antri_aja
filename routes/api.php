@@ -85,3 +85,5 @@ Route::get('/getRequest/{id}', 'Api\ApiController@getRequest');
 Route::get('/detailNakes/{id}', 'Api\ApiController@detailNakes');
 Route::get('/getSpesialisasi', 'Api\ApiController@getSpesialisasi');
 Route::post('/cariSpesialisasi', 'Api\ApiController@cariSpesialisasi');
+Route::post('/uploadImage', 'Api\ApiController@uploadImage');
+Route::post('/updateProfile', 'Api\ApiController@updateProfile');
