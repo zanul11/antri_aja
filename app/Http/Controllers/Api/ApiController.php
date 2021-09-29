@@ -433,6 +433,7 @@ class ApiController extends Controller
         $alamat = $request->alamat;
         $no_hp = $request->no_hp;
         $pengalaman = $request->pengalaman;
+        $foto = $request->foto;
 
         Dokter::where('id', $iddokter)
             ->update([
@@ -442,6 +443,7 @@ class ApiController extends Controller
                 "alamat" => $alamat,
                 "no_hp" => $no_hp,
                 "pengalaman" => $pengalaman,
+                "foto" => $foto,
             ]);
         return $this->success(
             'berhasil update'
