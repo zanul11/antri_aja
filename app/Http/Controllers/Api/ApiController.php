@@ -10,6 +10,7 @@ use App\Models\Notif;
 use App\Models\Persen;
 use App\Models\Pesan;
 use App\Models\RequestTable;
+use App\Models\Spesialis;
 use App\Models\TopUp;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Request;
@@ -348,6 +349,12 @@ class ApiController extends Controller
     public function getNotif($user)
     {
         $notif = Notif::where('user', $user)->orwhere('user', 'Broadcast')->orderBy('created_at', 'desc')->get();
+        return $notif;
+    }
+
+    public function getSpesialisasi()
+    {
+        $notif = Spesialis::orderBy('spesialis')->get();
         return $notif;
     }
 
