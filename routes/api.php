@@ -84,3 +84,4 @@ Route::get('/getRequest/{id}', 'Api\ApiController@getRequest');
 
 Route::get('/detailNakes/{id}', 'Api\ApiController@detailNakes');
 Route::get('/getSpesialisasi', 'Api\ApiController@getSpesialisasi');
+Route::get('/cariSpesialisasi', 'Api\ApiController@cariSpesialisasi');

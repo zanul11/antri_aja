@@ -358,6 +358,13 @@ class ApiController extends Controller
         return $notif;
     }
 
+    public function cariSpesialisasi(Request $r)
+    {
+        $notif = Spesialis::where('spesialis', 'like', '%' . $r->key . '%')->orderBy('spesialis')->get();
+        return $notif;
+    }
+
+
     public function updateNotif($id)
     {
         $notif = Notif::where('id', $id)->update(['is_read' => 1]);
