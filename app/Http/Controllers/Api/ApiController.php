@@ -434,6 +434,11 @@ class ApiController extends Controller
         $no_hp = $request->no_hp;
         $pengalaman = $request->pengalaman;
         $foto = $request->foto;
+        $pagi = $request->pagi;
+        $siang = $request->siang;
+        $sore = $request->sore;
+        $malam = $request->malam;
+
 
         Dokter::where('id', $iddokter)
             ->update([
@@ -444,6 +449,10 @@ class ApiController extends Controller
                 "no_hp" => $no_hp,
                 "pengalaman" => $pengalaman,
                 "foto" => $foto,
+                "pagi" => $pagi,
+                "siang" => $siang,
+                "sore" => $sore,
+                "malam" => $malam,
             ]);
         return $this->success(
             'berhasil update'
@@ -458,6 +467,10 @@ class ApiController extends Controller
         $alamat = $request->alamat;
         $no_hp = $request->no_hp;
         $pengalaman = $request->pengalaman;
+        $pagi = $request->pagi;
+        $siang = $request->siang;
+        $sore = $request->sore;
+        $malam = $request->malam;
 
         Dokter::where('id', $iddokter)
             ->update([
@@ -467,6 +480,10 @@ class ApiController extends Controller
                 "alamat" => $alamat,
                 "no_hp" => $no_hp,
                 "pengalaman" => $pengalaman,
+                "pagi" => $pagi,
+                "siang" => $siang,
+                "sore" => $sore,
+                "malam" => $malam,
             ]);
         return $this->success(
             'berhasil update'
