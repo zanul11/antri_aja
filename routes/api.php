@@ -87,3 +87,4 @@ Route::get('/getSpesialisasi', 'Api\ApiController@getSpesialisasi');
 Route::post('/cariSpesialisasi', 'Api\ApiController@cariSpesialisasi');
 Route::post('/uploadImage', 'Api\ApiController@uploadImage');
 Route::post('/updateProfile', 'Api\ApiController@updateProfile');
+Route::post('/updateProfileNoFoto', 'Api\ApiController@updateProfileNoFoto');
