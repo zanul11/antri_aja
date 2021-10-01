@@ -45,7 +45,7 @@ class ReminderSore extends Command
         foreach ($data as $dt) {
             $dokter = Dokter::where('id', $dt->dokter)->first();
             if (isset($dokter['sore'])) {
-                $daftar_antrian = Antri::where('tgl', '>=', DB::raw('DATE_ADD(CURRENT_DATE, INTERVAL - 2 DAY)'))->where('dokter', $dokter['id'])->get();
+                $daftar_antrian = Antri::where('tgl', '>=', DB::raw('DATE_ADD(CURRENT_DATE, INTERVAL - 2 DAY)'))->where('dokter', $dokter['id'])->where('status', 1)->get();
                 foreach ($daftar_antrian as $ant) {
                     //kirim notif
                     Notif::create([
