@@ -50,7 +50,7 @@ class ReminderSore extends Command
                     //kirim notif
                     Notif::create([
                         "user" => $ant['no_hp'],
-                        "type" => 1,
+                        "type" => 2,
                         "dari" => $dokter['name'],
                         "isi" => 'Hallo ' . $ant['pasien'] . ', ' . $dokter['sore'],
                         'judul' => 'Reminder'

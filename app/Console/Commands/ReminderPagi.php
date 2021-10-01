@@ -50,7 +50,7 @@ class ReminderPagi extends Command
                     //kirim notif
                     Notif::create([
                         "user" => $ant['no_hp'],
-                        "type" => 1,
+                        "type" => 2,
                         "dari" => $dokter['name'],
                         "isi" => 'Hallo ' . $ant['pasien'] . ', ' . $dokter['pagi'],
                         'judul' => 'Reminder'
