@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class HelloWorldCommand extends Command
+class ReminderMalam extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'hello:world';
+    protected $signature = 'reminder:malam';
 
     /**
      * The console command description.
@@ -37,11 +37,10 @@ class HelloWorldCommand extends Command
      */
     public function handle()
     {
-        // $daftar_antrian = Antri::select('notif_id')->get()->pluck('notif_id');
         $data = DB::select('select * from antri where tgl >= DATE_ADD(CURRENT_DATE, INTERVAL - 2 DAY) group by dokter');
         foreach ($data as $dt) {
             $dokter = Dokter::where('id', $dt->dokter)->first();
-            if (isset($dokter['pagi'])) {
+            if (isset($dokter['malam'])) {
                 $daftar_antrian = Antri::where('tgl', '>=', DB::raw('DATE_ADD(CURRENT_DATE, INTERVAL - 2 DAY)'))->where('dokter', $dokter['id'])->get();
                 foreach ($daftar_antrian as $ant) {
                     //kirim notif
@@ -49,13 +48,13 @@ class HelloWorldCommand extends Command
                         "user" => $ant['no_hp'],
                         "type" => 1,
                         "dari" => $dokter['name'],
-                        "isi" => 'Hallo ' . $ant['pasien'] . ', ' . $dokter['pagi'],
+                        "isi" => 'Hallo ' . $ant['pasien'] . ', ' . $dokter['malam'],
                         'judul' => 'Reminder'
                     ]);
                     $url = 'https://fcm.googleapis.com/fcm/send';
                     $msg = [
                         'title' => 'Reminder',
-                        'body' => 'Hallo ' . $ant['pasien'] . ', ' . $dokter['pagi'],
+                        'body' => 'Hallo ' . $ant['pasien'] . ', ' . $dokter['malam'],
                     ];
                     $extra = ["message" => $msg];
                     $fcm = [
@@ -79,7 +78,6 @@ class HelloWorldCommand extends Command
                 }
             }
         }
-
         return 0;
     }
 }

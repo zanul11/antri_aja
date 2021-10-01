@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Antri;
 use App\Models\Broadcast;
 use App\Models\Dokter;
+use App\Models\Notif;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -109,6 +110,7 @@ class HomeController extends Controller
             'pie' => $pie,
             'tahun' => $tahun
         ];
+
 
 
         return view('dashboard')->with($data);

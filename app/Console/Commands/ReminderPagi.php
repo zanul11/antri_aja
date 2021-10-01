@@ -4,14 +4,14 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 
-class HelloWorldCommand extends Command
+class ReminderPagi extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'hello:world';
+    protected $signature = 'reminder:pagi';
 
     /**
      * The console command description.
@@ -37,7 +37,6 @@ class HelloWorldCommand extends Command
      */
     public function handle()
     {
-        // $daftar_antrian = Antri::select('notif_id')->get()->pluck('notif_id');
         $data = DB::select('select * from antri where tgl >= DATE_ADD(CURRENT_DATE, INTERVAL - 2 DAY) group by dokter');
         foreach ($data as $dt) {
             $dokter = Dokter::where('id', $dt->dokter)->first();
@@ -79,7 +78,6 @@ class HelloWorldCommand extends Command
                 }
             }
         }
-
         return 0;
     }
 }
