@@ -4,6 +4,9 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use App\Models\Antri;
+use App\Models\Dokter;
+use App\Models\Notif;
 
 class ReminderSore extends Command
 {
