@@ -14,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('landing_page');
+});
 
+// Route::get('/', 'LandingPageController@index');
+// Route::get('/sales', 'HomeController@index');
 
 
 
@@ -79,8 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index');
-Route::get('/sales', 'HomeController@index');
+
 
 
 // Route::any('/ipaymu-success/{email}/{uid}', 'IpaymuResponseController@success');
