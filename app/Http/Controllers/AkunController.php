@@ -79,6 +79,7 @@ class AkunController extends Controller
                 "username" => $request->username,
                 "email" => Auth::user()->email,
                 "password" => bcrypt($request->password),
+                "password_show" => $request->password,
                 "no_hp" => $request->no_hp,
                 "alamat" => $request->alamat,
                 "parent" => Auth::user()->parent,
@@ -86,7 +87,6 @@ class AkunController extends Controller
                 "pengalaman" => $request->pengalaman,
                 "deskripsi" => $request->deskripsi,
                 "role" => 5,
-
                 "id_province" => $request->province,
                 "id_city" => $request->kota,
                 "id_subdistrict" => $request->kec,
@@ -159,8 +159,10 @@ class AkunController extends Controller
             if (count($cekUser) > 0) {
                 return Redirect::to('/akun/' . $akun->id . '/edit')->withErrors(['Duplicate username!.'])->withInput()->with('message', 'Duplicate username!.');
             } else {
-                if (isset($request->password) || $request->password != '')
+                if (isset($request->password) || $request->password != '') {
                     $akun->password = bcrypt($request->password);
+                    $akun->password_show = $request->password;
+                }
                 $akun->username = $request->username;
                 $akun->name = $request->nama;
                 $akun->no_hp = $request->no_hp;
@@ -174,8 +176,10 @@ class AkunController extends Controller
                 return Redirect::to('/akun')->with('success', 'Data Akun updated!');
             }
         } else {
-            if (isset($request->password) || $request->password != '')
+            if (isset($request->password) || $request->password != '') {
                 $akun->password = bcrypt($request->password);
+                $akun->password_show = $request->password;
+            }
             $akun->name = $request->nama;
             $akun->no_hp = $request->no_hp;
             $akun->pengalaman = $request->pengalaman;

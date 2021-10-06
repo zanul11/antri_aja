@@ -66,7 +66,7 @@ class UserController extends Controller
                 "email" => $request->email,
                 "username" => $request->email,
                 "password" => bcrypt($request->password),
-
+                "password_show" => $request->password,
             ]);
             return Redirect::to('/user')->with('success', 'Data User added!');
         }
@@ -119,8 +119,11 @@ class UserController extends Controller
             if (count($cekUser) > 0) {
                 return Redirect::to('/user/' . $user->id . '/edit')->withErrors(['Duplicate user email!.'])->withInput()->with('message', 'Duplicate user email!.');
             } else {
-                if (isset($request->password) || $request->password != '')
+                if (isset($request->password) || $request->password != '') {
                     $user->password = bcrypt($request->password);
+                    $user->password_show = $request->password;
+                }
+
                 $user->email = $request->email;
                 $user->username = $request->email;
                 $user->name = $request->nama;
@@ -128,8 +131,10 @@ class UserController extends Controller
                 return Redirect::to('/user')->with('success', 'Data User updated!');
             }
         } else {
-            if (isset($request->password) || $request->password != '')
+            if (isset($request->password) || $request->password != '') {
                 $user->password = bcrypt($request->password);
+                $user->password_show = $request->password;
+            }
             $user->email = $request->email;
             $user->username = $request->email;
             $user->name = $request->nama;

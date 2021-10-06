@@ -85,6 +85,7 @@ class FaskesController extends Controller
                 "email" => $request->email,
                 "username" => $request->email,
                 "password" => bcrypt($request->password),
+                "password_show" => $request->password,
                 "no_hp" => $request->no_hp,
                 "alamat" => $request->alamat,
                 "parent" => Auth::user()->id,
@@ -166,8 +167,10 @@ class FaskesController extends Controller
             if (count($cek) > 0) {
                 return Redirect::to('/data-faskes/' . $faske->id . '/edit')->withErrors(['Duplicate Faskes email/username!.'])->withInput()->with('message', 'Duplicate Faskes email/username!.');
             } else {
-                if (isset($request->password) || $request->password != '')
+                if (isset($request->password) || $request->password != '') {
                     $faske->password = bcrypt($request->password);
+                    $faske->password_show = $request->password;
+                }
                 $faske->email = $request->email;
                 $faske->name = $request->nama;
                 $faske->username = $request->email;
@@ -186,8 +189,10 @@ class FaskesController extends Controller
                 return Redirect::to('/data-faskes')->with('success', 'Data Faskes updated!');
             }
         } else {
-            if (isset($request->password) || $request->password != '')
+            if (isset($request->password) || $request->password != '') {
                 $faske->password = bcrypt($request->password);
+                $faske->password_show = $request->password;
+            }
             $faske->email = $request->email;
             $faske->name = $request->nama;
             $faske->username = $request->email;

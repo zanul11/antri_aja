@@ -51,6 +51,7 @@ class FaskesAkunController extends Controller
                 "username" => $request->username,
                 "email" => $request->email_faskes,
                 "password" => bcrypt($request->password),
+                "password_show" => $request->password,
                 "no_hp" => $request->no_hp,
                 "alamat" => $request->alamat,
                 "parent" => $request->parent_faskes,
@@ -136,8 +137,10 @@ class FaskesAkunController extends Controller
             if (count($cekUser) > 0) {
                 return Redirect::to('/data-akun/' . $request->id_faskes)->withErrors(['Duplicate username!.'])->withInput()->with('message', 'Duplicate username!.');
             } else {
-                if (isset($request->password) || $request->password != '')
+                if (isset($request->password) || $request->password != '') {
                     $data_akun->password = bcrypt($request->password);
+                    $data_akun->password_show = $request->password;
+                }
                 $data_akun->username = $request->username;
                 $data_akun->name = $request->nama;
                 $data_akun->no_hp = $request->no_hp;
@@ -151,8 +154,10 @@ class FaskesAkunController extends Controller
                 return Redirect::to('/data-faskes/' . $request->id_faskes)->with('success', 'Data Akun updated!');
             }
         } else {
-            if (isset($request->password) || $request->password != '')
+            if (isset($request->password) || $request->password != '') {
                 $data_akun->password = bcrypt($request->password);
+                $data_akun->password_show = $request->password;
+            }
             $data_akun->name = $request->nama;
             $data_akun->no_hp = $request->no_hp;
             $data_akun->pengalaman = $request->pengalaman;

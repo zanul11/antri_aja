@@ -69,6 +69,7 @@ class MarketingController extends Controller
                 "name" => $request->nama,
                 "email" => $request->email,
                 "password" => bcrypt($request->password),
+                "password_show" => $request->password,
                 "username" => $request->email,
                 "no_hp" => $request->no_hp,
                 "alamat" => $request->alamat,
@@ -98,7 +99,7 @@ class MarketingController extends Controller
     public function edit(Marketing $marketing)
     {
         $data = [
-            'category_name' => 'Marketing',
+            'category_name' => 'Data Marketing',
             'page_name' => 'Tambah Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -123,8 +124,10 @@ class MarketingController extends Controller
             if (count($cek) > 0) {
                 return Redirect::to('/marketing/' . $marketing->id . '/edit')->withErrors(['Duplicate user email/username!.'])->withInput()->with('message', 'Duplicate user email/username!.');
             } else {
-                if (isset($request->password) || $request->password != '')
+                if (isset($request->password) || $request->password != '') {
                     $marketing->password = bcrypt($request->password);
+                    $marketing->password_show = $request->password;
+                }
                 $marketing->email = $request->email;
                 $marketing->name = $request->nama;
                 $marketing->username = $request->email;
@@ -134,8 +137,10 @@ class MarketingController extends Controller
                 return Redirect::to('/marketing')->with('success', 'Data Marketing updated!');
             }
         } else {
-            if (isset($request->password) || $request->password != '')
+            if (isset($request->password) || $request->password != '') {
                 $marketing->password = bcrypt($request->password);
+                $marketing->password_show = $request->password;
+            }
             $marketing->email = $request->email;
             $marketing->name = $request->nama;
             $marketing->username = $request->email;

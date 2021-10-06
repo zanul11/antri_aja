@@ -48,7 +48,7 @@
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="password">Password</label>
-                                                <input type="text" class="form-control mb-4" name="password" id="password" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}}>
+                                                <input type="text" class="form-control mb-4" name="password" id="password" value="{{(isset($dokter))?$dokter->password_show:(old('password')??'')}}" placeholder="{{($action=='Edit')?'Cant show':'Write your password'}}" {{($action=='Tambah')?'required':''}}>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
