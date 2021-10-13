@@ -51,9 +51,9 @@ https://templatemo.com/tm-537-art-factory
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#welcome" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#about">TENTANG</a></li>
-                            <li class="scroll-to-section"><a href="#services">Layanan</a></li>
+                            <li class="scroll-to-section"><a href="#about2">Layanan</a></li>
                             <li class="scroll-to-section"><a href="#services">Fitur</a></li>
-                            <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li>
+                            <li class="scroll-to-section"><a href="#frequently-question">Hal yang Sering Ditanyakan</a></li>
                             <li>
                                 <a href="https://play.google.com/store/apps/details?id=com.antri_aja" target="_blank"> <img src="{{asset('landing_page/images/play.png')}}" height="45"></a>
                             </li>
@@ -346,15 +346,29 @@ https://templatemo.com/tm-537-art-factory
                 <div class="left-text col-lg-6 col-md-6 col-sm-12">
                     <!-- <h5>Class aptent taciti sociosqu ad litora torquent per conubia</h5> -->
                     <div class="accordion-text">
-                        <p>Sebelum kamu menanyakan sesuatu terkait AntriAja. Sebaiknya cek dulu di pertanyaan ini:
-                            Antriaja itu apa?
+                        <p>Sebelum kamu menanyakan sesuatu terkait AntriAja. Sebaiknya cek dulu di pertanyaan ini :
+
                         </p>
                         <span>Email: <a href="#">admin@antriaja.com</a><br></span>
-                        <a href="#contact-us" class="main-button">Contact Us</a>
+                        <a href="mailto:admin@antriaja.com?subject=Pertanyaan AntriAja?" class="main-button">Contact Us</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="accordions is-first-expanded">
+                        <article class="accordion">
+                            <div class="accordion-head">
+                                <span>AntriAja itu apa?</span>
+                                <span class="icon">
+                                    <i class="icon fa fa-chevron-right"></i>
+                                </span>
+                            </div>
+                            <div class="accordion-body">
+                                <div class="content">
+                                    <p>Sebuah APLIKASI untuk memudahkan Pendaftaran di Fasilitas Kesehatan Kapan saja, di Mana Saja, SIMPLE, GRATIS dan lebih PROKES. Anda akan langsung tau Berapa Nomor Antriannya dan Jam berapa akan di Layani, Bahkan Anda bisa melihat secara REAL TIME, Antrian nomor berapa yang akan dan sudah TERLAYANI.
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
                         <article class="accordion">
                             <div class="accordion-head">
                                 <span>Apakah saya bisa mengakses sewaktu-waktu?</span>
