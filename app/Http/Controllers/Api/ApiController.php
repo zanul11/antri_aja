@@ -9,6 +9,7 @@ use App\Models\Jadwal;
 use App\Models\Notif;
 use App\Models\Persen;
 use App\Models\Pesan;
+use App\Models\PotonganSaldo;
 use App\Models\RequestTable;
 use App\Models\Spesialis;
 use App\Models\TopUp;
@@ -63,9 +64,14 @@ class ApiController extends Controller
         $pasien = Antri::where('dokter', $iddokter)->where('status', 1)->count();
         $saldo = TopUp::where('dokter', $iddokter)->where('status', 1)->sum('jumlah');
         $pesan = Pesan::where('dokter', $iddokter)->first();
-        $dokter = Dokter::where('id', $request->id_dokter)->first();
+        $dokter = Dokter::where('id', $iddokter)->first();
 
-        if (($saldo - ($pasien * 2000)) < 2000) {
+        $klinik = Dokter::where('email', $dokter['email'])->where('username',  $dokter['email'])->first();
+
+
+        $kredit = PotonganSaldo::where('dokter', $iddokter)->sum('jumlah');
+
+        if (($saldo - $kredit) < $klinik['potongan']) {
             return $this->success(
                 null,
                 'Saldo Kurang!'
@@ -126,6 +132,8 @@ class ApiController extends Controller
         $persen = Persen::first();
         $antri =  Antri::where('id',  $idantri)->first();
 
+        $klinik = Dokter::where('email', $dokter['email'])->where('username',  $dokter['email'])->first();
+
         Notif::create([
             "user" => $antri['no_hp'],
             "type" => 1,
@@ -142,8 +150,8 @@ class ApiController extends Controller
             // "session_id" => $res['Data']['SessionID'],
             "trx_id" => '-',
             "dokter" => $iddokter,
-            "jumlah" => $persen['nilai'],
-            "jumlah_admin" => $persen['nilai'] - (($persen['dokter'] / 100) * $persen['nilai']),
+            "jumlah" => $klinik['potongan'],
+            "jumlah_admin" => $klinik['potongan'] - (($persen['dokter'] / 100) * $klinik['potongan']),
             "status" => 1,
             "jenis" => 0,
             "ket" => 'Menangani pasien',
@@ -155,12 +163,19 @@ class ApiController extends Controller
             // "session_id" => $res['Data']['SessionID'],
             "trx_id" => '-',
             "dokter" => $dokter['parent'],
-            "jumlah" => ($persen['dokter'] / 100) * $persen['nilai'],
+            "jumlah" => ($persen['dokter'] / 100) * $klinik['potongan'],
             "status" => 1,
             "jenis" => 1,
             "ket" => 'Bonus',
             "dari" => $dokter['username'],
             "pasien_id" => $idantri
+        ]);
+
+        //input ke potongan saldo
+        PotonganSaldo::create([
+            "dokter" => $iddokter,
+            "jumlah" => $klinik['potongan'],
+            "antri" => idantri
         ]);
 
         $url = 'https://fcm.googleapis.com/fcm/send';
@@ -198,7 +213,8 @@ class ApiController extends Controller
 
     public function getSaldo($id)
     {
-        $kredit = TopUp::where('dokter', $id)->where('status', 1)->where('jenis', 0)->sum('jumlah');
+        // $kredit = TopUp::where('dokter', $id)->where('status', 1)->where('jenis', 0)->sum('jumlah');
+        $kredit = PotonganSaldo::where('dokter', $id)->sum('jumlah');
         $saldo = TopUp::where('dokter', $id)->where('status', 1)->where('jenis', 1)->sum('jumlah');
         return $this->success(
             $saldo - $kredit

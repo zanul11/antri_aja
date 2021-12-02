@@ -99,6 +99,7 @@ class FaskesController extends Controller
                 "id_province" => $request->province,
                 "id_city" => $request->kota,
                 "id_subdistrict" => $request->kec,
+                "potongan" => $request->potongan
 
             ]);
             return Redirect::to('/data-faskes')->with('success', 'Data Faskes added!');
@@ -185,6 +186,7 @@ class FaskesController extends Controller
                 $faske->id_province = $request->province;
                 $faske->id_city = $request->kota;
                 $faske->id_subdistrict = $request->kec;
+                $faske->potongan = $request->potongan;
                 $faske->save();
                 return Redirect::to('/data-faskes')->with('success', 'Data Faskes updated!');
             }
@@ -207,6 +209,7 @@ class FaskesController extends Controller
             $faske->id_province = $request->province;
             $faske->id_city = $request->kota;
             $faske->id_subdistrict = $request->kec;
+            $faske->potongan = $request->potongan;
             $faske->save();
             return Redirect::to('/data-faskes')->with('success', 'Data Faskes updated!');
         }
