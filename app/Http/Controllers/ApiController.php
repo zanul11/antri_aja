@@ -6,15 +6,19 @@ use App\Models\Antri;
 use App\Models\Dokter;
 use App\Models\Jadwal;
 use App\Models\Kecamatan;
+use App\Models\Notif;
+use App\Models\Pesan;
 use App\Models\Provinsi;
 use App\Models\Spesialis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Traits\ApiResponser;
 
 class ApiController extends Controller
 {
+    use ApiResponser;
     public function login(Request $r)
     {
         $res = [
@@ -266,6 +270,12 @@ class ApiController extends Controller
         return $bc;
     }
 
+    public function artikel()
+    {
+        $bc = DB::select(DB::raw("SELECT *, concat('http://antriaja.com/uploads/',foto) as link_gambar FROM artikel order by created_at desc limit 15"));
+        return $bc;
+    }
+
 
     public function getProvinsi()
     {
@@ -332,5 +342,24 @@ class ApiController extends Controller
         }
 
         return $dokter;
+    }
+
+    public function updateAntriUser(Request $request)
+    {
+        $nohp = $request->nohp;
+        $nama = $request->nama;
+        $nohp_baru = $request->nohp_baru;
+        Antri::where('no_hp', $nohp)
+            ->update([
+                "user_name" => $nama,
+                "no_hp" => $nohp_baru,
+            ]);
+        Notif::where('user', $nohp)
+            ->update([
+                "user" => $nohp_baru,
+            ]);
+        return $this->success(
+            'berhasil update'
+        );
     }
 }

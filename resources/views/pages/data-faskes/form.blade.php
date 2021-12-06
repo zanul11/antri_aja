@@ -35,13 +35,13 @@
 
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="nama">Nama</label>
+                                                <label for="nama">Nama (Kepala/Owner)</label>
                                                 <input type="text" class="form-control mb-4" name="nama" id="nama" placeholder="Nama user" value="{{(isset($dokter))?$dokter->name:(old('nama')??'')}}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="email">Email</label>
+                                                <label for="email">Email </label>
                                                 <input type="email" class="form-control mb-4" name="email" id="email" placeholder="Email user" value="{{(isset($dokter))?$dokter->email:(old('email')??'')}}" required>
                                             </div>
                                         </div>
@@ -53,7 +53,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="no_hp">No Hp</label>
+                                                <label for="no_hp">No Hp (Kepala/Owner)</label>
                                                 <input type="number" class="form-control mb-4" name="no_hp" id="no_hp" placeholder="No Hp user" value="{{(isset($dokter))?$dokter->no_hp:(old('no_hp')??'')}}" required>
                                             </div>
                                         </div>
@@ -133,7 +133,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-12">
+                                        <div class="col-lg-8">
 
                                             <div class="form-group">
                                                 <label for="alamat">Alamat Detail Praktek</label>
@@ -141,7 +141,11 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-lg-12 row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="potongan">Potongan Penanganan Pasien</label>
+                                                <input type="number" class="form-control mb-4" name="potongan" placeholder="Telepon Faskes" value="{{(isset($dokter))?$dokter->potongan:(old('potongan')??'2000')}}" required>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

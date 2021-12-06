@@ -51,6 +51,7 @@ Route::post('/searchDokterFaskes', 'ApiController@searchDokterFaskes');
 
 
 Route::get('/broadcast', 'ApiController@broadcast');
+Route::get('/artikel', 'ApiController@artikel');
 
 Route::get('/detailFaskes/{id}', 'ApiController@detailFaskes');
 
@@ -61,6 +62,9 @@ Route::get('/get-kec/{kota}', 'ApiController@getKec');
 
 Route::post('/get-dokter-wilayah', 'ApiController@getDokterWilayah');
 Route::post('/search-dokter-wilayah', 'ApiController@cariDokterWilayah');
+
+Route::post('/updateAntriUser', 'ApiController@updateAntriUser');
+
 
 
 //NAKES
