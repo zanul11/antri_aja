@@ -167,6 +167,11 @@ return [
             'url' => '/faskes'
         ],
         [
+            'icon' => '<i data-feather="chevrons-down" ></i>',
+            'title' => 'Withdraw',
+            'url' => '/withdraw'
+        ],
+        [
             'icon' => '<i data-feather="user" ></i>',
             'title' => 'Data Akun Nakes',
             'url' => '/akun'

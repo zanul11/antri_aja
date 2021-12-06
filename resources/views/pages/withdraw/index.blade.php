@@ -81,7 +81,7 @@
                 <div class="col-lg-12 ">
                     <div class="bio layout-spacing">
                         <div class="widget-content widget-content-area">
-                            <h3 class="">Data Keuangan</h3>
+                            <h3 class="">Data Withdraw</h3>
                             <div class="table-responsive mb-4 mt-4">
                                 <table id="zero-config" class="table table-hover" style="width:100%">
                                     <thead>
