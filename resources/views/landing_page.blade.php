@@ -45,7 +45,9 @@ https://templatemo.com/tm-537-art-factory
                 <div class="col-12">
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
-                        <a href="#" class="logo">AntriAja</a>
+                        <a href="#" class="logo">
+                            <img src="{{asset('assets/img/logo2.png')}}" height="50">
+                        </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
