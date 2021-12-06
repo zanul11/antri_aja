@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('data-akun', 'FaskesAkunController');
 
         Route::resource('broadcast', 'BroadcastController');
+        Route::resource('artikel', 'ArtikelController');
         Route::resource('disposisi-admin', 'DisposisiAdminController');
         Route::get('select2/getDataDisposisi', 'Select2Controller@getDataDisposisi')->name('select2.getdata');
     });

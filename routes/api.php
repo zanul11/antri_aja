@@ -51,6 +51,7 @@ Route::post('/searchDokterFaskes', 'ApiController@searchDokterFaskes');
 
 
 Route::get('/broadcast', 'ApiController@broadcast');
+Route::get('/artikel', 'ApiController@artikel');
 
 Route::get('/detailFaskes/{id}', 'ApiController@detailFaskes');
 

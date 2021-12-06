@@ -270,6 +270,12 @@ class ApiController extends Controller
         return $bc;
     }
 
+    public function artikel()
+    {
+        $bc = DB::select(DB::raw("SELECT *, concat('http://antriaja.com/uploads/',foto) as link_gambar FROM artikel order by created_at desc limit 15"));
+        return $bc;
+    }
+
 
     public function getProvinsi()
     {

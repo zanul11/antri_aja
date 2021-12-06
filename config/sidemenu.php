@@ -60,6 +60,11 @@ return [
             'url' => '/data-faskes'
         ],
         [
+            'icon' => '<i data-feather="book-open" ></i>',
+            'title' => 'Artikel',
+            'url' => '/artikel'
+        ],
+        [
             'icon' => '<i data-feather="message-square" ></i>',
             'title' => 'Broadcast',
             'url' => '/broadcast'
