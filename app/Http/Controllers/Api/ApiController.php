@@ -175,7 +175,7 @@ class ApiController extends Controller
         PotonganSaldo::create([
             "dokter" => $iddokter,
             "jumlah" => $klinik['potongan'],
-            "antri" => idantri
+            "antri" => $idantri
         ]);
 
         $url = 'https://fcm.googleapis.com/fcm/send';
