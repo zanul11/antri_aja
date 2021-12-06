@@ -70,6 +70,11 @@ return [
             'url' => '/broadcast'
         ],
         [
+            'icon' => '<i data-feather="trending-down" ></i>',
+            'title' => 'Request Withdraw',
+            'url' => '/withdraw-admin'
+        ],
+        [
             'icon' => '<i data-feather="file-text" ></i>',
             'title' => 'Laporan Pasien',
             'url' => '/pasien'
@@ -122,6 +127,11 @@ return [
             'icon' => '<i data-feather="dollar-sign" ></i>',
             'title' => 'Saldo',
             'url' => '/saldo'
+        ],
+        [
+            'icon' => '<i data-feather="chevrons-down" ></i>',
+            'title' => 'Withdraw',
+            'url' => '/withdraw'
         ],
 
     ],

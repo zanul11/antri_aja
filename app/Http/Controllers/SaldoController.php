@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Antri;
 use App\Models\Dokter;
+use App\Models\PotonganSaldo;
 use App\Models\TopUp;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,9 +52,10 @@ class SaldoController extends Controller
 
     public function getSaldo()
     {
-        $kredit = TopUp::where('dokter', Auth::user()->id)->where('status', 1)->where('jenis', 0)->sum('jumlah');
+        $kredit = PotonganSaldo::where('dokter', Auth::user()->id)->sum('jumlah');
+        $kredit2 = TopUp::where('dokter', Auth::user()->id)->where('ket', 'Withdraw/Penarikan')->sum('jumlah');
         $saldo = TopUp::where('dokter', Auth::user()->id)->where('status', 1)->where('jenis', 1)->sum('jumlah');
-        return $saldo - $kredit;
+        return $saldo - $kredit - $kredit2;
     }
 
     /**

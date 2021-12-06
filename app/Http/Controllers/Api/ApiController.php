@@ -70,8 +70,10 @@ class ApiController extends Controller
 
 
         $kredit = PotonganSaldo::where('dokter', $iddokter)->sum('jumlah');
+        $kredit2 = TopUp::where('dokter', $iddokter)->where('ket', 'Withdraw/Penarikan')->sum('jumlah');
 
-        if (($saldo - $kredit) < $klinik['potongan']) {
+
+        if (($saldo - $kredit - $kredit2) < $klinik['potongan']) {
             return $this->success(
                 null,
                 'Saldo Kurang!'
@@ -215,9 +217,10 @@ class ApiController extends Controller
     {
         // $kredit = TopUp::where('dokter', $id)->where('status', 1)->where('jenis', 0)->sum('jumlah');
         $kredit = PotonganSaldo::where('dokter', $id)->sum('jumlah');
+        $kredit2 = TopUp::where('dokter', $id)->where('ket', 'Withdraw/Penarikan')->sum('jumlah');
         $saldo = TopUp::where('dokter', $id)->where('status', 1)->where('jenis', 1)->sum('jumlah');
         return $this->success(
-            $saldo - $kredit
+            $saldo - $kredit - $kredit2
         );
     }
 

@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('data-faskes', 'FaskesController');
         Route::resource('data-akun', 'FaskesAkunController');
 
+        Route::resource('withdraw-admin', 'WithdrawAdminController');
         Route::resource('broadcast', 'BroadcastController');
         Route::resource('artikel', 'ArtikelController');
         Route::resource('disposisi-admin', 'DisposisiAdminController');
@@ -73,6 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('antri_dokter', 'AntriDokterController');
         Route::resource('saldo/pembayaran', 'SaldoController@pembayaran');
         Route::resource('saldo', 'SaldoController');
+        Route::resource('withdraw', 'WithdrawController');
         Route::resource('pesan', 'PesanController');
         Route::resource('request-saldo', 'RequestTableController');
         Route::post('/reminder', 'PesanController@addReminder');
