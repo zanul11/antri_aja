@@ -54,8 +54,9 @@ class SaldoController extends Controller
     {
         $kredit = PotonganSaldo::where('dokter', Auth::user()->id)->sum('jumlah');
         $kredit2 = TopUp::where('dokter', Auth::user()->id)->where('ket', 'Withdraw/Penarikan')->sum('jumlah');
+        $kredit3 = TopUp::where('dokter', Auth::user()->id)->where('jenis', 0)->where('ket', 'Disposisi')->sum('jumlah');
         $saldo = TopUp::where('dokter', Auth::user()->id)->where('status', 1)->where('jenis', 1)->sum('jumlah');
-        return $saldo - $kredit - $kredit2;
+        return $saldo - $kredit - $kredit2 - $kredit3;
     }
 
     /**
@@ -100,8 +101,7 @@ class SaldoController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-    }
+    { }
 
     /**
      * Update the specified resource in storage.
