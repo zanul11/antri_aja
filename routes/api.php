@@ -62,6 +62,9 @@ Route::get('/get-kec/{kota}', 'ApiController@getKec');
 Route::post('/get-dokter-wilayah', 'ApiController@getDokterWilayah');
 Route::post('/search-dokter-wilayah', 'ApiController@cariDokterWilayah');
 
+Route::post('/updateAntriUser', 'ApiController@updateAntriUser');
+
+
 
 //NAKES
 Route::post('/auth', 'Api\ApiController@login');

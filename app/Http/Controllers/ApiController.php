@@ -6,6 +6,8 @@ use App\Models\Antri;
 use App\Models\Dokter;
 use App\Models\Jadwal;
 use App\Models\Kecamatan;
+use App\Models\Notif;
+use App\Models\Pesan;
 use App\Models\Provinsi;
 use App\Models\Spesialis;
 use Illuminate\Http\Request;
@@ -332,5 +334,24 @@ class ApiController extends Controller
         }
 
         return $dokter;
+    }
+
+    public function updateAntriUser(Request $request)
+    {
+        $nohp = $request->nohp;
+        $nama = $request->nama;
+        $nohp_baru = $request->nohp_baru;
+        Antri::where('no_hp', $nohp)
+            ->update([
+                "user_name" => $nama,
+                "no_hp" => $nohp_baru,
+            ]);
+        Notif::where('user', $nohp)
+            ->update([
+                "user" => $nohp_baru,
+            ]);
+        return $this->success(
+            'berhasil update'
+        );
     }
 }
