@@ -76,8 +76,7 @@ class SpesialisController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Spesialis $spesiali)
-    {
-    }
+    { }
 
     /**
      * Update the specified resource in storage.

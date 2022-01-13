@@ -70,6 +70,7 @@ class ApiController extends Controller
         if (isset($r->kecamatan)) {
             $dokter = Dokter::with(['jadwal' => function ($q) { }])
                 ->where('role', 5)
+                ->with('faskes')
                 ->where('id_province', $r->provinsi)
                 ->where('id_city', $r->kota)
                 ->where('id_subdistrict', $r->kecamatan)
@@ -77,7 +78,7 @@ class ApiController extends Controller
                     $q->where('status', 1);
                 }])->with('spesialis_detail')->with('provinsi')->with('kota')->with('kecamatan')->orderBy('antri_count', 'desc')->get();
         } else {
-            $dokter = Dokter::with(['jadwal' => function ($q) { }])->where('role', 5)
+            $dokter = Dokter::with(['jadwal' => function ($q) { }])->where('role', 5)->with('faskes')
                 ->where('id_province', $r->provinsi)
                 ->where('id_city', $r->kota)
                 ->where('spesialis', $r->spesialis)->withCount(['antri' => function ($q) {
