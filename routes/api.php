@@ -65,6 +65,7 @@ Route::post('/search-dokter-wilayah', 'ApiController@cariDokterWilayah');
 
 Route::post('/updateAntriUser', 'ApiController@updateAntriUser');
 
+Route::get('/detailArtikelBroad/{jenis}/{id}', 'ApiController@detailArtikelBroad');
 
 
 //NAKES

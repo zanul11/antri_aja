@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Traits\ApiResponser;
+use App\Models\Broadcast;
+use App\Models\Artikel;
 
 class ApiController extends Controller
 {
@@ -99,6 +101,19 @@ class ApiController extends Controller
     {
         $jum = Antri::where('dokter', $r->dokter)->whereDate('tgl', $r->tgl)->where('waktu', $r->jam)->count();
         return response()->json(['status' => true, 'data' =>  $jum]);
+    }
+
+    public function detailArtikelBroad($jenis, $id)
+    {
+        if ($jenis == 0) {
+            //broadcast
+
+            $data = Broadcast::where('id', $id)->first();
+        } else {
+            //artikel/
+            $data = Artikel::where('id', $id)->first();
+        }
+        return response()->json(['status' => true, 'data' =>  $data]);
     }
 
     public function saveAntrian(Request $r)

@@ -18,6 +18,12 @@
                         <div class="row">
                             <div class="col-sm-8">
                                 <div class="form-group">
+                                    <label for="noHp">Judul</label>
+                                    <input type="text" class="form-control mb-4" name="judul" required value="{{(isset($broadcast))?$broadcast->judul:(old('judul')??'')}}"></input>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
                                     <label for="noHp">Pesan</label>
                                     <textarea id="summernote" type="text" class="form-control mb-4" name="pesan" rows="10" required>{{(isset($broadcast))?$broadcast->isi:(old('pesan')??'')}}</textarea>
                                 </div>
@@ -25,7 +31,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <div class="upload mt-4 pr-md-4">
-                                        <input type="file" id="input-file-max-fs" class="dropify" name="file" data-default-file="{{(isset($broadcast))?asset('antri_aja/public/uploads/'.$dt->foto):asset('assets/img/1280x857.jpg')}}" data-max-file-size="2M" />
+                                        <input type="file" id="input-file-max-fs" class="dropify" name="file" data-default-file="{{(isset($broadcast))?asset('antri_aja/public/uploads/'.$broadcast->foto):asset('assets/img/1280x857.jpg')}}" data-max-file-size="2M" />
                                         <p class="mt-2"><i class="flaticon-cloud-upload mr-1"></i> Upload Foto</p>
                                     </div>
                                 </div>

@@ -93,12 +93,14 @@ class ArtikelController extends Controller
             $image->move($path, $foto);
         }
         $getnotif = Antri::select('notif_id')->groupby('notif_id')->get()->pluck('notif_id');
-        Artikel::create([
+        $artikel = Artikel::create([
             "judul" => $request->judul,
             "isi" => $request->isi,
             "user" => Auth::user()->name,
             "foto" => $foto,
         ]);
+
+
         $url = 'https://fcm.googleapis.com/fcm/send';
         $msg = [
             'title' => 'Artikel Terbaru!',
@@ -110,6 +112,7 @@ class ArtikelController extends Controller
             "type" => 1,
             "judul" => 'Artikel Terkini',
             "dari" => 'Administrator',
+            "id_data" => $artikel->id,
             "isi" => $request->judul . "...",
         ]);
         $extra = ["message" => $msg];

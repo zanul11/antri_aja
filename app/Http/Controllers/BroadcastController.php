@@ -67,18 +67,20 @@ class BroadcastController extends Controller
         }
 
         if ($request->jenis == 1) {
-            Broadcast::create([
+            $broad =    Broadcast::create([
                 "isi" => $request->pesan,
                 "user" => Auth::user()->name,
+                "judul" => $request->judul,
                 "batas" => $request->batas,
                 "jenis" => $request->jenis,
                 "foto" => $foto,
             ]);
         } else {
             $getnotif = Antri::select('notif_id')->groupby('notif_id')->get()->pluck('notif_id');
-            Broadcast::create([
+            $broad = Broadcast::create([
                 "isi" => $request->pesan,
                 "user" => Auth::user()->name,
+                "judul" => $request->judul,
                 "batas" => $request->batas,
                 "jenis" => $request->jenis,
                 "foto" => $foto,
@@ -86,7 +88,7 @@ class BroadcastController extends Controller
             $url = 'https://fcm.googleapis.com/fcm/send';
             $msg = [
                 'title' => 'Kabar Terbaru!',
-                'body' => substr(strip_tags($request->pesan), 0, 110) . "...",
+                'body' => $request->judul,
 
             ];
             Notif::create([
@@ -94,7 +96,8 @@ class BroadcastController extends Controller
                 "type" => 1,
                 "judul" => 'Berita Terkini',
                 "dari" => 'Administrator',
-                "isi" => substr(strip_tags($request->pesan), 0, 110) . "...",
+                "id_data" => $broad->id,
+                "isi" => $request->judul,
             ]);
             $extra = ["message" => $msg];
             $fcm = [
@@ -202,6 +205,7 @@ class BroadcastController extends Controller
         $broadcast->isi = $request->pesan;
         $broadcast->jenis = $request->jenis;
         $broadcast->batas = $request->batas;
+        $broadcast->judul = $request->judul;
         $broadcast->user = Auth::user()->name;
         $broadcast->save();
         return Redirect::to('/broadcast')->with('success', 'Data Broadcast updated!');
