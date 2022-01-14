@@ -107,7 +107,6 @@ class ApiController extends Controller
     {
         if ($jenis == 0) {
             //broadcast
-
             $data = Broadcast::where('id', $id)->first();
         } else {
             //artikel/

@@ -140,7 +140,7 @@ class ApiController extends Controller
             "user" => $antri['no_hp'],
             "type" => 1,
             "dari" => $dokter['name'],
-            "isi" => 'Pasien Selesai Ditangani! \n' . $catatan,
+            "isi" => 'Pasien Selesai Ditangani! ' . $catatan,
             'judul' => 'Update Antrian'
         ]);
 

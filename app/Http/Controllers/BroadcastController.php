@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
+
 class BroadcastController extends Controller
 {
     /**
@@ -26,6 +27,7 @@ class BroadcastController extends Controller
             'scrollspy_offset' => '',
             'data_broadcast' => $broadcast
         ];
+
         return view('pages.broadcast.index')->with($data);
     }
 
