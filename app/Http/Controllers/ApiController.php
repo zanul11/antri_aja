@@ -308,7 +308,7 @@ class ApiController extends Controller
 
     public function artikel()
     {
-        $bc = DB::select(DB::raw("SELECT *, concat('http://antriaja.com/uploads/',foto) as link_gambar FROM artikel,kategori_artikel where artikel.kategori_id=kategori_artikel.id order by artikel.created_at desc limit 15"));
+        $bc = Artikel::with('kategori')->orderby('created_at', 'desc')->limit(10)->get();
         return $bc;
     }
 
