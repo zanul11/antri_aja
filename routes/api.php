@@ -68,6 +68,11 @@ Route::post('/updateAntriUser', 'ApiController@updateAntriUser');
 Route::get('/detailArtikelBroad/{jenis}/{id}', 'ApiController@detailArtikelBroad');
 
 
+Route::get('/getKategori', 'ApiController@getKategori');
+Route::get('/getArtikelbyKategori/{id}', 'ApiController@getArtikelbyKategori');
+
+
+
 //NAKES
 Route::post('/auth', 'Api\ApiController@login');
 Route::get('/antrian-nakes/{id}/{tgl}', 'Api\ApiController@antrianNakes');

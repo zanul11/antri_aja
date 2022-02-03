@@ -140,8 +140,8 @@ class ApiController extends Controller
             "user" => $antri['no_hp'],
             "type" => 1,
             "dari" => $dokter['name'],
-            "isi" => 'Pasien Selesai Ditangani! ' . $catatan,
-            'judul' => 'Update Antrian'
+            "isi" => $catatan,
+            'judul' => 'Pasien Antrian No. ' . $antri['no_antrian'] .  ', atas nama ' . $antri['pasien'] . ' selesai ditangani!.'
         ]);
 
         Antri::where('id', $idantri)
@@ -182,7 +182,7 @@ class ApiController extends Controller
 
         $url = 'https://fcm.googleapis.com/fcm/send';
         $msg = [
-            'title' => 'Pasien Selesai Ditangani!',
+            'title' => 'Pasien Antrian No. ' . $antri['no_antrian'] .  ', atas nama ' . $antri['pasien'] . ' selesai ditangani!.',
             'body' => $catatan,
 
         ];

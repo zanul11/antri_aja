@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Traits\ApiResponser;
 use App\Models\Broadcast;
 use App\Models\Artikel;
+use App\Models\KategoriArtikel;
 
 class ApiController extends Controller
 {
@@ -57,6 +58,16 @@ class ApiController extends Controller
     public function getSpesialis()
     {
         return Spesialis::all();
+    }
+
+    public function getKategori()
+    {
+        return KategoriArtikel::orderby('kategori')->get();
+    }
+
+    public function getArtikelbyKategori($id)
+    {
+        return Artikel::with('kategori')->where('kategori_id', $id)->orderby('created_at', 'desc')->get();
     }
 
     public function getDokterSpesialis(Request $r)
