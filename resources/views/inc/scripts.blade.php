@@ -173,7 +173,10 @@
     placeholder: "Pilih Spesialis",
     allowClear: true
   });
-
+  $(".kategori").select2({
+    placeholder: "Pilih Kategori",
+    allowClear: true
+  });
   $(".provinsi").select2({
     placeholder: "Pilih Provinsi",
     allowClear: true

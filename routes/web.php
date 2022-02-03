@@ -52,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('withdraw-admin', 'WithdrawAdminController');
         Route::resource('broadcast', 'BroadcastController');
         Route::resource('artikel', 'ArtikelController');
+        Route::resource('kategori', 'KategoriArtikelController');
         Route::resource('disposisi-admin', 'DisposisiAdminController');
         Route::get('select2/getDataDisposisi', 'Select2Controller@getDataDisposisi')->name('select2.getdata');
     });

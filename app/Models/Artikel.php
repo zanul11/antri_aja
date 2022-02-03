@@ -10,4 +10,9 @@ class Artikel extends Model
     use HasFactory;
     protected $table = 'artikel';
     protected $guarded = [];
+
+    public function kategori()
+    {
+        return $this->hasOne(KategoriArtikel::class, 'id', 'kategori_id');
+    }
 }

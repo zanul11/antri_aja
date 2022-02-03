@@ -19,6 +19,7 @@
                                 <th>No</th>
                                 <th>Tanggal</th>
                                 <th>Judul</th>
+                                <th>Kategori</th>
                                 <th>Gambar</th>
                                 <th class="no-content"></th>
                             </tr>
@@ -29,6 +30,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{date('m-d-Y', strtotime($dt->created_at))}}</td>
                                 <td>{{$dt->judul}}</td>
+                                <td>{{$dt->kategori->kategori??''}}</td>
                                 <td><img src="{{asset('antri_aja/public/uploads/'.$dt->foto)}}" alt="Girl in a jacket" width="100"></td>
                                 <td>
                                     <a href="artikel/{{$dt->id}}/edit"><i data-feather="edit-2" class="text-warning"></i></a>

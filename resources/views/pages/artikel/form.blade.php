@@ -22,6 +22,17 @@
                                     <input type="text" class="form-control mb-4" name="judul" required value="{{(isset($artikel))?$artikel->judul:(old('judul')??'')}}"></input>
                                 </div>
                             </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="no_hp">Kategori</label>
+                                    <select class="kategori js-states form-control" id="kategori_id" name="kategori_id" required>
+                                        <option value="">Pilih Kategori</option>
+                                        @foreach($data_kategori as $dt)
+                                        <option value="{{$dt->id}}" {{($action!='Tambah')?(($artikel->kategori_id==$dt->id)?'selected':''):''}}>{{$dt->kategori}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div class="col-sm-8">
                                 <div class="form-group">
                                     <label for="noHp">Isi</label>

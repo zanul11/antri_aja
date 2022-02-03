@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Antri;
 use App\Models\Artikel;
+use App\Models\KategoriArtikel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -18,7 +19,7 @@ class ArtikelController extends Controller
      */
     public function index()
     {
-        $broadcast = Artikel::orderby('created_at', 'desc')->get();
+        $broadcast = Artikel::with('kategori')->orderby('created_at', 'desc')->get();
         $data = [
             'category_name' => 'Artikel',
             'page_name' => 'Artikel',
@@ -36,13 +37,14 @@ class ArtikelController extends Controller
      */
     public function create()
     {
+        $kategori = KategoriArtikel::orderby('kategori')->get();
         $data = [
             'category_name' => 'Artikel',
             'page_name' => 'Tambah Artikel',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
-            'action' => 'Tambah'
-
+            'action' => 'Tambah',
+            'data_kategori' => $kategori
         ];
         // $this->notifNakes('tes dong');
         return view('pages.artikel.form')->with($data);
@@ -96,6 +98,7 @@ class ArtikelController extends Controller
         $artikel = Artikel::create([
             "judul" => $request->judul,
             "isi" => $request->isi,
+            "kategori_id" => $request->kategori_id,
             "user" => Auth::user()->name,
             "foto" => $foto,
         ]);
@@ -158,13 +161,15 @@ class ArtikelController extends Controller
      */
     public function edit(Artikel $artikel)
     {
+        $kategori = KategoriArtikel::orderby('kategori')->get();
         $data = [
             'category_name' => 'Artikel',
             'page_name' => 'Edit Data',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
             'action' => 'Edit',
-            'artikel' => $artikel
+            'artikel' => $artikel,
+            'data_kategori' => $kategori
         ];
         return view('pages.artikel.form')->with($data);
     }
@@ -189,6 +194,7 @@ class ArtikelController extends Controller
         }
         $artikel->isi = $request->isi;
         $artikel->judul = $request->judul;
+        $artikel->kategori_id = $request->kategori_id;
         $artikel->user = Auth::user()->name;
         $artikel->save();
         return Redirect::to('/artikel')->with('success', 'Data Artikel updated!');
