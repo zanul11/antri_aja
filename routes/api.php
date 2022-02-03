@@ -70,7 +70,7 @@ Route::get('/detailArtikelBroad/{jenis}/{id}', 'ApiController@detailArtikelBroad
 
 Route::get('/getKategori', 'ApiController@getKategori');
 Route::get('/getArtikelbyKategori/{id}', 'ApiController@getArtikelbyKategori');
-
+Route::post('/searchKategori', 'ApiController@searchKategori');
 
 
 //NAKES

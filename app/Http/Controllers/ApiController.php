@@ -237,6 +237,11 @@ class ApiController extends Controller
         return Spesialis::where('spesialis', 'like', '%' . $request->key . '%')->get();
     }
 
+    public function searchKategori(Request $request)
+    {
+        return KategoriArtikel::where('kategori', 'like', '%' . $request->key . '%')->get();
+    }
+
     public function getFaskesTernama()
     {
         return  DB::select("select a.*, (select count(*) from `users` where email=a.email) as `akun` from `users` a where `role` = 3  ORDER BY akun DESC limit 5");
