@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('spesialis', 'SpesialisController');
         Route::resource('marketing', 'MarketingController');
         Route::resource('persen', 'PersenController');
+        Route::resource('lainnya', 'LainnyaController');
         Route::resource('pemasukan', 'PemasukanController');
         //PASIEN
         Route::resource('pasien', 'PasienController');

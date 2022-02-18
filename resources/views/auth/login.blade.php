@@ -107,11 +107,11 @@
                                         <span class="brand-name">Github</span>
                                     </a>
                                 </div> -->
-                                <center>
+                                <!-- <center>
                                     <div class="footer-section f-section-1" style="margin-top: 20px;">
                                         <a href="{{url('/daftar')}}" style="color:blue">Daftar Pasien baru disini !</a>
                                     </div>
-                                </center>
+                                </center> -->
                                 <center>
                                     <div class="footer-section f-section-1" style="margin-top: 20px;">
                                         <p class="">Copyright © {{date('Y')}} Antrian Aja</p>

@@ -71,7 +71,7 @@ Route::get('/detailArtikelBroad/{jenis}/{id}', 'ApiController@detailArtikelBroad
 Route::get('/getKategori', 'ApiController@getKategori');
 Route::get('/getArtikelbyKategori/{id}', 'ApiController@getArtikelbyKategori');
 Route::post('/searchKategori', 'ApiController@searchKategori');
-
+Route::get('/lainnya', 'ApiController@lainnya');
 
 //NAKES
 Route::post('/auth', 'Api\ApiController@login');

@@ -18,6 +18,7 @@ use App\Traits\ApiResponser;
 use App\Models\Broadcast;
 use App\Models\Artikel;
 use App\Models\KategoriArtikel;
+use App\Models\Lainnya;
 
 class ApiController extends Controller
 {
@@ -309,6 +310,12 @@ class ApiController extends Controller
     public function artikel()
     {
         $bc = Artikel::with('kategori')->orderby('created_at', 'desc')->limit(10)->get();
+        return $bc;
+    }
+
+    public function lainnya()
+    {
+        $bc = Lainnya::first();
         return $bc;
     }
 
