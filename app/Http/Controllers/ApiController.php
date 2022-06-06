@@ -309,7 +309,13 @@ class ApiController extends Controller
 
     public function artikel()
     {
-        $bc = Artikel::with('kategori')->orderby('created_at', 'desc')->limit(10)->get();
+        $bc = Artikel::with('kategori')->orderby('created_at', 'desc')->limit(5)->get();
+        return $bc;
+    }
+
+    public function artikelperKategori($id)
+    {
+        $bc = Artikel::with('kategori')->where('kategori_id', $id)->orderby('created_at', 'desc')->limit(5)->get();
         return $bc;
     }
 
